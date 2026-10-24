@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Truck Online | RP TRANSPORT COMPANY (RPTC)</title>
+  <meta name="description" content="Book a truck online with RP TRANSPORT COMPANY (RPTC). FTL, PTL, container and open body truck booking with instant booking reference. PAN India transport.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23B30000'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3ERT%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= TOP BAR ================= -->
+  <div class="topbar no-print">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span><i class="fa-solid fa-location-dot"></i> Kalamboli, Navi Mumbai – 410218</span>
+        <a href="mailto:rptransportcompany28@gmail.com"><i class="fa-solid fa-envelope"></i> rptransportcompany28@gmail.com</a>
+      </div>
+      <div class="topbar-right">
+        <a href="tel:+918828383122"><i class="fa-solid fa-phone"></i> +91 88283 83122</a>
+        <a href="tel:+917738733177"><i class="fa-solid fa-phone"></i> +91 77387 33177</a>
+        <a class="wa-link" href="https://wa.me/918828383122?text=Hello%20RP%20TRANSPORT%20COMPANY%2C%20I%20would%20like%20to%20enquire%20about%20truck%20booking%20and%20freight%20charges."><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= NAVBAR ================= -->
+  <nav class="navbar no-print" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-badge">RPTC</span>
+        <span class="brand-text"><b>RP TRANSPORT</b><small>COMPANY</small></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" data-page="index.html">Home</a></li>
+        <li><a href="about.html" data-page="about.html">About Us</a></li>
+        <li><a href="services.html" data-page="services.html">Services</a></li>
+        <li><a href="booking.html" data-page="booking.html">Book a Truck</a></li>
+        <li><a href="tracking.html" data-page="tracking.html">Track Shipment</a></li>
+        <li><a href="contact.html" data-page="contact.html">Contact Us</a></li>
+        <li><a href="login.html" data-page="login.html">Login</a></li>
+        <li><a href="#freight-quote" class="btn btn-red btn-sm nav-cta">Get a Freight Quote</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <!-- ================= PAGE BANNER ================= -->
+  <header class="page-banner no-print">
+    <div class="container">
+      <h1>Book a <span>Truck</span></h1>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i><span>Book a Truck</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="notice notice-blue reveal">
+        <i class="fa-solid fa-circle-info"></i>
+        <span><b>Booking request — not a confirmed booking.</b> Submitting this form creates a booking <b>request</b> with a reference number. Final confirmation, vehicle assignment and freight amount are issued by RP TRANSPORT COMPANY after verification. Track your request anytime on the <a href="tracking.html" style="color:#B30000;font-weight:700;">Track Shipment</a> page.</span>
+      </div>
+
+      <form id="bookingForm" novalidate>
+        <!-- ===== CUSTOMER INFORMATION ===== -->
+        <div class="form-card reveal">
+          <div class="form-section-head">
+            <div class="form-section-num">1</div>
+            <div>
+              <h2>Customer Information</h2>
+              <p>Who is requesting this transport service?</p>
+            </div>
+          </div>
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label>Customer Full Name <em>*</em></label>
+              <input type="text" name="cName" placeholder="Full name" required>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Company Name</label>
+              <input type="text" name="cCompany" placeholder="Company / firm (optional)">
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Mobile Number <em>*</em></label>
+              <input type="tel" name="cMobile" placeholder="10-digit mobile" maxlength="10" data-validate="mobile" required>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" name="cEmail" placeholder="name@example.com">
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>GST Number (optional)</label>
+              <input type="text" name="cGst" placeholder="e.g. 27ABCDE1234F1Z5">
+              <small class="error-msg"></small>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== PICKUP DETAILS ===== -->
+        <div class="form-card reveal">
+          <div class="form-section-head">
+            <div class="form-section-num">2</div>
+            <div>
+              <h2>Pickup Details</h2>
+              <p>Where should the truck collect the goods?</p>
+            </div>
+          </div>
+          <div class="form-grid-3">
+            <div class="form-group full">
+              <label>Pickup Address <em>*</em></label>
+              <input type="text" name="pAddress" placeholder="Godown / shop / mandi address" required>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Pickup City <em>*</em></label>
+              <input type="text" name="pCity" placeholder="e.g. Mumbai" required>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Pickup State <em>*</em></label>
+              <select name="pState" required>
+                <option value="">Select state</option>
+                <option>Maharashtra</option><option>Gujarat</option><option>Karnataka</option>
+                <option>Delhi</option><option>Tamil Nadu</option><option>Telangana</option>
+                <option>Andhra Pradesh</option><option>Rajasthan</option><option>Uttar Pradesh</option>
+                <option>Punjab</option><option>Haryana</option><option>Madhya Pradesh</option>
+                <option>West Bengal</option><option>Kerala</option><option>Other</option>
+              </select>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Pickup PIN Code <em>*</em></label>
+              <input type="text" name="pPin" placeholder="6-digit PIN" maxlength="6" data-validate="pin" required>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Pickup Date <em>*</em></label>
+              <input type="date" name="pDate" required>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Preferred Pickup Time</label>
+              <select name="pTime">
+                <option value="Flexible">Flexible</option>
+                <option>06:00 – 09:00</option>
+                <option>09:00 – 12:00</option>
+                <option>12:00 – 15:00</option>
+                <option>15:00 – 18:00</option>
+                <option>18:00 – 21:00</option>
+              </select>
+              <small class="error-msg"></small>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== DELIVERY DETAILS ===== -->
+        <div class="form-card reveal">
+          <div class="form-section-head">
+            <div class="form-section-num">3</div>
+            <div>
+              <h2>Delivery Details</h2>
+              <p>Where should the goods be delivered?</p>
+            </div>
+          </div>
+          <div class="form-grid-3">
+            <div class="form-group full">
+              <label>Delivery Address <em>*</em></label>
+              <input type="text" name="dAddress" placeholder="Delivery point address" required>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Delivery City <em>*</em></label>
+              <input type="text" name="dCity" placeholder="e.g. Delhi" required>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Delivery State <em>*</em></label>
+              <select name="dState" required>
+                <option value="">Select state</option>
+                <option>Maharashtra</option><option>Gujarat</option><option>Karnataka</option>
+                <option>Delhi</option><option>Tamil Nadu</option><option>Telangana</option>
+                <option>Andhra Pradesh</option><option>Rajasthan</option><option>Uttar Pradesh</option>
+                <option>Punjab</option><option>Haryana</option><option>Madhya Pradesh</option>
+                <option>West Bengal</option><option>Kerala</option><option>Other</option>
+              </select>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Delivery PIN Code <em>*</em></label>
+              <input type="text" name="dPin" placeholder="6-digit PIN" maxlength="6" data-validate="pin" required>
+              <small class="error-msg"></small>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== GOODS DETAILS ===== -->
+        <div class="form-card reveal">
+          <div class="form-section-head">
+            <div class="form-section-num">4</div>
+            <div>
+              <h2>Goods Details</h2>
+              <p>What are you transporting?</p>
+            </div>
+          </div>
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label>Material Name <em>*</em></label>
+              <input type="text" name="gMaterial" placeholder="e.g. Cement bags, steel rods" required>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Material Category <em>*</em></label>
+              <select name="gCategory" required>
+                <option value="">Select category</option>
+                <option>General Goods</option>
+                <option>Fragile</option>
+                <option>Perishable</option>
+                <option>Hazardous (declare as per rules)</option>
+                <option>Oversized / Heavy Lift</option>
+              </select>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Approximate Weight (Tons) <em>*</em></label>
+              <input type="number" name="gWeight" min="0.1" step="0.1" placeholder="e.g. 5" data-min="0.1" required>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Number of Packages</label>
+              <input type="number" name="gPackages" min="1" step="1" placeholder="e.g. 120">
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Goods Dimensions (optional)</label>
+              <input type="text" name="gDimensions" placeholder="L × W × H (approx.)">
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Special Handling Instructions</label>
+              <input type="text" name="gHandling" placeholder="e.g. Keep dry, this side up">
+              <small class="error-msg"></small>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TRUCK DETAILS ===== -->
+        <div class="form-card reveal">
+          <div class="form-section-head">
+            <div class="form-section-num">5</div>
+            <div>
+              <h2>Truck Details</h2>
+              <p>Choose the vehicle type and capacity you need.</p>
+            </div>
+          </div>
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label>Vehicle Type <em>*</em></label>
+              <select name="vType" required>
+                <option value="">Select vehicle type</option>
+                <option>Open Body Truck</option>
+                <option>Container Truck</option>
+                <option>Light Commercial Vehicle</option>
+                <option>Medium Commercial Vehicle</option>
+                <option>Heavy Commercial Vehicle</option>
+              </select>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Required Truck Capacity <em>*</em></label>
+              <select name="vCapacity" required>
+                <option value="">Select capacity</option>
+                <option>Up to 2 T</option>
+                <option>Up to 3.5 T</option>
+                <option>Up to 7.5 T</option>
+                <option>Up to 9 T</option>
+                <option>Up to 16 T</option>
+                <option>Up to 20 T</option>
+                <option>Up to 25 T</option>
+              </select>
+              <small class="error-msg"></small>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== PAYMENT & QUOTATION ===== -->
+        <div class="form-card reveal">
+          <div class="form-section-head">
+            <div class="form-section-num">6</div>
+            <div>
+              <h2>Payment &amp; Quotation</h2>
+              <p>Your payment preference and any special instructions.</p>
+            </div>
+          </div>
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label>Freight Payment Preference <em>*</em></label>
+              <select name="payFreight" required>
+                <option value="">Select</option>
+                <option>Sender Pays</option>
+                <option>Receiver Pays</option>
+                <option>To be discussed</option>
+              </select>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group">
+              <label>Advance Payment Preference <em>*</em></label>
+              <select name="payAdvance" required>
+                <option value="">Select</option>
+                <option>Yes, advance to be paid</option>
+                <option>No advance</option>
+                <option>To be discussed</option>
+              </select>
+              <small class="error-msg"></small>
+            </div>
+            <div class="form-group full">
+              <label>Special Instructions</label>
+              <textarea name="payInstructions" placeholder="Anything our team should know?"></textarea>
+              <small class="error-msg"></small>
+            </div>
+          </div>
+          <div class="summary-actions">
+            <button type="submit" class="btn btn-red"><i class="fa-solid fa-paper-plane"></i> Submit Booking Request</button>
+            <button type="button" class="btn btn-outline" id="bookingReset"><i class="fa-solid fa-rotate-left"></i> Reset Form</button>
+            <a href="tel:+918828383122" class="btn btn-navy"><i class="fa-solid fa-phone"></i> Contact Transport Team</a>
+            <a href="https://wa.me/918828383122?text=Hello%20RP%20TRANSPORT%20COMPANY%2C%20I%20would%20like%20to%20enquire%20about%20truck%20booking%20and%20freight%20charges." class="btn btn-wa wa-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp Team</a>
+          </div>
+        </div>
+      </form>
+
+      <!-- ===== BOOKING SUMMARY (shown after submission) ===== -->
+      <div class="summary-card" id="bookingSummary" hidden>
+        <div class="summary-head">
+          <div class="ref" id="sumRef">RPTC-2026-10001</div>
+          <p>Booking request submitted — please save this reference number for tracking.</p>
+        </div>
+        <div class="summary-body">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px;">
+            <span class="pill pill-pending" id="sumStatus">PENDING COMPANY CONFIRMATION</span>
+            <span style="font-size:13px;color:var(--muted);">This is a booking <b>request</b> — not a confirmed truck booking.</span>
+          </div>
+          <div class="summary-grid">
+            <div class="summary-item"><small>Customer</small><b id="sumName"></b></div>
+            <div class="summary-item"><small>Route</small><b id="sumRoute"></b></div>
+            <div class="summary-item"><small>Contact</small><b id="sumContact"></b></div>
+            <div class="summary-item"><small>Pickup Location</small><b id="sumPickup"></b></div>
+            <div class="summary-item"><small>Delivery Location</small><b id="sumDelivery"></b></div>
+            <div class="summary-item"><small>Pickup Date</small><b id="sumDate"></b></div>
+            <div class="summary-item"><small>Vehicle Type</small><b id="sumVehicle"></b></div>
+            <div class="summary-item"><small>Goods Details</small><b id="sumGoods"></b></div>
+            <div class="summary-item"><small>Request Submitted</small><b id="sumSubmitted"></b></div>
+          </div>
+          <div class="summary-actions no-print">
+            <button class="btn btn-navy" id="printBookingBtn"><i class="fa-solid fa-print"></i> Print Booking</button>
+            <a href="tracking.html" class="btn btn-red"><i class="fa-solid fa-magnifying-glass-location"></i> Track This Shipment</a>
+            <a href="#" class="btn btn-wa wa-link" id="sumWhatsapp"><i class="fa-brands fa-whatsapp"></i> Send on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= FREIGHT QUOTATION ================= -->
+      <div id="freight-quote" style="margin-top:70px;">
+        <div class="section-head center reveal">
+          <span class="kicker">Freight Quotation</span>
+          <h2 class="section-title">Request a <span class="accent">Freight Quote</span></h2>
+          <p class="section-sub">Share your route and load details — our team will respond with a freight quotation. Any amount shown here is an <b>illustrative sample estimate only</b>.</p>
+        </div>
+        <div class="form-card reveal" style="max-width:860px;margin:0 auto;">
+          <form id="quoteForm" novalidate>
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label>Pickup City <em>*</em></label>
+                <input type="text" name="qPickup" placeholder="e.g. Mumbai" required>
+                <small class="error-msg"></small>
+              </div>
+              <div class="form-group">
+                <label>Delivery City <em>*</em></label>
+                <input type="text" name="qDelivery" placeholder="e.g. Delhi" required>
+                <small class="error-msg"></small>
+              </div>
+              <div class="form-group">
+                <label>Material Type <em>*</em></label>
+                <select name="qMaterial" required>
+                  <option value="">Select material</option>
+                  <option>Cement / Bags</option><option>Steel / Metal</option><option>Electronics</option>
+                  <option>FMCG Goods</option><option>Machinery</option><option>Agricultural Produce</option>
+                  <option>Textiles</option><option>Furniture</option><option>Chemicals</option><option>Other</option>
+                </select>
+                <small class="error-msg"></small>
+              </div>
+              <div class="form-group">
+                <label>Weight (Tons) <em>*</em></label>
+                <input type="number" name="qWeight" min="0.1" step="0.1" placeholder="e.g. 5" data-min="0.1" required>
+                <small class="error-msg"></small>
+              </div>
+              <div class="form-group">
+                <label>Truck Type <em>*</em></label>
+                <select name="qTruck" required>
+                  <option value="">Select truck type</option>
+                  <option>Open Body Truck</option>
+                  <option>Container Truck</option>
+                  <option>Light Commercial Vehicle</option>
+                  <option>Medium Commercial Vehicle</option>
+                  <option>Heavy Commercial Vehicle</option>
+                </select>
+                <small class="error-msg"></small>
+              </div>
+              <div class="form-group">
+                <label>Pickup Date <em>*</em></label>
+                <input type="date" name="qDate" required>
+                <small class="error-msg"></small>
+              </div>
+              <div class="form-group">
+                <label>Customer Contact Number <em>*</em></label>
+                <input type="tel" name="qContact" placeholder="10-digit mobile" maxlength="10" data-validate="mobile" required>
+                <small class="error-msg"></small>
+              </div>
+            </div>
+            <div class="summary-actions">
+              <button type="submit" class="btn btn-red"><i class="fa-solid fa-calculator"></i> Request Freight Quote</button>
+              <a href="tel:+918828383122" class="btn btn-outline"><i class="fa-solid fa-phone"></i> Call for a Quote</a>
+            </div>
+          </form>
+
+          <!-- Quotation summary -->
+          <div class="result-panel" id="quoteSummary" hidden style="margin-top:26px;">
+            <div class="result-head">
+              <h3><i class="fa-solid fa-file-invoice-dollar"></i><span id="qRef"></span></h3>
+              <span class="pill pill-pending" id="qStatus">AWAITING QUOTATION</span>
+            </div>
+            <div class="result-body">
+              <p style="font-size:14px;margin-bottom:6px;" id="qRoute"></p>
+              <p style="font-size:13.5px;color:var(--muted);margin-bottom:18px;" id="qDetails"></p>
+              <div style="display:flex;gap:26px;align-items:center;flex-wrap:wrap;background:var(--grey);border:1px dashed var(--border);border-radius:var(--radius-sm);padding:18px 22px;margin-bottom:18px;">
+                <div>
+                  <small style="font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);">Illustrative sample estimate</small>
+                  <div style="font-family:var(--font-head);font-size:32px;font-weight:800;color:var(--navy);"><span id="qEstLow"></span> – <span id="qEstHigh"></span></div>
+                </div>
+                <span class="demo-tag"><i class="fa-solid fa-triangle-exclamation"></i> Sample only — not a valid quote</span>
+              </div>
+              <div class="result-note">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span><b>Illustrative estimate only.</b> The amount above is a <b>sample calculation generated for demonstration</b>. RP TRANSPORT COMPANY does not publish binding freight prices online — your final quotation depends on verified route, vehicle, fuel, toll and loading conditions and is shared directly by our team.</span>
+              </div>
+              <div class="summary-actions">
+                <a href="#" class="btn btn-wa wa-link" id="qWhatsapp"><i class="fa-brands fa-whatsapp"></i> Contact Transport Company</a>
+                <a href="tel:+918828383122" class="btn btn-navy"><i class="fa-solid fa-phone"></i> Call Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer no-print">
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a href="index.html" class="brand">
+            <span class="brand-badge">RPTC</span>
+            <span class="brand-text"><b style="color:#fff;">RP TRANSPORT</b><small>COMPANY</small></span>
+          </a>
+          <p><b style="color:#fff;">WE DELIVER SAFE.</b><br>Fleet owner &amp; transport contractor providing truck booking, freight quotation and logistics services across India.</p>
+          <div class="footer-social">
+            <a href="tel:+918828383122" aria-label="Call"><i class="fa-solid fa-phone"></i></a>
+            <a href="https://wa.me/918828383122?text=Hello%20RP%20TRANSPORT%20COMPANY%2C%20I%20would%20like%20to%20enquire%20about%20truck%20booking%20and%20freight%20charges." class="wa-link wa" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="mailto:rptransportcompany28@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="contact.html#map" aria-label="Location"><i class="fa-solid fa-location-dot"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Us</a></li>
+            <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Services</a></li>
+            <li><a href="booking.html"><i class="fa-solid fa-chevron-right"></i> Book a Truck</a></li>
+            <li><a href="tracking.html"><i class="fa-solid fa-chevron-right"></i> Track Shipment</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact Us</a></li>
+            <li><a href="login.html"><i class="fa-solid fa-chevron-right"></i> Customer Login</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Our Services</h4>
+          <ul class="footer-links">
+            <li><a href="services.html#ftl"><i class="fa-solid fa-chevron-right"></i> Full Truck Load (FTL)</a></li>
+            <li><a href="services.html#ptl"><i class="fa-solid fa-chevron-right"></i> Part Truck Load (PTL)</a></li>
+            <li><a href="services.html#container"><i class="fa-solid fa-chevron-right"></i> Container Transportation</a></li>
+            <li><a href="services.html#openbody"><i class="fa-solid fa-chevron-right"></i> Open Body Trucks</a></li>
+            <li><a href="services.html#heavy"><i class="fa-solid fa-chevron-right"></i> Heavy Goods Transport</a></li>
+            <li><a href="booking.html#freight-quote"><i class="fa-solid fa-chevron-right"></i> Freight Quotation</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact Us</h4>
+          <ul class="footer-contact">
+            <li><i class="fa-solid fa-location-dot"></i><span>D 5103, Bima Complex, Near Steel Market, Kalamboli, Navi Mumbai – 410218, Maharashtra, India</span></li>
+            <li><i class="fa-solid fa-phone"></i><span><a href="tel:+918828383122">+91 88283 83122</a><br><a href="tel:+917738733177">+91 77387 33177</a></span></li>
+            <li><i class="fa-solid fa-envelope"></i><a href="mailto:rptransportcompany28@gmail.com">rptransportcompany28@gmail.com</a></li>
+          </ul>
+          <a href="https://wa.me/918828383122?text=Hello%20RP%20TRANSPORT%20COMPANY%2C%20I%20would%20like%20to%20enquire%20about%20truck%20booking%20and%20freight%20charges." class="btn btn-wa btn-sm wa-link"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <span>© <span class="year">2026</span> <b>RP TRANSPORT COMPANY (RPTC)</b>. All rights reserved.</span>
+          <span>Frontend demonstration — data is stored only in this browser (LocalStorage).</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-top no-print" id="backTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <script src="script.js"></script>
+</body>
+</html>
