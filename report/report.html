@@ -1,0 +1,2313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Project Report — RPTC Transport Management System</title>
+<style>
+  @font-face{font-family:'Tinos';font-style:normal;font-weight:400;src:url('fonts/tinos-latin-400-normal.woff2') format('woff2');}
+  @font-face{font-family:'Tinos';font-style:italic;font-weight:400;src:url('fonts/tinos-latin-400-italic.woff2') format('woff2');}
+  @font-face{font-family:'Tinos';font-style:normal;font-weight:700;src:url('fonts/tinos-latin-700-normal.woff2') format('woff2');}
+  @font-face{font-family:'Tinos';font-style:italic;font-weight:700;src:url('fonts/tinos-latin-700-italic.woff2') format('woff2');}
+
+  @page { size: A4; margin: 25mm 20mm 22mm 22mm; }
+  @page :first { margin: 12mm 12mm 12mm 12mm; }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Tinos',Georgia,serif;
+    font-size:12pt;
+    line-height:1.5;
+    color:#000000;
+    background:#ffffff;
+    -webkit-font-smoothing:antialiased;
+  }
+  p{margin:0 0 8pt;text-align:justify;color:#000000;}
+  h1,h2,h3,h4{color:#000000;font-family:'Tinos',Georgia,serif;}
+  h1{font-size:16pt;text-align:center;letter-spacing:.6px;text-transform:uppercase;margin:0 0 14pt;line-height:1.3;}
+  h2{font-size:13pt;margin:16pt 0 7pt;line-height:1.3;}
+  h3{font-size:12pt;margin:12pt 0 5pt;font-style:italic;font-weight:700;}
+  ul,ol{margin:0 0 9pt;padding-left:20pt;color:#000000;}
+  li{margin-bottom:4pt;text-align:justify;}
+  ol.refs li, ol.refs{text-align:left;}
+  b,strong{font-weight:700;}
+  a{color:#000000;text-decoration:none;}
+
+  .chapter{page-break-before:always;}
+  .chapter > h1{margin-top:0;padding-bottom:8pt;border-bottom:1.2pt solid #000;margin-bottom:16pt;text-align:center;}
+
+  .center{text-align:center;}
+  .small{font-size:10.5pt;}
+
+  /* ---------- cover ---------- */
+  .cover{page-break-after:always;text-align:center;padding-top:6mm;}
+  .cover p{text-align:center;}
+  .cover .univ-mark{text-align:center;margin-bottom:4mm;}
+  .cover .univ-mark img{height:26mm;}
+  .cover .univ-name{font-size:19pt;font-weight:700;letter-spacing:.5px;margin:0;}
+  .cover .univ-sub{font-size:10pt;font-weight:700;margin:2pt 0 0;}
+  .cover .rule-slim{width:60mm;border-top:1pt solid #000;margin:9mm auto 8mm;}
+  .cover .on{font-size:12pt;letter-spacing:1px;margin:0 0 6mm;}
+  .cover .title{font-size:22pt;font-weight:700;line-height:1.25;margin:0 auto 2mm;max-width:130mm;}
+  .cover .subtitle{font-size:11.5pt;font-style:italic;margin:0 0 9mm;}
+  .cover .label{font-size:11.5pt;letter-spacing:.6px;margin:0 0 2mm;}
+  .cover .value{font-size:14pt;font-weight:700;margin:0;text-decoration:underline;text-underline-offset:3px;}
+  .cover .gap{height:9mm;}
+  .cover .dept{font-size:13pt;font-weight:700;letter-spacing:.5px;margin:0;}
+  .cover .college{font-size:11.5pt;margin:2mm auto 0;max-width:150mm;}
+  .cover .college-logo{height:24mm;margin:6mm auto 4mm;display:block;}
+  .cover .session{font-size:11.5pt;font-weight:700;letter-spacing:.5px;margin:0;}
+
+  /* ---------- certificate / declaration ---------- */
+  .page-plain{page-break-after:always;}
+  .cert-head{display:flex;align-items:center;gap:5mm;border-bottom:1pt solid #000;padding-bottom:6pt;margin-bottom:6mm;}
+  .cert-head img{height:17mm;flex:0 0 auto;}
+  .cert-head .ch-body{flex:1;text-align:center;}
+  .cert-head .ch-name{font-size:12.5pt;line-height:1.35;margin:0;}
+  .cert-head .ch-sub{font-size:10.5pt;margin:2pt 0 0;}
+  .cert-title{text-align:center;margin:12mm 0 3mm;}
+  .cert-title .t1{font-size:13pt;font-weight:700;letter-spacing:.5px;margin:0;}
+  .cert-title .t2{font-size:15pt;font-weight:700;letter-spacing:2px;margin:4pt 0 0;}
+  .body-just{text-align:justify;font-size:12pt;line-height:1.75;}
+  .sign-row{display:flex;justify-content:space-between;margin-top:26mm;font-size:11pt;}
+  .sign-row div{width:45%;}
+  .sign-row .right{text-align:right;}
+  .sign-bottom{display:flex;justify-content:space-between;margin-top:30mm;font-size:11pt;}
+  .sign-bottom .mid{text-align:center;}
+  .decl-title{text-align:center;font-size:14pt;letter-spacing:3px;margin:22mm 0 16mm;font-weight:400;}
+  .decl-meta{margin-top:30mm;font-size:11.5pt;line-height:2.4;}
+
+  /* ---------- contents ---------- */
+  .toc h1{text-align:center;font-size:14pt;letter-spacing:2px;border-bottom:1.2pt solid #000;padding-bottom:6pt;margin-bottom:12pt;}
+  .toc-row{display:flex;align-items:baseline;font-size:11.5pt;margin:0 0 3.5pt;}
+  .toc-row .t{flex:1;}
+  .toc-row .dots{flex:0 1 auto;border-bottom:1px dotted #000;margin:0 4pt;min-width:12pt;transform:translateY(-1.5pt);}
+  .toc-row .p{flex:0 0 auto;}
+  .lvl1{font-weight:700;margin-top:6pt;}
+  .lvl2{padding-left:12pt;}
+  .lvl3{padding-left:24pt;font-size:11pt;}
+  .list-two{column-count:2;column-gap:16pt;}
+  .list-two .toc-row{margin-bottom:2.5pt;break-inside:avoid;}
+  .fig{font-size:9.5pt;margin-bottom:2.5pt !important;}
+  .toc .toc-row{font-size:10pt;line-height:1.2;margin-bottom:1.6pt;}
+  .toc .lvl1{font-size:10.5pt;margin-top:5pt;}
+  .toc .lvl2{font-size:10pt;}
+  .toc .lvl3{font-size:9.5pt;}
+  .toc h1{margin-bottom:9pt;}
+  .toc-note{font-size:10pt;font-style:italic;margin-top:10pt;text-align:left;}
+
+  /* ---------- tables ---------- */
+  table{width:100%;border-collapse:collapse;font-size:10pt;margin:4pt 0 10pt;page-break-inside:auto;}
+  caption{caption-side:top;font-size:10pt;font-weight:700;text-align:left;padding-bottom:4pt;color:#000;}
+  th,td{border:0.6pt solid #000;padding:3.6pt 5pt;vertical-align:top;text-align:left;color:#000;}
+  th{background:#e8e8e8;font-weight:700;}
+  td.c,th.c{text-align:center;}
+  tr{page-break-inside:avoid;}
+  thead{display:table-header-group;}
+
+  /* ---------- figures ---------- */
+  figure{margin:8pt auto 13pt;page-break-inside:avoid;text-align:center;width:88%;}
+  figure img{width:100%;height:auto;border:0.6pt solid #444;}
+  figcaption{font-size:10pt;margin-top:4pt;text-align:center;color:#000;}
+  .fig-grid{display:flex;gap:8pt;justify-content:center;align-items:flex-start;page-break-inside:avoid;margin:8pt 0 12pt;}
+  .fig-grid figure{flex:1;margin:0;}
+
+  /* ---------- diagrams ---------- */
+  .diagram{width:100%;margin:6pt 0 12pt;page-break-inside:avoid;text-align:center;}
+  .diagram svg{width:100%;height:auto;display:block;}
+  .diagram-cap{font-size:10pt;text-align:center;margin:3pt 0 0;}
+
+  /* ---------- misc ---------- */
+  .note{border:0.8pt solid #000;padding:7pt 9pt;font-size:10.5pt;margin:8pt 0 10pt;}
+  .note b{display:block;margin-bottom:2pt;}
+  .kv{font-size:11pt;line-height:1.9;}
+  .avoid{page-break-inside:avoid;}
+  .pb{page-break-before:always;}
+  html.body-only .chapter.first{page-break-before:auto;}
+  .code{font-family:'Courier New',monospace;font-size:9pt;background:#f2f2f2;border:0.6pt solid #666;padding:6pt 8pt;white-space:pre-wrap;line-height:1.35;margin:4pt 0 10pt;}
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover">
+  <div class="univ-mark"><img src="images/logo_university.png" alt="University of Mumbai emblem"></div>
+  <p class="univ-name">University of Mumbai</p>
+  <p class="univ-sub">Re-accredited with A++ Grade (CGPA 3.65) by NAAC (3rd Cycle 2021)</p>
+
+  <div class="rule-slim"></div>
+
+  <p class="on">A PROJECT REPORT ON</p>
+  <p class="title">RPTC Transport Management System &amp; Online Truck Booking Website</p>
+  <p class="subtitle">&ldquo;WE DELIVER SAFE.&rdquo; — A Web-Based Transport Management and Booking Platform</p>
+
+  <p class="label">SUBMITTED BY</p>
+  <p class="value">Piyush Sawant</p>
+
+  <div class="gap"></div>
+
+  <p class="label">IN PARTIAL FULFILMENT FOR THE AWARD OF</p>
+  <p class="label">THE DEGREE OF</p>
+  <p class="value">BACHELOR OF SCIENCE IN COMPUTER SCIENCE</p>
+
+  <div class="gap"></div>
+
+  <p class="label">UNDER THE GUIDANCE OF</p>
+  <p class="value">MRS. SAYALI BORNARE</p>
+
+  <div class="gap"></div>
+
+  <p class="dept">DEPARTMENT OF COMPUTER SCIENCE</p>
+  <p class="college">S.I.C.E.S Degree College of Arts, Science &amp; Commerce (Sem VI)</p>
+
+  <img class="college-logo" src="images/logo_college.png" alt="S.I.C.E.S. Ambarnath college emblem">
+  <p class="session">(MARCH: 2025 &ndash; 2026)</p>
+</div>
+
+<!-- ==================== CERTIFICATE ==================== -->
+<div class="page-plain">
+  <div class="cert-head">
+    <img src="images/logo_college.png" alt="College emblem">
+    <div class="ch-body">
+      <p class="ch-name">S.I.C.E.S Degree College of Arts, Science &amp; Commerce,<br>
+        Jambhul Phata, Chikhloli, Ambernath (W)<br>
+        NAAC Accredited B+ Grade</p>
+    </div>
+  </div>
+
+  <div class="cert-title">
+    <p class="t1">Department of Computer Science</p>
+    <p class="t2">CERTIFICATE</p>
+  </div>
+
+  <p class="body-just" style="margin-top:8mm;">
+    This is to certify that Mr. <b><i>Piyush Sawant</i></b> of <b><i>T.Y.B.Sc.CS (Sem VI)</i></b> class has
+    satisfactorily completed the Project <b><i>RPTC Transport Management System &amp; Online Truck
+    Booking Website</i></b> to be submitted in the partial fulfilment for the award of
+    <b>Bachelor of Science in Computer Science</b> during the academic year <b>2025 &ndash; 2026</b>.
+  </p>
+
+  <p style="margin-top:9mm;">Date of Submission: ______________________</p>
+
+  <div class="sign-row">
+    <div>Project Guide</div>
+    <div class="right">Head of Department of<br>Computer Science</div>
+  </div>
+
+  <div class="sign-bottom">
+    <div>College Seal</div>
+    <div class="mid">Signature of Examiner</div>
+    <div class="right">Signature of Principal</div>
+  </div>
+</div>
+
+<!-- ==================== DECLARATION ==================== -->
+<div class="page-plain">
+  <p class="decl-title">DECLARATION</p>
+
+  <p class="body-just">
+    I am <b>Piyush Sawant</b>, hereby declare that the project entitled
+    <b><i>&ldquo;RPTC Transport Management System &amp; Online Truck Booking Website&rdquo;</i></b>
+    submitted in the partial fulfilment for the award of <b>Bachelor of Science in Computer
+    Science</b> during the academic year <b>2025 &ndash; 2026</b> is my original work and the project
+    has not formed the basis for the award of any degree, associateship, fellowship or any other
+    similar titles.
+  </p>
+
+  <p class="decl-meta">
+    Signature of the Student: ______________________<br>
+    Place: ______________________<br>
+    Date: ______________________
+  </p>
+</div>
+
+<!-- ==================== ACKNOWLEDGEMENT ==================== -->
+<div class="page-plain">
+  <h1 style="text-align:center;letter-spacing:2px;border-bottom:1.2pt solid #000;padding-bottom:6pt;margin-bottom:14pt;">ACKNOWLEDGEMENT</h1>
+
+  <p class="body-just">
+    I would want to convey my heartfelt gratitude to <b>Mrs. Sayali Bornare</b>, my mentor, for her
+    invaluable advice and assistance in completing my project. She was there to assist me every step
+    of the way, and her motivation is what enabled me to accomplish my task effectively. Her
+    suggestions on the structure of the system, the clarity of the documentation and the discipline
+    of testing helped me convert a simple website into a properly documented software project.
+  </p>
+
+  <p class="body-just">
+    I would also like to thank the <b>Head of the Department of Computer Science</b> and all of the
+    other supporting personnel of <b>S.I.C.E.S Degree College of Arts, Science and Commerce</b> for
+    enabling me to work on this project by providing me with the necessary skillset, laboratory
+    facilities and academic guidance to accomplish my goals.
+  </p>
+
+  <p class="body-just">
+    I am thankful to <b>RP TRANSPORT COMPANY (RPTC)</b>, Kalamboli, Navi Mumbai, for sharing their
+    business details, service list and operating process, which formed the practical basis of the
+    system requirements described in this report. Their real-world booking and dispatch process is
+    what the proposed website is designed to support.
+  </p>
+
+  <p class="body-just">
+    Finally, I would also like to thank my friends and parents for their support and encouragement as
+    I worked on this assignment. Their feedback during the demonstration sessions helped me improve
+    the usability of the website considerably.
+  </p>
+
+  <p style="margin-top:22mm;text-align:right;">
+    <b>Piyush Sawant</b><br>
+    T.Y.B.Sc. Computer Science (Sem VI)
+  </p>
+</div>
+
+<!-- ==================== CONTENTS ==================== -->
+<div class="page-plain toc">
+  <h1>CONTENTS</h1>
+<div class="toc-row lvl1"><span class="t">1. Abstract</span><span class="dots"></span><span class="p">1</span></div>
+  <div class="toc-row lvl1"><span class="t">2. Introduction</span><span class="dots"></span><span class="p">2</span></div>
+  <div class="toc-row lvl2"><span class="t">2.1 System Development</span><span class="dots"></span><span class="p">2</span></div>
+  <div class="toc-row lvl2"><span class="t">2.2 About the Project — RPTC Transport Management System</span><span class="dots"></span><span class="p">2</span></div>
+  <div class="toc-row lvl2"><span class="t">2.3 Modules of the System</span><span class="dots"></span><span class="p">3</span></div>
+  <div class="toc-row lvl3"><span class="t">2.3.1 Public (Visitor) Module</span><span class="dots"></span><span class="p">3</span></div>
+  <div class="toc-row lvl3"><span class="t">2.3.2 Customer Module</span><span class="dots"></span><span class="p">4</span></div>
+  <div class="toc-row lvl3"><span class="t">2.3.3 Administrator Module</span><span class="dots"></span><span class="p">4</span></div>
+  <div class="toc-row lvl1"><span class="t">3. System Analysis</span><span class="dots"></span><span class="p">6</span></div>
+  <div class="toc-row lvl2"><span class="t">3.1 Preliminary Investigation</span><span class="dots"></span><span class="p">6</span></div>
+  <div class="toc-row lvl2"><span class="t">3.2 Feasibility Study</span><span class="dots"></span><span class="p">6</span></div>
+  <div class="toc-row lvl3"><span class="t">3.2.1 Technical Feasibility</span><span class="dots"></span><span class="p">7</span></div>
+  <div class="toc-row lvl3"><span class="t">3.2.2 Operational Feasibility</span><span class="dots"></span><span class="p">7</span></div>
+  <div class="toc-row lvl3"><span class="t">3.2.3 Economical Feasibility</span><span class="dots"></span><span class="p">7</span></div>
+  <div class="toc-row lvl2"><span class="t">3.3 Gathering Information</span><span class="dots"></span><span class="p">8</span></div>
+  <div class="toc-row lvl2"><span class="t">3.4 System Study</span><span class="dots"></span><span class="p">9</span></div>
+  <div class="toc-row lvl3"><span class="t">3.4.1 Present (Existing) System</span><span class="dots"></span><span class="p">9</span></div>
+  <div class="toc-row lvl3"><span class="t">3.4.2 Proposed System</span><span class="dots"></span><span class="p">9</span></div>
+  <div class="toc-row lvl3"><span class="t">3.4.3 Limitations of the Proposed System</span><span class="dots"></span><span class="p">10</span></div>
+  <div class="toc-row lvl1"><span class="t">4. System Requirements</span><span class="dots"></span><span class="p">11</span></div>
+  <div class="toc-row lvl2"><span class="t">4.1 Software Environment</span><span class="dots"></span><span class="p">11</span></div>
+  <div class="toc-row lvl3"><span class="t">4.1.1 Technology Used</span><span class="dots"></span><span class="p">11</span></div>
+  <div class="toc-row lvl2"><span class="t">4.2 Working Environment</span><span class="dots"></span><span class="p">14</span></div>
+  <div class="toc-row lvl3"><span class="t">4.2.1 Hardware Configuration</span><span class="dots"></span><span class="p">14</span></div>
+  <div class="toc-row lvl3"><span class="t">4.2.2 Software Configuration</span><span class="dots"></span><span class="p">15</span></div>
+  <div class="toc-row lvl1"><span class="t">5. System Design</span><span class="dots"></span><span class="p">16</span></div>
+  <div class="toc-row lvl2"><span class="t">5.1 Introduction to System Design</span><span class="dots"></span><span class="p">16</span></div>
+  <div class="toc-row lvl2"><span class="t">5.2 System Flow Diagram</span><span class="dots"></span><span class="p">17</span></div>
+  <div class="toc-row lvl2"><span class="t">5.3 Data Flow Diagrams</span><span class="dots"></span><span class="p">18</span></div>
+  <div class="toc-row lvl3"><span class="t">5.3.1 Context Level (0 Level) DFD</span><span class="dots"></span><span class="p">18</span></div>
+  <div class="toc-row lvl3"><span class="t">5.3.2 First Level (I Level) DFD</span><span class="dots"></span><span class="p">19</span></div>
+  <div class="toc-row lvl3"><span class="t">5.3.3 Second Level (II Level) DFD — Booking Module</span><span class="dots"></span><span class="p">19</span></div>
+  <div class="toc-row lvl2"><span class="t">5.4 Database Design</span><span class="dots"></span><span class="p">21</span></div>
+  <div class="toc-row lvl3"><span class="t">5.4.1 Data Dictionary</span><span class="dots"></span><span class="p">21</span></div>
+  <div class="toc-row lvl2"><span class="t">5.5 Screens (Project Screen Shots)</span><span class="dots"></span><span class="p">27</span></div>
+  <div class="toc-row lvl1"><span class="t">6. System Testing</span><span class="dots"></span><span class="p">41</span></div>
+  <div class="toc-row lvl2"><span class="t">6.1 Test Plan</span><span class="dots"></span><span class="p">41</span></div>
+  <div class="toc-row lvl2"><span class="t">6.2 Test Units and Levels of Testing</span><span class="dots"></span><span class="p">42</span></div>
+  <div class="toc-row lvl2"><span class="t">6.3 Other Testing Strategies</span><span class="dots"></span><span class="p">43</span></div>
+  <div class="toc-row lvl2"><span class="t">6.4 Test Cases Executed</span><span class="dots"></span><span class="p">43</span></div>
+  <div class="toc-row lvl2"><span class="t">6.5 Test Deliverables</span><span class="dots"></span><span class="p">46</span></div>
+  <div class="toc-row lvl1"><span class="t">7. Implementation and Evaluation</span><span class="dots"></span><span class="p">47</span></div>
+  <div class="toc-row lvl1"><span class="t">8. Conclusion and Future Enhancement</span><span class="dots"></span><span class="p">50</span></div>
+  <div class="toc-row lvl2"><span class="t">8.1 Conclusion</span><span class="dots"></span><span class="p">50</span></div>
+  <div class="toc-row lvl2"><span class="t">8.2 Extensibility</span><span class="dots"></span><span class="p">50</span></div>
+  <div class="toc-row lvl2"><span class="t">8.3 Future Enhancement</span><span class="dots"></span><span class="p">50</span></div>
+  <div class="toc-row lvl1"><span class="t">Bibliography / References</span><span class="dots"></span><span class="p">52</span></div>
+</div>
+
+<div class="page-plain toc">
+  <h1>LIST OF FIGURES AND TABLES</h1>
+  <h2 style="font-size:11.5pt;margin:0 0 6pt;">List of Figures</h2>
+  <div class="list-two">
+  <div class="toc-row fig"><span class="t">Figure 5.1 — System Flow Diagram of RPTC Transport Management System</span><span class="dots"></span><span class="p">18</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.2 — Context Level (0 Level) Data Flow Diagram</span><span class="dots"></span><span class="p">19</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.3 — First Level (I Level) Data Flow Diagram</span><span class="dots"></span><span class="p">19</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.4 — Second Level (II Level) Data Flow Diagram — Booking Module</span><span class="dots"></span><span class="p">20</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.5 — Entity Relationship Diagram of the Data Store</span><span class="dots"></span><span class="p">21</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.6 — Home Page of the Website</span><span class="dots"></span><span class="p">27</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.7 — Quick Truck Booking Form with Simulated Availability Result</span><span class="dots"></span><span class="p">28</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.8 — Services Section of the Home Page</span><span class="dots"></span><span class="p">28</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.9 — “Why Choose Us” Section</span><span class="dots"></span><span class="p">29</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.10 — Four-Step Booking Process Section</span><span class="dots"></span><span class="p">29</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.11 — About Us Page</span><span class="dots"></span><span class="p">30</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.12 — Core Values and Business Details Section</span><span class="dots"></span><span class="p">30</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.13 — Services Page</span><span class="dots"></span><span class="p">31</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.14 — Vehicle Types and Capacities Table</span><span class="dots"></span><span class="p">31</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.15 — Online Truck Booking Form</span><span class="dots"></span><span class="p">32</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.16 — Client-Side Validation Messages</span><span class="dots"></span><span class="p">32</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.17 — Completed Booking Form</span><span class="dots"></span><span class="p">33</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.18 — Booking Request Summary with Generated Reference</span><span class="dots"></span><span class="p">33</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.19 — Freight Quotation Request Form</span><span class="dots"></span><span class="p">34</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.20 — Illustrative Freight Estimate Summary</span><span class="dots"></span><span class="p">33</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.21 — Shipment Tracking Page</span><span class="dots"></span><span class="p">35</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.22 — Tracking Result with Six-Step Progress Timeline</span><span class="dots"></span><span class="p">35</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.23 — “No Record Found” State of Tracking</span><span class="dots"></span><span class="p">36</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.24 — Contact Us Page</span><span class="dots"></span><span class="p">36</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.25 — Validated Contact Form</span><span class="dots"></span><span class="p">37</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.26 — Customer Login and Registration Page</span><span class="dots"></span><span class="p">37</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.27 — Logged-In Demonstration Session</span><span class="dots"></span><span class="p">38</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.28 — Admin Dashboard with Statistics</span><span class="dots"></span><span class="p">38</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.29 — Admin Booking Management Table</span><span class="dots"></span><span class="p">39</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.30 — Vehicle and Fleet Management Panel</span><span class="dots"></span><span class="p">39</span></div>
+  <div class="toc-row fig"><span class="t">Figure 5.31 — Responsive Mobile Layout</span><span class="dots"></span><span class="p">40</span></div>
+  </div>
+  <h2 style="font-size:11.5pt;margin:12pt 0 6pt;">List of Tables</h2>
+  <div class="toc-row fig"><span class="t">Table 5.1 — LocalStorage Data Store Keys</span><span class="dots"></span><span class="p">21</span></div>
+  <div class="toc-row fig"><span class="t">Table 5.2 — Data Dictionary — Booking Record</span><span class="dots"></span><span class="p">22</span></div>
+  <div class="toc-row fig"><span class="t">Table 5.3 — Data Dictionary — Freight Quotation Record</span><span class="dots"></span><span class="p">23</span></div>
+  <div class="toc-row fig"><span class="t">Table 5.4 — Data Dictionary — Vehicle (Fleet) Record</span><span class="dots"></span><span class="p">24</span></div>
+  <div class="toc-row fig"><span class="t">Table 5.5 — Data Dictionary — User and Session Records</span><span class="dots"></span><span class="p">24</span></div>
+  <div class="toc-row fig"><span class="t">Table 5.6 — Booking Status Flow Master</span><span class="dots"></span><span class="p">25</span></div>
+  <div class="toc-row fig"><span class="t">Table 6.1 — Test Cases and Results</span><span class="dots"></span><span class="p">43</span></div>
+</div>
+
+<!-- ==================== 1. ABSTRACT ==================== -->
+<div class="chapter">
+  <h1>1. Abstract</h1>
+
+  <p>
+    Road transport is the backbone of Indian goods movement, and a large share of it is still
+    coordinated over phone calls, WhatsApp messages and hand-written loading slips. A transport
+    contractor receives booking details in fragments, notes them in a register, informs the driver
+    separately and then answers repeated status calls from the customer. The result is double
+    booking, unclear freight commitments, lost reference numbers and customers who have no reliable
+    way of knowing where their consignment is at any given moment.
+  </p>
+
+  <p>
+    The present project, <b>RPTC Transport Management System &amp; Online Truck Booking Website</b>,
+    is a web-based front end built for <b>RP TRANSPORT COMPANY (RPTC)</b>, a fleet owner and
+    transport contractor based at Kalamboli, Navi Mumbai, that operates on a PAN India basis. The
+    website brings the complete booking conversation onto one platform: the customer selects a
+    route, load details and vehicle type, receives a booking reference number, can request an
+    indicative freight estimate and can track the booking through a six-stage progress timeline. The
+    administrator, in turn, gets a single dashboard where every request can be viewed, approved or
+    rejected, matched with a vehicle from the fleet register, moved through the delivery stages and
+    printed as a booking document.
+  </p>
+
+  <p>
+    The system is implemented as a static, framework-free web application using HTML5, CSS3 and
+    vanilla JavaScript. It contains eight linked pages — Home, About Us, Services, Book a Truck,
+    Track Shipment, Contact Us, Customer Login and Admin Dashboard — sharing one stylesheet and one
+    script file. All demonstration records are persisted in the browser's LocalStorage, which makes
+    the complete workflow demonstrable on an ordinary laptop without installing a server or a
+    database. Careful attention has been paid to telling the user what is real and what is
+    illustrative: the availability check, the freight estimate and the admin actions are clearly
+    labelled as demonstration features, and the report describes honestly how each of them must be
+    replaced by a server-side implementation before commercial use.
+  </p>
+
+  <p>The present project elucidates the following features:</p>
+  <ul>
+    <li>Online truck booking request with automatic reference number generation (RPTC-YYYY-NNNNN).</li>
+    <li>Route, goods and vehicle selection with complete client-side validation.</li>
+    <li>Freight quotation request with an illustrative, clearly-labelled cost estimate.</li>
+    <li>Shipment tracking with a six-stage visual progress timeline.</li>
+    <li>Customer registration and login (demonstration authentication).</li>
+    <li>Admin dashboard for booking approval, vehicle assignment, status updates and fleet records.</li>
+    <li>Printable booking summary, click-to-call, WhatsApp enquiry and responsive mobile layout.</li>
+  </ul>
+</div>
+
+<!-- ==================== 2. INTRODUCTION ==================== -->
+<div class="chapter">
+  <h1>2. Introduction</h1>
+
+  <h2>2.1 System Development</h2>
+
+  <p>
+    The process of building systems has always been complex; as systems become larger, the costs and
+    complexities get multiplied. So the need for better methods for developing systems is widely
+    recognised to be effective, and the applied model should meet a few basic requirements.
+  </p>
+
+  <ul>
+    <li>The model should be structured and cover the entire system development process from
+        feasibility study to programming, testing and implementation.</li>
+    <li>The model should utilise established methods and techniques like database design,
+        normalisation and structured programming techniques.</li>
+    <li>The model should consist of building blocks, which define tasks, results and interfaces.</li>
+    <li>The model should separate the logical system from the physical system.</li>
+    <li>Documentation should be a direct result of the development work and should be concise,
+        precise and as non-redundant as possible.</li>
+  </ul>
+
+  <p>
+    Based on the above requirements of the system model, a system study has been made for this
+    project. Various methodologies have been applied for the system study, evolving design documents,
+    data modelling, input screen design and output (report) design. The development followed the
+    classical waterfall sequence — preliminary investigation, feasibility study, requirement
+    gathering, system analysis, system design, coding, testing and implementation — with short
+    iterations back to design whenever a screen or a validation rule had to be corrected during
+    testing.
+  </p>
+
+  <h2>2.2 About the Project — RPTC Transport Management System</h2>
+
+  <p>
+    <b>RP TRANSPORT COMPANY (RPTC)</b> is a fleet owner and transport contractor located at
+    D 5103, Bima Complex, Near Steel Market, Kalamboli, Navi Mumbai &ndash; 410218, Maharashtra. The
+    firm arranges full truck load (FTL) and part truck load (PTL) movements, container
+    transportation, open body truck transport, heavy goods movement for industrial and commercial
+    consignments and long-term transport contracting for businesses across India. Its stated promise
+    is the tagline <i>&ldquo;WE DELIVER SAFE.&rdquo;</i>
+  </p>
+
+  <p>
+    Before the proposed system, the booking process of such a transport office is essentially verbal.
+    A customer telephones the office with a route, a material and a tonnage; the person at the desk
+    checks with the fleet in-charge whether a suitable vehicle is free, notes the details in a
+    register, quotes a freight amount verbally and later communicates the driver's mobile number to
+    the customer. Every subsequent status enquiry — <i>&ldquo;has the truck left?&rdquo;</i>,
+    <i>&ldquo;where is the consignment now?&rdquo;</i> — is another telephone call. Because nothing is
+    written down in a structured way, the office cannot answer simple questions such as how many
+    bookings are pending confirmation, which vehicle is running on which booking, or what was quoted
+    to a customer last month.
+  </p>
+
+  <p>
+    The proposed system moves this conversation onto a website. A visitor can read the company
+    profile and the ten services, check an indicative availability preview, submit a full booking
+    request and receive a reference number of the form <b>RPTC-2026-10001</b>, request a freight
+    quotation, and later track the booking through six clearly defined stages. The office gains an
+    admin dashboard in which every request is listed with its route, vehicle type, pickup date and
+    status, and in which the request can be approved, rejected, matched to a vehicle from the fleet
+    register and advanced through the delivery stages, with every change written into a status
+    history.
+  </p>
+
+  <p>
+    The project deliberately stops at the front end. It is a complete, working user interface with a
+    browser-side data layer, and it is structured so that a server-side API and a relational database
+    can later be attached behind the same screens without redesigning them. Chapter 7 and Chapter 8
+    describe exactly which parts are real, which are illustrative and what must be added for
+    production use.
+  </p>
+
+  <h2>2.3 Modules of the System</h2>
+
+  <p>
+    The system is divided into three modules: the Public (Visitor) Module, the Customer Module and
+    the Administrator Module. The division follows the three kinds of people who use the website.
+  </p>
+
+  <h3>2.3.1 Public (Visitor) Module</h3>
+
+  <p>
+    This module is available to anyone who opens the website and requires no login. It carries the
+    company's identity and the information a prospective customer needs in order to decide whether to
+    book.
+  </p>
+
+  <ul>
+    <li><b>Home:</b> The welcome page. It contains the hero banner, the quick truck booking form with
+        its simulated availability preview, four company highlights, ten service cards, a
+        &ldquo;Why Choose Us&rdquo; section, a four-step process explanation, clearly-marked sample
+        testimonials and the site footer.</li>
+    <li><b>About Us:</b> The company profile — who we are, mission, vision, values, core values grid
+        and the complete business details table (company name, business type, tagline, address,
+        mobile numbers, e-mail, operating area and services).</li>
+    <li><b>Services:</b> Detailed descriptions of all ten services with feature lists and booking
+        links, a vehicle type and capacity table (LCV, open body, MCV, container, HCV) and the eight
+        industries served.</li>
+    <li><b>Book a Truck:</b> The full six-section booking form (customer, pickup, delivery, goods,
+        truck, payment), the freight quotation form and the generated booking summary.</li>
+    <li><b>Track Shipment:</b> Lookup of a booking by reference number with the six-step progress
+        timeline, and a clear &ldquo;No Record Found&rdquo; state for an unknown reference.</li>
+    <li><b>Contact Us:</b> Office address, click-to-call numbers, WhatsApp button, e-mail link, the
+        validated contact form and an embedded Google Map of the Kalamboli area.</li>
+  </ul>
+
+  <h3>2.3.2 Customer Module</h3>
+
+  <p>
+    This module belongs to a customer who has registered on the site. Registration stores the name,
+    e-mail address, mobile number and password in the browser's LocalStorage and creates a session
+    record; the login form then restores that session and shows a signed-in panel from which the
+    customer can go straight to booking or tracking, or log out. Registration also prevents the same
+    e-mail address from being registered twice and checks that the two password entries match.
+  </p>
+
+  <ul>
+    <li><b>Register:</b> Full name, e-mail, 10-digit mobile number, password and confirm password,
+        with validation on every field.</li>
+    <li><b>Login:</b> E-mail and password verification against the stored record.</li>
+    <li><b>Logged-in panel:</b> Shows the signed-in customer, with links to <i>Book a Truck</i> and
+        <i>Track Shipment</i>, and a Logout action that clears the session.</li>
+    <li><b>My booking activity:</b> Any booking submitted from the same browser is available for
+        tracking by its reference number.</li>
+  </ul>
+
+  <div class="note">
+    <b>Security note.</b>
+    The customer module is a demonstration. Passwords are stored in plain text in LocalStorage and
+    the session is a local object, so it is not secure and must never be used for real customer
+    accounts. Production requires a secure backend, password hashing (for example bcrypt or Argon2),
+    server-side session management, HTTPS and role-based access control.
+  </div>
+
+  <h3>2.3.3 Administrator Module</h3>
+
+  <p>
+    The Administrator Module is the operational heart of the system. It is a single dashboard page
+    that reads the booking, quotation and vehicle records and presents them as live, filterable
+    tables. Statistics cards at the top show total booking requests, pending requests, approved
+    bookings, completed deliveries and quotation requests, all computed from the stored records
+    rather than typed in by hand.
+  </p>
+
+  <ul>
+    <li><b>Dashboard:</b> Five statistic cards and a filter for booking status (all, pending,
+        approved, vehicle assigned, picked up, in transit, delivered, rejected).</li>
+    <li><b>Booking management:</b> A table of all requests — reference, customer, route, vehicle
+        type, pickup date and status pill — with six actions per row: <i>view</i>, <i>approve</i>,
+        <i>reject</i>, <i>assign vehicle</i>, <i>update status</i> and <i>print</i>.</li>
+    <li><b>Vehicle and fleet management:</b> Add, edit and remove vehicles with registration number,
+        type, capacity, driver name, driver contact, availability status, current location and the
+        booking currently assigned.</li>
+    <li><b>Status history:</b> Every approval, rejection, vehicle assignment and status change is
+        appended to the booking's history with a timestamp and a note, so the tracking page shows an
+        auditable sequence rather than a single overwritten value.</li>
+    <li><b>Printing:</b> Any booking can be printed as a clean booking document; the print stylesheet
+        removes the navigation, banners, buttons and toasts.</li>
+  </ul>
+
+  <div class="note">
+    <b>Administration note.</b>
+    In this front end the dashboard is a publicly reachable demonstration page with no login, and all
+    actions are stored only in the local browser. A production deployment must place the dashboard
+    behind backend authentication and role-based authorisation, validate every action on the server
+    and keep an immutable audit log.
+  </div>
+</div>
+
+<!-- ==================== 3. SYSTEM ANALYSIS ==================== -->
+<div class="chapter">
+  <h1>3. System Analysis</h1>
+
+  <h2>3.1 Preliminary Investigation</h2>
+
+  <p>
+    First in the system development process is preliminary investigation. Preliminary investigation is
+    conducted in the following phases:
+  </p>
+  <ul>
+    <li>Project clarification</li>
+    <li>Feasibility study</li>
+    <li>Project appraisal</li>
+  </ul>
+
+  <p>
+    Project clarification is the process of selecting a project request for further study. When a
+    system development or modification request is made, the first systems activity — the preliminary
+    investigation — begins. The activity has three parts: request clarification, feasibility study
+    and project appraisal. Many requests from employees and users in an organisation are not clearly
+    stated. Therefore, before any systems investigation can be considered, the project request must be
+    examined to determine precisely what the originator wants. This is called request clarification.
+  </p>
+
+  <p>
+    In this project the request came from the transport office itself. The requirement was clarified
+    in discussion with the proprietor and the dispatch staff, and was reduced to four questions that
+    the website must answer for the business:
+  </p>
+
+  <ol>
+    <li><i>Can a customer give us the complete load details once, instead of five separate phone
+        calls?</i> — Answer: a structured booking form with mandatory fields for customer, pickup,
+        delivery, goods, vehicle and payment preference.</li>
+    <li><i>Can every enquiry be given a number so that it can be found again?</i> — Answer: an
+        automatically generated reference in the form RPTC-YYYY-NNNNN and a tracking page that
+        resolves it.</li>
+    <li><i>Can the office see, at a glance, what is pending and which vehicle is free?</i> —
+        Answer: an admin dashboard with status counters, a booking table and a fleet register.</li>
+    <li><i>Can the customer follow the consignment without telephoning us?</i> — Answer: a six-stage
+        progress timeline that is advanced only by an authorised status update.</li>
+  </ol>
+
+  <p>
+    An important outcome of the preliminary investigation is the determination that the system request
+    is feasible; that determination is recorded in the next section.
+  </p>
+
+  <h2>3.2 Feasibility Study</h2>
+
+  <p>
+    The feasibility study is performed to determine whether the proposed system is viable considering
+    the technical, operational and economical factors. After going through the feasibility study we
+    can have a clear-cut view of the system's benefits and drawbacks.
+  </p>
+
+  <h3>3.2.1 Technical Feasibility</h3>
+
+  <p>
+    The proposed system is developed using HTML5, CSS3 and JavaScript as the front-end tools, with the
+    browser's LocalStorage as the demonstration data store. No compiler, application server or
+    database server is required to run the system: any modern browser — Chrome, Edge, Firefox or
+    Safari on a desktop, tablet or phone — is sufficient. The only external dependencies are a Google
+    Fonts stylesheet, a Font Awesome icon stylesheet and the Tailwind CSS browser script, all of which
+    are fetched over HTTPS; if they are unavailable the site still functions with system fonts and
+    falls back gracefully.
+  </p>
+
+  <p>
+    The development tools used — a plain text editor or Visual Studio Code, the browser's developer
+    tools, and the Lighthouse and console panels for performance and error checking — are free and
+    already installed on the laboratory machines. Because the code is plain HTML, CSS and JavaScript
+    with no build step, the same files can later be served by any web server, including Apache, Nginx,
+    IIS or a Node.js host, and the data layer can be replaced by server calls inside the existing
+    <span class="code" style="display:inline;padding:1pt 3pt;border:none;background:#f2f2f2;">getData</span>
+    and <span class="code" style="display:inline;padding:1pt 3pt;border:none;background:#f2f2f2;">setData</span>
+    helpers. All the required hardware and software are readily available; hence the system is
+    technically feasible.
+  </p>
+
+  <h3>3.2.2 Operational Feasibility</h3>
+
+  <p>
+    The proposed system is operationally feasible because of the following reasons:
+  </p>
+  <ul>
+    <li>The customer is benefited more as most of his time is saved. A complete booking request can be
+        sent in a few minutes from a phone, without waiting for office hours.</li>
+    <li>The transport office no longer transcribes verbal details into a register; the request arrives
+        already structured, with a reference number and a printable summary.</li>
+    <li>The interface follows the same steps that the staff already follow on the telephone —
+        customer, pickup, delivery, goods, truck, payment — so no retraining or process change is
+        required.</li>
+    <li>The site is fully responsive and works on the low-cost Android phones used by drivers and
+        small traders, not only on office desktops.</li>
+    <li>The cost of the proposed system is almost negligible when compared with the benefits gained,
+        because it needs no licence and no server to demonstrate.</li>
+  </ul>
+
+  <h3>3.2.3 Economical Feasibility</h3>
+
+  <p>
+    As the necessary hardware (an ordinary PC or laptop) and software (a browser and a free code
+    editor) are available at low or no cost, the initial investment is the only cost incurred and the
+    system does not need any further enhancements to remain usable. Hosting of the static site can be
+    done free of charge on any static hosting service, and the only recurring cost for a production
+    version would be a domain name, a small server instance and an e-mail or SMS gateway. Set against
+    the value of avoided double bookings, reduced telephone handling time and better customer
+    retention, the system is economically feasible; the system is feasible in all respects and hence
+    it encourages taking up the system design.
+  </p>
+
+  <h2>3.3 Gathering Information</h2>
+
+  <p>
+    The analysis through collection of data plays the wider role in the analysis of the system. So the
+    data is collected at different levels of management to keep track of full information of the
+    system. The collection of data is done from:
+  </p>
+  <ul>
+    <li>Top level management — the proprietor of RP TRANSPORT COMPANY, who explained the business
+        model, the service range and the pricing policy;</li>
+    <li>Middle level management — the dispatch and fleet in-charge, who explained how vehicles are
+        allotted, what documents accompany a consignment and how status is communicated;</li>
+    <li>Low level management — the office assistant who receives calls and maintains the booking
+        register, and drivers who reported what information they actually need on the road.</li>
+  </ul>
+
+  <p>Different methods were used to collect the data.</p>
+
+  <p>
+    <b>Questionnaires.</b> The data is collected through questionnaires by filling a set of questions
+    from the different levels of management. The questions made through questionnaires are of three
+    different types: <i>structured</i> questionnaires, in which every question has fixed options (for
+    example, a list of the vehicle types actually arranged by the firm); <i>unstructured</i>
+    questionnaires, in which the respondent writes freely about the difficulties of the present
+    process; and <i>semi-structured</i> questionnaires, which combine fixed options with a comment
+    column. A short semi-structured questionnaire circulated among five regular customers produced the
+    most useful input — the wish for a reference number and for a status they could check themselves.
+  </p>
+
+  <p>
+    <b>Interviews.</b> Interviews were conducted to collect the information, at two levels: formal
+    group interviews with the hierarchical (official) groups in the firm, that is the proprietor with
+    the dispatch staff; and informal group interviews with groups formed outside the company, that is
+    drivers, loading labour and two traders from the Kalamboli steel market.
+  </p>
+
+  <p>
+    <b>Observation.</b> The data is also collected by observation of the firm. The office was observed
+    at different timings and in different situations — when the firm is busy, such as the early
+    morning loading window, and when the firm has little work to do — to see how a booking moves from
+    a telephone call to a loaded truck.
+  </p>
+
+  <p>
+    <b>Record review.</b> To collect the data and to get a clear idea of the firm, some data was also
+    collected from the past records of the firm: the booking register, loading slips, freight bills and
+    the vehicle list. This information helps very much to get a clear idea of the different problems
+    that occur in different seasons and of some exceptional conditions, such as a vehicle breakdown en
+    route or a consignment rejected at the delivery point. Reviewing these records is also how the
+    field names of the proposed data store were decided.
+  </p>
+
+  <h2>3.4 System Study</h2>
+
+  <h3>3.4.1 Present (Existing) System</h3>
+
+  <p>
+    There are certain features limiting the process of the present system. The drawbacks of the present
+    system are listed below.
+  </p>
+
+  <ul>
+    <li><b>Everything is verbal.</b> Bookings, freight amounts and pickup times are agreed on the
+        telephone. Nothing is written down until the loading slip is prepared, so disputes about what
+        was agreed are difficult to settle.</li>
+    <li><b>No reference number.</b> A customer who calls again has to describe the load afresh, and
+        the office has to search the register by date and name.</li>
+    <li><b>No status visibility.</b> The customer has no way of knowing whether the request was
+        approved, whether a vehicle was assigned, or whether the goods have been picked up; each of
+        these facts requires a telephone call during office hours.</li>
+    <li><b>Double booking and idle capacity.</b> Availability is tracked in the fleet in-charge's head
+        or on a whiteboard, so the same vehicle is sometimes committed twice while another stands
+        idle.</li>
+    <li><b>No management information.</b> The office cannot state how many requests are pending, how
+        many were rejected, or what proportion of bookings was actually delivered, without counting by
+        hand.</li>
+    <li><b>No record of the customer.</b> Repeat customers re-send the same address, GST number and
+        material details for every consignment.</li>
+    <li><b>Limited working hours.</b> A trader who decides at night that a load must move next
+        morning cannot register the request until the office opens.</li>
+    <li><b>Documents are prepared by hand.</b> The booking confirmation, which the driver must carry,
+        is written manually and is often illegible.</li>
+  </ul>
+
+  <h3>3.4.2 Proposed System</h3>
+
+  <p>
+    The proposed system, an online transport management and truck booking website, overcomes the
+    drawbacks of the present system. It gives the customer a single place to describe a load, obtain a
+    reference number and follow the consignment, and gives the office a single screen from which every
+    request can be handled. The advantages of the proposed system are listed below.
+  </p>
+
+  <ul>
+    <li>The customer can submit a complete, structured booking request at any hour, from a phone or a
+        computer, and immediately receives a reference number of the form RPTC-2026-10001.</li>
+    <li>Vehicle availability, capacity ranges and the ten services are published, so the customer
+        chooses the correct vehicle type before speaking to the office.</li>
+    <li>A freight quotation request can be raised with route, material, weight and truck type, and the
+        customer gets an illustrative estimate that is explicitly marked as not a valid quote.</li>
+    <li>Shipment tracking shows a six-stage timeline — request received, approved, vehicle assigned,
+        picked up, in transit, delivered — so that routine status calls disappear.</li>
+    <li>The booking summary can be printed as a clean document for the driver, and the same summary
+        can be forwarded to the office on WhatsApp in one tap.</li>
+    <li>The admin dashboard turns the register into live data: counts of pending, approved and
+        completed bookings, a filterable booking table and a fleet register with availability status.</li>
+    <li>Every status change is appended to a status history with a timestamp, producing an audit trail
+        for each consignment.</li>
+    <li>It is very flexible and user friendly: the layout adapts from a 1440-pixel desktop to a
+        390-pixel phone, and all forms work with a keyboard alone.</li>
+    <li>The person's time and work is reduced very much compared with the present system; the office
+        staff spend their time on dispatch rather than on transcription.</li>
+    <li>The customer is not limited to the working hours of the branch: the site is available
+        24 hours a day, 7 days a week and 365 days of the year.</li>
+  </ul>
+
+  <h3>3.4.3 Limitations of the Proposed System</h3>
+
+  <ul>
+    <li>The present version is a front-end demonstration. Booking, quotation, vehicle, user and
+        message records are stored only in the browser's LocalStorage, so they are specific to that
+        browser and that device, are not shared between users, and are lost if browser data is
+        cleared. Real multi-user booking requires a backend API and a database.</li>
+    <li>The availability check is simulated. It shows an indicative vehicle suggestion for the route
+        and tonnage but does not confirm that a real truck is free.</li>
+    <li>The freight figure shown after a quotation request is an illustrative sample calculation, not
+        a valid quotation; RPTC's real freight depends on verified route, vehicle, fuel, toll and
+        loading conditions.</li>
+    <li>Tracking reflects only the status recorded by the office. There is no GPS feed, so the
+        position of the vehicle on the road is not shown.</li>
+    <li>The login and the admin dashboard have no real security, as described in the notes in
+        Chapter 2.</li>
+    <li>The contact form does not deliver e-mail; it stores the message locally for demonstration.</li>
+  </ul>
+</div>
+
+<!-- ==================== 4. SYSTEM REQUIREMENTS ==================== -->
+<div class="chapter">
+  <h1>4. System Requirements</h1>
+
+  <h2>4.1 Software Environment</h2>
+
+  <p>
+    Software environment is a technical specification of the requirement of a software product. This
+    specifies the environment for development, operation and maintenance of the product. The proposed
+    system is a browser-based application; its environment is therefore described by the protocols,
+    languages and browser interfaces it uses rather than by a database server or an application
+    server.
+  </p>
+
+  <p style="margin-bottom:4pt;"><b>Technology used:</b></p>
+  <table class="avoid">
+    <thead><tr><th style="width:34%;">Layer</th><th>Technology used in the project</th></tr></thead>
+    <tr><td>Transfer protocol</td><td>HTTP / HTTPS</td></tr>
+    <tr><td>Markup and structure</td><td>HTML5</td></tr>
+    <tr><td>Presentation and layout</td><td>CSS3 (Flexbox, CSS Grid, media queries, print styles)</td></tr>
+    <tr><td>Client-side scripting</td><td>JavaScript (ES6, vanilla — no framework)</td></tr>
+    <tr><td>Data store (demonstration)</td><td>Web Storage API — <i>window.localStorage</i>, JSON serialisation</td></tr>
+    <tr><td>Browser interfaces used</td><td>DOM, DOM events, FormData and the Constraint-free custom validation, IntersectionObserver, URLSearchParams, window.print()</td></tr>
+    <tr><td>Supporting libraries</td><td>Google Fonts (Barlow Condensed, Inter), Font Awesome 6.5.2, Tailwind CSS browser script</td></tr>
+    <tr><td>Version control</td><td>Git and GitHub</td></tr>
+  </table>
+
+  <h3>4.1.1 HTTP and HTTP Basics</h3>
+
+  <p>
+    The Hypertext Transfer Protocol is a stateless, TCP/IP-based protocol used for communicating on the
+    World Wide Web. HTTP defines the precise manner in which web clients communicate with web servers.
+    The current versions in use are HTTP/1.1 and HTTP/2, and browsers negotiate HTTPS (HTTP over
+    TLS) for practically every public site. The protocol is standardised in the RFC 7230–7235 series
+    for HTTP/1.1.
+  </p>
+
+  <p>
+    The HTTP protocol follows a very simple request/response paradigm. In short, a conversation
+    between a web browser and a web server goes something like this: the client opens a connection to
+    the server, the client makes a request to the server, the server responds to the request, and the
+    connection is closed (or kept alive and reused, in the case of HTTP keep-alive). The four stages of
+    a simple web transaction are:
+  </p>
+
+  <table class="avoid">
+    <thead><tr><th style="width:22%;">Stage</th><th>What happens in this project</th></tr></thead>
+    <tr><td>1. Connection</td><td>The browser opens a TCP/TLS connection to the host that serves the site files.</td></tr>
+    <tr><td>2. Request</td><td>The browser sends <span class="code" style="display:inline;border:none;background:none;padding:0;">GET /index.html</span>, then further GET requests for <i>style.css</i>, <i>script.js</i> and the images.</td></tr>
+    <tr><td>3. Response</td><td>The host returns <span class="code" style="display:inline;border:none;background:none;padding:0;">200 OK</span> with the HTML document, the stylesheet, the script and the image bytes, each with its own MIME type.</td></tr>
+    <tr><td>4. Close / reuse</td><td>The connection is kept alive for the remaining asset requests and released when the page has finished loading.</td></tr>
+  </table>
+
+  <p>
+    Because the site is static, every page is an independent HTTP document and navigation between
+    pages is ordinary hyperlink navigation. Form submissions, however, are intercepted in JavaScript
+    with <span class="code" style="display:inline;border:none;background:none;padding:0;">event.preventDefault()</span>,
+    so that the page is not reloaded and the record can be written to LocalStorage and echoed back as
+    a booking summary. This is exactly the place where a production version would instead issue an
+    HTTP POST to a server-side API.
+  </p>
+
+  <h3>4.1.2 HTML5</h3>
+
+  <p>
+    HTML5 provides the semantic structure of all eight pages. Each page declares
+    <span class="code" style="display:inline;border:none;background:none;padding:0;">&lt;!DOCTYPE html&gt;</span>
+    and uses semantic elements — <i>header</i>, <i>nav</i>, <i>section</i>, <i>article</i>,
+    <i>footer</i> — with a viewport meta tag so that the layout is scaled correctly on a mobile phone.
+    HTML5 input types are used where they help the user: <i>type="date"</i> opens the device date
+    picker, <i>type="tel"</i> opens the numeric keyboard on a phone, <i>type="email"</i> triggers
+    e-mail keyboard suggestions, and <i>type="number"</i> with <i>min</i> and <i>step</i> restricts the
+    tonnage field. Attributes such as <i>required</i>, <i>maxlength</i>, <i>minlength</i>,
+    <i>placeholder</i>, <i>autocomplete</i> and <i>aria-label</i> carry the validation contract and the
+    accessibility hints. The document is written to be readable without CSS and is fully usable from
+    the keyboard.
+  </p>
+
+  <h3>4.1.3 CSS3</h3>
+
+  <p>
+    A single shared stylesheet of about 760 lines defines the whole visual language of the site. Custom
+    properties (CSS variables) hold the palette and the type scale, so a colour or a radius can be
+    changed in one place:
+  </p>
+
+  <div class="code">:root{
+  --red:#B30000;  --red-dark:#8A0000;  --red-soft:#FDEAEA;
+  --navy:#0A2342; --navy-2:#10305C;    --navy-3:#17427E;
+  --black:#111111; --ink:#1B2433;      --text:#46536A;
+  --muted:#71809A; --grey:#F4F6F8;     --border:#E3E8F0;
+  --green:#1E7E34; --amber:#9A6700;
+  --radius:14px;   --shadow-md:0 12px 32px rgba(10,35,66,.12);
+  --font-head:'Barlow Condensed',sans-serif;
+  --font-body:'Inter',sans-serif;
+}</div>
+
+  <p>
+    The layout is built with CSS Grid for the form grids, the service cards, the statistics cards, the
+    process steps and the summary blocks, and with Flexbox for the navigation bar, the top bar and the
+    button rows. Responsive behaviour is controlled by four media queries — 1080 px, 1024 px, 900 px
+    and 600 px — which progressively collapse the grids from five columns to two and then to one, and
+    which replace the horizontal menu with a hamburger menu below 900 px. A dedicated
+    <span class="code" style="display:inline;border:none;background:none;padding:0;">@media print</span>
+    block removes the top bar, navigation, banners, floating buttons and toast container, and converts
+    the coloured cards to black-on-white bordered boxes, so that a booking summary prints as a clean
+    document.
+  </p>
+
+  <h3>4.1.4 JavaScript</h3>
+
+  <p>
+    The behaviour of all pages is contained in one script file of about 1000 lines, written as a single
+    immediately-invoked function expression in strict mode so that no variable leaks into the global
+    scope. It is organised in numbered sections: utility helpers and company details, LocalStorage
+    helpers, the booking status model, reference-number generators, seed demonstration data, toast and
+    modal helpers, navigation, scroll-reveal animation, form validation, and one initialiser function
+    per page that returns early when its own markup is absent. The last property means a single script
+    file can be included by every page without errors.
+  </p>
+
+  <p>
+    The central data functions are only a few lines long, and they are the single point through which
+    every page reads and writes data. Replacing them with <i>fetch()</i> calls against a backend API is
+    the natural upgrade path to a multi-user system:
+  </p>
+
+  <div class="code">const KEYS = {
+  bookings:'rptc_bookings', quotes:'rptc_quotes', vehicles:'rptc_vehicles',
+  users:'rptc_users',       messages:'rptc_messages', session:'rptc_session'
+};
+const getData = (key, fallback) => {
+  try { const v = JSON.parse(localStorage.getItem(key));
+        return v == null ? fallback : v; }
+  catch (e) { return fallback; }
+};
+const setData = (key, value) => localStorage.setItem(key, JSON.stringify(value));</div>
+
+  <p>
+    The script also implements the features that make the interface feel like an application: a toast
+    notification that appears for three seconds and slides away, a reusable modal dialog used by the
+    admin actions, an IntersectionObserver that reveals sections as they scroll into view, a sticky
+    navigation bar that shrinks on scroll, a back-to-top button that appears after 500 px, automatic
+    pre-filling of the booking form from the query string of the home page quick-booking form, and
+    automatic injection of today's date as the minimum value of every date field so that a past pickup
+    date cannot be chosen.
+  </p>
+
+  <h3>4.1.5 Web Storage (LocalStorage) as the Data Store</h3>
+
+  <p>
+    The Web Storage API gives a web page a simple key/value store, roughly 5 MB per origin, that
+    survives a page reload and a browser restart. Records are stored as JSON strings under the six keys
+    listed above. The API is used because it allows the entire workflow — submit a booking, see it in
+    the admin table, approve it, assign a vehicle, advance its status, and watch the tracking timeline
+    change — to be demonstrated on a single laptop with no installation whatsoever.
+  </p>
+
+  <p>
+    LocalStorage is synchronous and origin-scoped. Its limitations are important and are stated openly
+    in the system itself: it is per-browser and per-device, it is not shared between users, it is not
+    backed up, it can be cleared by the user, and it offers no access control. The data model has
+    therefore been designed to be exactly the model that a relational database would use (Chapter 5.4),
+    so that the storage layer can be swapped without touching the screens.
+  </p>
+
+  <h3>4.1.6 Supporting Libraries</h3>
+
+  <ul>
+    <li><b>Google Fonts</b> — supplies <i>Barlow Condensed</i> for headings and <i>Inter</i> for body
+        text. Two families and five weights only, to keep the page light.</li>
+    <li><b>Font Awesome 6.5.2</b> — supplies the truck, container, shield, phone, envelope, WhatsApp
+        and chevron icons used throughout the interface, so that no raster icon files are needed.</li>
+    <li><b>Tailwind CSS browser script</b> — loaded for a handful of utility classes used in the
+        demonstration banners; the substantive styling remains in the hand-written stylesheet, so the
+        site continues to look correct if the script is blocked.</li>
+  </ul>
+
+  <h3>4.1.7 Version Control</h3>
+
+  <p>
+    The complete source — eight HTML pages, the stylesheet, the script file and a README describing how
+    to run and what is real versus demonstration — is maintained in a Git repository published on
+    GitHub. Version control made it possible to try changes to the layout and the validation rules
+    without losing a working version, and it allows the project guide to run exactly the same code that
+    was demonstrated.
+  </p>
+
+  <h2>4.2 Working Environment</h2>
+
+  <p>
+    The working environment describes the hardware and software configuration on which the system was
+    developed and on which it is expected to run.
+  </p>
+
+  <h3>4.2.1 Hardware Configuration</h3>
+
+  <table class="avoid">
+    <thead><tr><th style="width:38%;">Component</th><th>Minimum requirement</th></tr></thead>
+    <tr><td>Processor</td><td>Intel Core i3 (2.0 GHz) or equivalent; Core i5 recommended</td></tr>
+    <tr><td>RAM</td><td>4 GB minimum; 8 GB recommended for editing and testing together</td></tr>
+    <tr><td>Hard disk drive</td><td>20 GB free space (the project folder itself is under 1 MB)</td></tr>
+    <tr><td>Keyboard</td><td>104 keys, standard QWERTY</td></tr>
+    <tr><td>Mouse</td><td>Standard optical mouse or touchpad</td></tr>
+    <tr><td>Monitor</td><td>15.6&Prime; colour display, 1366 &times; 768 or higher</td></tr>
+    <tr><td>Display type</td><td>HD / LED; a full-HD display is preferred for design work</td></tr>
+    <tr><td>Mobile device (for responsive testing)</td><td>Android phone, 390 px wide viewport, or the browser device-emulation mode</td></tr>
+    <tr><td>Internet connection</td><td>Required only for the web-font and icon CDNs, the WhatsApp links and the embedded map</td></tr>
+  </table>
+
+  <h3>4.2.2 Software Configuration</h3>
+
+  <table class="avoid">
+    <thead><tr><th style="width:38%;">Component</th><th>Configuration used</th></tr></thead>
+    <tr><td>Operating system</td><td>Windows 10 / 11, Linux (Ubuntu) or macOS</td></tr>
+    <tr><td>Web browser</td><td>Google Chrome 100+ / Microsoft Edge 100+ / Mozilla Firefox 100+ / Safari 15+</td></tr>
+    <tr><td>Web server</td><td>Not required — pages open directly from the file system. Optional static server: <span class="code" style="display:inline;border:none;background:none;padding:0;">python -m http.server 8000</span></td></tr>
+    <tr><td>Designing tool</td><td>Visual Studio Code / Notepad++ with HTML, CSS and JavaScript syntax support</td></tr>
+    <tr><td>Client-side scripting</td><td>JavaScript (ES6), enabled in the browser</td></tr>
+    <tr><td>Data store</td><td>Browser LocalStorage (no database server required for the demonstration)</td></tr>
+    <tr><td>Debugging tools</td><td>Browser developer tools — Console, Elements, Network and Lighthouse panels</td></tr>
+    <tr><td>Version control</td><td>Git 2.x with a GitHub remote</td></tr>
+    <tr><td>Screen capture / documentation</td><td>Browser screenshot and print-to-PDF for this report</td></tr>
+  </table>
+
+  <div class="note">
+    <b>How to run the project.</b>
+    Copy the whole project folder to the computer, keeping all files together; then double-click
+    <i>index.html</i>. No installation, build step or server is required. All navigation between pages
+    works through the menu, the buttons and the footer. For a phone test on the same Wi-Fi network,
+    serve the folder with any local static server and open the computer's address from the phone.
+  </div>
+</div>
+
+<!-- ==================== 5. SYSTEM DESIGN ==================== -->
+<div class="chapter">
+  <h1>5. System Design</h1>
+
+  <h2>5.1 Introduction to System Design</h2>
+
+  <p>
+    System design is the process of planning a new system or of replacing the existing system. Simply
+    stated, system design is like the blueprint for a building: it specifies all the features that are
+    to be in the finished product. The system design phase follows the system analysis phase. Design is
+    concerned with identifying functions, the data streams among those functions, maintaining a record
+    of the design decisions and providing a blueprint for the implementation phase.
+  </p>
+
+  <p>
+    Design is the bridge between system analysis and system implementation. Some of the essential
+    fundamental concepts involved in the design of application software are:
+  </p>
+  <ul>
+    <li><b>Abstraction</b></li>
+    <li><b>Modularity</b></li>
+    <li><b>Verification</b></li>
+  </ul>
+
+  <p>
+    <b>Abstraction</b> is used to construct solutions to a problem without having to take account of the
+    intricate details of the various component sub-problems. Abstraction allows the system designer to
+    make step-wise refinement, in which each stage of the design may hide unnecessary details
+    associated with representation or implementation from the surrounding environment. In this project
+    the abstraction is visible in three levels: the page level (seven public screens and one admin
+    screen), the section level (the six numbered sections of the booking form) and the data level (the
+    six LocalStorage keys accessed only through <i>getData()</i> and <i>setData()</i>, so that no page
+    knows how the data is stored).
+  </p>
+
+  <p>
+    <b>Modularity</b> is concerned with decomposing the main module into well-defined, manageable units
+    with well-defined interfaces among the units. This enhances design clarity, which in turn eases
+    implementation, debugging, testing, documenting and maintenance of the software product. Modularity
+    viewed in this sense is a vital tool in the construction of large software projects. Here each page
+    is a module with its own initialiser function, the behaviour is separated from the presentation
+    (one script file, one stylesheet, eight documents), and the demonstration data is seeded only once
+    by a single function.
+  </p>
+
+  <p>
+    <b>Verification</b> is a fundamental concept in software design. A design is verifiable if it can
+    be demonstrated that the design will result in an implementation that satisfies the customer's
+    requirements. Verification is of two types, namely:
+  </p>
+  <ul>
+    <li>verification that the software requirements analysis satisfies the customer's needs;</li>
+    <li>verification that the design satisfies the requirement analysis.</li>
+  </ul>
+
+  <p>
+    Both were addressed in this project through a requirements checklist agreed with the firm, a
+    traceable mapping from each requirement to a screen (Chapter 5.5) and a formal set of test cases
+    executed against the finished screens (Chapter 6.4).
+  </p>
+
+  <h2>5.2 System Flow Diagram</h2>
+
+  <p>
+    The system flow diagram shows the path followed by one booking, from the moment the customer opens
+    the website to the moment the consignment is delivered and the tracking timeline shows all six
+    stages completed. It also shows the two feedback loops in the design: the validation loop, which
+    returns an invalid form to the customer with a specific message, and the administration loop,
+    through which the office controls the status that the customer sees.
+  </p>
+
+  <figure class="diagram">
+  <svg viewBox="0 0 480 510" xmlns="http://www.w3.org/2000/svg" font-family="Tinos, Georgia, serif" fill="#000" stroke="#000" stroke-width="0.7" font-size="9.5">
+    <defs><marker id="A" markerWidth="7" markerHeight="7" refX="5.6" refY="2.2" orient="auto"><path d="M0,0 L5.6,2.2 L0,4.4 z" fill="#000" stroke="none"/></marker></defs>
+    <g>
+      <rect x="140" y="6" width="200" height="32" rx="0" fill="#fff"/>
+      <text x="240" y="19.435" font-size="9" text-anchor="middle">Customer / visitor opens the website</text>
+      <text x="240" y="30.685" font-size="9" text-anchor="middle">(any browser, desktop or mobile)</text>
+      <rect x="140" y="58" width="200" height="32" rx="0" fill="#fff"/>
+      <text x="240" y="71.435" font-size="9" text-anchor="middle">Home page — services, company profile</text>
+      <text x="240" y="82.685" font-size="9" text-anchor="middle">and simulated availability preview</text>
+      <rect x="140" y="110" width="200" height="40" rx="0" fill="#fff"/>
+      <text x="240" y="121.81" font-size="9" text-anchor="middle">Book a Truck — six-section form</text>
+      <text x="240" y="133.06" font-size="9" text-anchor="middle">(customer, pickup, delivery,</text>
+      <text x="240" y="144.31" font-size="9" text-anchor="middle">goods, truck, payment)</text>
+      <polygon points="240,172 340,200 240,228 140,200" fill="#fff"/>
+      <text x="240" y="196" font-size="9" text-anchor="middle">Client-side validation</text>
+      <text x="240" y="208" font-size="9" text-anchor="middle">passed?</text>
+      <rect x="4" y="182" width="116" height="40" rx="0" fill="#fff"/>
+      <text x="62" y="194.72" font-size="8" text-anchor="middle">Inline error message and</text>
+      <text x="62" y="204.72" font-size="8" text-anchor="middle">toast; data kept, user</text>
+      <text x="62" y="214.72" font-size="8" text-anchor="middle">returns to the form</text>
+      <rect x="140" y="248" width="200" height="32" rx="0" fill="#fff"/>
+      <text x="240" y="261.435" font-size="9" text-anchor="middle">Reference generated:</text>
+      <text x="240" y="272.685" font-size="9" text-anchor="middle">RPTC-YYYY-NNNNN</text>
+      <rect x="140" y="300" width="200" height="32" rx="0" fill="#fff"/>
+      <text x="240" y="313.435" font-size="9" text-anchor="middle">Record stored, status =</text>
+      <text x="240" y="324.685" font-size="9" text-anchor="middle">Pending Company Confirmation</text>
+      <rect x="140" y="352" width="200" height="40" rx="0" fill="#fff"/>
+      <text x="240" y="363.81" font-size="9" text-anchor="middle">Booking summary shown —</text>
+      <text x="240" y="375.06" font-size="9" text-anchor="middle">Print · Track Shipment ·</text>
+      <text x="240" y="386.31" font-size="9" text-anchor="middle">WhatsApp</text>
+      <rect x="348" y="296" width="128" height="34" rx="0" fill="#fff"/>
+      <text x="412" y="310.577" font-size="8.5" text-anchor="middle">Administrator reviews</text>
+      <text x="412" y="321.202" font-size="8.5" text-anchor="middle">the dashboard</text>
+      <rect x="348" y="346" width="128" height="46" rx="0" fill="#fff"/>
+      <text x="412" y="361.265" font-size="8.5" text-anchor="middle">Approve / reject,</text>
+      <text x="412" y="371.89" font-size="8.5" text-anchor="middle">assign a vehicle,</text>
+      <text x="412" y="382.515" font-size="8.5" text-anchor="middle">update the status</text>
+      <rect x="348" y="412" width="128" height="34" rx="0" fill="#fff"/>
+      <text x="412" y="426.577" font-size="8.5" text-anchor="middle">Status history</text>
+      <text x="412" y="437.202" font-size="8.5" text-anchor="middle">appended, with time</text>
+      <rect x="110" y="462" width="260" height="40" rx="0" fill="#fff"/>
+      <text x="240" y="473.81" font-size="9" text-anchor="middle">Tracking page shows the six-stage</text>
+      <text x="240" y="485.06" font-size="9" text-anchor="middle">timeline; the customer stays informed</text>
+      <text x="240" y="496.31" font-size="9" text-anchor="middle">without telephoning the office</text>
+      <line x1="240" y1="38" x2="240" y2="56" marker-end="url(#A)"/>
+      <line x1="240" y1="90" x2="240" y2="108" marker-end="url(#A)"/>
+      <line x1="240" y1="150" x2="240" y2="170" marker-end="url(#A)"/>
+      <line x1="140" y1="200" x2="122" y2="200" marker-end="url(#A)"/>
+      <polyline points="74,182 74,127 138,127" fill="none" marker-end="url(#A)"/>
+      <line x1="240" y1="228" x2="240" y2="246" marker-end="url(#A)"/>
+      <line x1="240" y1="280" x2="240" y2="298" marker-end="url(#A)"/>
+      <line x1="240" y1="332" x2="240" y2="350" marker-end="url(#A)"/>
+      <line x1="340" y1="313" x2="346" y2="313" marker-end="url(#A)"/>
+      <line x1="412" y1="330" x2="412" y2="344" marker-end="url(#A)"/>
+      <line x1="412" y1="392" x2="412" y2="410" marker-end="url(#A)"/>
+      <polyline points="412,446 412,482 372,482" fill="none" marker-end="url(#A)"/>
+      <text x="132" y="194" font-size="7.6" text-anchor="start">No</text>
+      <text x="248" y="244" font-size="7.6" text-anchor="start">Yes</text>
+    </g>
+  </svg>
+  <figcaption class="diagram-cap"><b>Figure 5.1</b> System Flow Diagram of the RPTC Transport Management System</figcaption>
+</figure>
+
+  <h2>5.3 Data Flow Diagrams</h2>
+
+  <p>
+    The data flow diagrams describe the same system as a set of processes, external entities and data
+    stores, and show what data enters and leaves each process. Three levels are presented: the context
+    (0) level, which treats the whole website as one process; the first level, which decomposes it into
+    six major processes; and the second level, which decomposes the booking process into its seven
+    internal steps. Notation used: a <b>rectangle</b> is an external entity, a <b>rounded rectangle</b>
+    is a process, an <b>open-ended rectangle</b> is a data store and a <b>labelled arrow</b> is a data
+    flow.
+  </p>
+
+  <h3>5.3.1 Context Level (0 Level) DFD</h3>
+
+  <figure class="diagram">
+  <svg viewBox="0 0 480 230" xmlns="http://www.w3.org/2000/svg" font-family="Tinos, Georgia, serif" fill="#000" stroke="#000" stroke-width="0.7" font-size="9.5">
+    <defs><marker id="A" markerWidth="7" markerHeight="7" refX="5.6" refY="2.2" orient="auto"><path d="M0,0 L5.6,2.2 L0,4.4 z" fill="#000" stroke="none"/></marker></defs>
+    <g>
+      <rect x="178" y="58" width="132" height="100" rx="10" fill="#fff"/>
+      <text x="244" y="88.56" font-size="9" font-weight="bold" text-anchor="middle">RPTC Transport</text>
+      <text x="244" y="99.81" font-size="9" font-weight="bold" text-anchor="middle">Management System</text>
+      <text x="244" y="111.06" font-size="9" text-anchor="middle">(Process 0)</text>
+      <text x="244" y="122.31" font-size="9" text-anchor="middle">online truck booking</text>
+      <text x="244" y="133.56" font-size="9" text-anchor="middle">and shipment tracking</text>
+      <rect x="6" y="22" width="116" height="36" rx="0" fill="#fff"/>
+      <text x="64" y="37.435" font-size="9" text-anchor="middle">Customer /</text>
+      <text x="64" y="48.685" font-size="9" text-anchor="middle">Visitor</text>
+      <rect x="6" y="158" width="116" height="36" rx="0" fill="#fff"/>
+      <text x="64" y="173.435" font-size="9" text-anchor="middle">Administrator</text>
+      <text x="64" y="184.685" font-size="9" text-anchor="middle">(RPTC office)</text>
+      <rect x="358" y="22" width="116" height="36" rx="0" fill="#fff"/>
+      <text x="416" y="37.435" font-size="9" text-anchor="middle">Driver /</text>
+      <text x="416" y="48.685" font-size="9" text-anchor="middle">Fleet in-charge</text>
+      <rect x="358" y="158" width="116" height="36" rx="0" fill="#fff"/>
+      <text x="416" y="173.435" font-size="9" text-anchor="middle">Browser data store</text>
+      <text x="416" y="184.685" font-size="9" text-anchor="middle">(LocalStorage)</text>
+      <line x1="122" y1="40" x2="176" y2="40" marker-end="url(#A)"/>
+      <text x="149" y="35" font-size="7.4" text-anchor="middle">booking</text>
+      <line x1="176" y1="74" x2="122" y2="74" marker-end="url(#A)"/>
+      <text x="149" y="69" font-size="7.4" text-anchor="middle">reference, status</text>
+      <line x1="122" y1="176" x2="176" y2="176" marker-end="url(#A)"/>
+      <text x="149" y="171" font-size="7.4" text-anchor="middle">approve / assign</text>
+      <line x1="176" y1="148" x2="122" y2="148" marker-end="url(#A)"/>
+      <text x="149" y="143" font-size="7.4" text-anchor="middle">pending list, quotes</text>
+      <line x1="310" y1="40" x2="356" y2="40" marker-end="url(#A)"/>
+      <text x="333" y="35" font-size="7.4" text-anchor="middle">trip details</text>
+      <line x1="356" y1="74" x2="310" y2="74" marker-end="url(#A)"/>
+      <text x="333" y="69" font-size="7.4" text-anchor="middle">availability</text>
+      <line x1="310" y1="176" x2="356" y2="176" marker-end="url(#A)"/>
+      <text x="333" y="171" font-size="7.4" text-anchor="middle">write records</text>
+      <line x1="356" y1="148" x2="310" y2="148" marker-end="url(#A)"/>
+      <text x="333" y="143" font-size="7.4" text-anchor="middle">read records</text>
+      <text x="240" y="212" font-size="7.8" text-anchor="middle" font-style="italic">Validation rules, the status model and reference numbering are applied inside Process 0.</text>
+    </g>
+  </svg>
+  <figcaption class="diagram-cap"><b>Figure 5.2</b> Context Level (0 Level) Data Flow Diagram</figcaption>
+</figure>
+
+  <h3>5.3.2 First Level (I Level) DFD</h3>
+
+  <figure class="diagram">
+  <svg viewBox="0 0 480 346" xmlns="http://www.w3.org/2000/svg" font-family="Tinos, Georgia, serif" fill="#000" stroke="#000" stroke-width="0.7" font-size="9.5">
+    <defs><marker id="A" markerWidth="7" markerHeight="7" refX="5.6" refY="2.2" orient="auto"><path d="M0,0 L5.6,2.2 L0,4.4 z" fill="#000" stroke="none"/></marker></defs>
+    <g>
+      <rect x="4" y="14" width="84" height="28" rx="0" fill="#fff"/>
+      <text x="46" y="30.822" font-size="8.3" text-anchor="middle">Customer</text>
+      <rect x="140" y="8" width="142" height="40" rx="8" fill="#fff"/>
+      <text x="211" y="25.549" font-size="8.6" text-anchor="middle">1.0 Booking</text>
+      <text x="211" y="36.299" font-size="8.6" text-anchor="middle">Management</text>
+      <rect x="340" y="12" width="136" height="32" fill="#f0f0f0"/>
+      <line x1="340" y1="12" x2="340" y2="44"/>
+      <text x="408" y="30.822" font-size="8.3" text-anchor="middle">D1  Booking records</text>
+      <line x1="90" y1="22" x2="138" y2="22" marker-end="url(#A)"/>
+      <text x="114" y="17" font-size="6.8" text-anchor="middle">booking request</text>
+      <line x1="138" y1="35" x2="90" y2="35" marker-end="url(#A)"/>
+      <text x="114" y="47" font-size="6.8" text-anchor="middle">reference no.</text>
+      <line x1="282" y1="22" x2="338" y2="22" marker-end="url(#A)"/>
+      <text x="310" y="17" font-size="6.8" text-anchor="middle">write</text>
+      <line x1="338" y1="35" x2="282" y2="35" marker-end="url(#A)"/>
+      <text x="310" y="47" font-size="6.8" text-anchor="middle">read</text>
+      <rect x="4" y="66" width="84" height="28" rx="0" fill="#fff"/>
+      <text x="46" y="82.822" font-size="8.3" text-anchor="middle">Customer</text>
+      <rect x="140" y="60" width="142" height="40" rx="8" fill="#fff"/>
+      <text x="211" y="77.549" font-size="8.6" text-anchor="middle">2.0 Availability and</text>
+      <text x="211" y="88.299" font-size="8.6" text-anchor="middle">Freight Enquiry</text>
+      <rect x="340" y="64" width="136" height="32" fill="#f0f0f0"/>
+      <line x1="340" y1="64" x2="340" y2="96"/>
+      <text x="408" y="82.822" font-size="8.3" text-anchor="middle">D2  Quotation records</text>
+      <line x1="90" y1="74" x2="138" y2="74" marker-end="url(#A)"/>
+      <text x="114" y="69" font-size="6.8" text-anchor="middle">route, weight</text>
+      <line x1="138" y1="87" x2="90" y2="87" marker-end="url(#A)"/>
+      <text x="114" y="99" font-size="6.8" text-anchor="middle">estimate</text>
+      <line x1="282" y1="74" x2="338" y2="74" marker-end="url(#A)"/>
+      <text x="310" y="69" font-size="6.8" text-anchor="middle">write</text>
+      <line x1="338" y1="87" x2="282" y2="87" marker-end="url(#A)"/>
+      <text x="310" y="99" font-size="6.8" text-anchor="middle">read</text>
+      <rect x="4" y="118" width="84" height="28" rx="0" fill="#fff"/>
+      <text x="46" y="134.822" font-size="8.3" text-anchor="middle">Customer</text>
+      <rect x="140" y="112" width="142" height="40" rx="8" fill="#fff"/>
+      <text x="211" y="129.549" font-size="8.6" text-anchor="middle">3.0 Shipment</text>
+      <text x="211" y="140.299" font-size="8.6" text-anchor="middle">Tracking</text>
+      <rect x="340" y="116" width="136" height="32" fill="#f0f0f0"/>
+      <line x1="340" y1="116" x2="340" y2="148"/>
+      <text x="408" y="134.822" font-size="8.3" text-anchor="middle">D1  Booking records</text>
+      <line x1="90" y1="126" x2="138" y2="126" marker-end="url(#A)"/>
+      <text x="114" y="121" font-size="6.8" text-anchor="middle">reference no.</text>
+      <line x1="138" y1="139" x2="90" y2="139" marker-end="url(#A)"/>
+      <text x="114" y="151" font-size="6.8" text-anchor="middle">status</text>
+      <line x1="282" y1="126" x2="338" y2="126" marker-end="url(#A)"/>
+      <text x="310" y="121" font-size="6.8" text-anchor="middle">write</text>
+      <line x1="338" y1="139" x2="282" y2="139" marker-end="url(#A)"/>
+      <text x="310" y="151" font-size="6.8" text-anchor="middle">read</text>
+      <rect x="4" y="170" width="84" height="28" rx="0" fill="#fff"/>
+      <text x="46" y="186.822" font-size="8.3" text-anchor="middle">Customer</text>
+      <rect x="140" y="164" width="142" height="40" rx="8" fill="#fff"/>
+      <text x="211" y="181.549" font-size="8.6" text-anchor="middle">4.0 Customer</text>
+      <text x="211" y="192.299" font-size="8.6" text-anchor="middle">Registration / Login</text>
+      <rect x="340" y="168" width="136" height="32" fill="#f0f0f0"/>
+      <line x1="340" y1="168" x2="340" y2="200"/>
+      <text x="408" y="186.822" font-size="8.3" text-anchor="middle">D4  User &amp; session records</text>
+      <line x1="90" y1="178" x2="138" y2="178" marker-end="url(#A)"/>
+      <text x="114" y="173" font-size="6.8" text-anchor="middle">credentials</text>
+      <line x1="138" y1="191" x2="90" y2="191" marker-end="url(#A)"/>
+      <text x="114" y="203" font-size="6.8" text-anchor="middle">session</text>
+      <line x1="282" y1="178" x2="338" y2="178" marker-end="url(#A)"/>
+      <text x="310" y="173" font-size="6.8" text-anchor="middle">write</text>
+      <line x1="338" y1="191" x2="282" y2="191" marker-end="url(#A)"/>
+      <text x="310" y="203" font-size="6.8" text-anchor="middle">read</text>
+      <rect x="4" y="222" width="84" height="28" rx="0" fill="#fff"/>
+      <text x="46" y="238.822" font-size="8.3" text-anchor="middle">Administrator</text>
+      <rect x="140" y="216" width="142" height="40" rx="8" fill="#fff"/>
+      <text x="211" y="233.549" font-size="8.6" text-anchor="middle">5.0 Fleet and</text>
+      <text x="211" y="244.299" font-size="8.6" text-anchor="middle">Vehicle Mgmt.</text>
+      <rect x="340" y="220" width="136" height="32" fill="#f0f0f0"/>
+      <line x1="340" y1="220" x2="340" y2="252"/>
+      <text x="408" y="238.822" font-size="8.3" text-anchor="middle">D3  Vehicle (fleet) records</text>
+      <line x1="90" y1="230" x2="138" y2="230" marker-end="url(#A)"/>
+      <text x="114" y="225" font-size="6.8" text-anchor="middle">trip, vehicle</text>
+      <line x1="138" y1="243" x2="90" y2="243" marker-end="url(#A)"/>
+      <text x="114" y="255" font-size="6.8" text-anchor="middle">fleet list</text>
+      <line x1="282" y1="230" x2="338" y2="230" marker-end="url(#A)"/>
+      <text x="310" y="225" font-size="6.8" text-anchor="middle">write</text>
+      <line x1="338" y1="243" x2="282" y2="243" marker-end="url(#A)"/>
+      <text x="310" y="255" font-size="6.8" text-anchor="middle">read</text>
+      <rect x="4" y="274" width="84" height="28" rx="0" fill="#fff"/>
+      <text x="46" y="290.822" font-size="8.3" text-anchor="middle">Visitor</text>
+      <rect x="140" y="268" width="142" height="40" rx="8" fill="#fff"/>
+      <text x="211" y="285.549" font-size="8.6" text-anchor="middle">6.0 Enquiry and</text>
+      <text x="211" y="296.299" font-size="8.6" text-anchor="middle">Contact Mgmt.</text>
+      <rect x="340" y="272" width="136" height="32" fill="#f0f0f0"/>
+      <line x1="340" y1="272" x2="340" y2="304"/>
+      <text x="408" y="290.822" font-size="8.3" text-anchor="middle">D5  Enquiry messages</text>
+      <line x1="90" y1="282" x2="138" y2="282" marker-end="url(#A)"/>
+      <text x="114" y="277" font-size="6.8" text-anchor="middle">message</text>
+      <line x1="138" y1="295" x2="90" y2="295" marker-end="url(#A)"/>
+      <text x="114" y="307" font-size="6.8" text-anchor="middle">acknowledgement</text>
+      <line x1="282" y1="282" x2="338" y2="282" marker-end="url(#A)"/>
+      <text x="310" y="277" font-size="6.8" text-anchor="middle">write</text>
+      <line x1="338" y1="295" x2="282" y2="295" marker-end="url(#A)"/>
+      <text x="310" y="307" font-size="6.8" text-anchor="middle">read</text>
+      <text x="240" y="322" font-size="7.8" text-anchor="middle" font-style="italic">Processes 1.0–6.0 correspond to the initialiser functions of the eight pages of the website.</text>
+    </g>
+  </svg>
+  <figcaption class="diagram-cap"><b>Figure 5.3</b> First Level (I Level) Data Flow Diagram</figcaption>
+</figure>
+
+  <h3>5.3.3 Second Level (II Level) DFD — Booking Module</h3>
+
+  <p>
+    The second level diagram expands process 1.0 (Booking Management) into the seven steps that a
+    booking actually passes through inside the website, and shows the interaction between the customer,
+    the validation rules, the record store and the administrator.
+  </p>
+
+  <figure class="diagram">
+  <svg viewBox="0 0 480 292" xmlns="http://www.w3.org/2000/svg" font-family="Tinos, Georgia, serif" fill="#000" stroke="#000" stroke-width="0.7" font-size="9.5">
+    <defs><marker id="A" markerWidth="7" markerHeight="7" refX="5.6" refY="2.2" orient="auto"><path d="M0,0 L5.6,2.2 L0,4.4 z" fill="#000" stroke="none"/></marker></defs>
+    <g>
+      <rect x="4" y="12" width="124" height="34" rx="0" fill="#fff"/>
+      <text x="66" y="32.06" font-size="9" text-anchor="middle">Customer</text>
+      <rect x="176" y="4" width="140" height="40" rx="8" fill="#fff"/>
+      <text x="246" y="21.549" font-size="8.6" text-anchor="middle">1.1 Receive and</text>
+      <text x="246" y="32.299" font-size="8.6" text-anchor="middle">validate form data</text>
+      <rect x="176" y="60" width="140" height="34" rx="8" fill="#fff"/>
+      <text x="246" y="74.549" font-size="8.6" text-anchor="middle">1.2 Generate</text>
+      <text x="246" y="85.299" font-size="8.6" text-anchor="middle">booking reference</text>
+      <rect x="176" y="110" width="140" height="34" rx="8" fill="#fff"/>
+      <text x="246" y="124.549" font-size="8.6" text-anchor="middle">1.3 Store booking</text>
+      <text x="246" y="135.299" font-size="8.6" text-anchor="middle">record</text>
+      <rect x="176" y="160" width="140" height="40" rx="8" fill="#fff"/>
+      <text x="246" y="177.549" font-size="8.6" text-anchor="middle">1.4 Render summary</text>
+      <text x="246" y="188.299" font-size="8.6" text-anchor="middle">and print view</text>
+      <rect x="176" y="216" width="140" height="34" rx="8" fill="#fff"/>
+      <text x="246" y="230.549" font-size="8.6" text-anchor="middle">1.5 Maintain status</text>
+      <text x="246" y="241.299" font-size="8.6" text-anchor="middle">history</text>
+      <rect x="348" y="6" width="126" height="32" fill="#f0f0f0"/>
+      <line x1="348" y1="6" x2="348" y2="38"/>
+      <text x="411" y="19.816" font-size="8.4" text-anchor="middle">D6  Validation</text>
+      <text x="411" y="29.896" font-size="8.4" text-anchor="middle">rule set</text>
+      <rect x="348" y="110" width="126" height="34" fill="#f0f0f0"/>
+      <line x1="348" y1="110" x2="348" y2="144"/>
+      <text x="411" y="124.816" font-size="8.4" text-anchor="middle">D1  Booking</text>
+      <text x="411" y="134.896" font-size="8.4" text-anchor="middle">records</text>
+      <rect x="348" y="160" width="126" height="34" rx="0" fill="#fff"/>
+      <text x="411" y="174.606" font-size="8.4" text-anchor="middle">Administrator</text>
+      <text x="411" y="185.106" font-size="8.4" text-anchor="middle">(approve / assign)</text>
+      <rect x="348" y="210" width="126" height="32" fill="#f0f0f0"/>
+      <line x1="348" y1="210" x2="348" y2="242"/>
+      <text x="411" y="223.816" font-size="8.4" text-anchor="middle">D3  Vehicle</text>
+      <text x="411" y="233.896" font-size="8.4" text-anchor="middle">records</text>
+      <line x1="130" y1="29" x2="174" y2="29" marker-end="url(#A)"/>
+      <text x="152" y="24" font-size="6.8" text-anchor="middle">form data</text>
+      <line x1="174" y1="42" x2="132" y2="42" marker-end="url(#A)"/>
+      <text x="152" y="55" font-size="6.8" text-anchor="middle">errors</text>
+      <line x1="318" y1="24" x2="346" y2="24" marker-end="url(#A)"/>
+      <text x="332" y="19" font-size="6.8" text-anchor="middle">rules</text>
+      <line x1="246" y1="44" x2="246" y2="58" marker-end="url(#A)"/>
+      <line x1="246" y1="94" x2="246" y2="108" marker-end="url(#A)"/>
+      <line x1="246" y1="144" x2="246" y2="158" marker-end="url(#A)"/>
+      <line x1="246" y1="200" x2="246" y2="214" marker-end="url(#A)"/>
+      <line x1="318" y1="127" x2="346" y2="127" marker-end="url(#A)"/>
+      <text x="332" y="122" font-size="6.8" text-anchor="middle">write</text>
+      <line x1="346" y1="138" x2="318" y2="138" marker-end="url(#A)"/>
+      <text x="332" y="150" font-size="6.8" text-anchor="middle">read</text>
+      <line x1="411" y1="168" x2="411" y2="146" marker-end="url(#A)"/>
+      <text x="415" y="160" font-size="7" text-anchor="start">new status</text>
+      <polyline points="348,194 330,194 330,207 246,207 246,214" fill="none" marker-end="url(#A)"/>
+      <text x="288" y="204" font-size="6.8" text-anchor="middle">status history</text>
+      <line x1="318" y1="226" x2="346" y2="226" marker-end="url(#A)"/>
+      <text x="332" y="221" font-size="6.8" text-anchor="middle">vehicle</text>
+      <text x="240" y="280" font-size="7.8" text-anchor="middle" font-style="italic">The administrator loop is the only path by which a booking status or an assigned vehicle can change.</text>
+    </g>
+  </svg>
+  <figcaption class="diagram-cap"><b>Figure 5.4</b> Second Level (II Level) Data Flow Diagram — Booking Module</figcaption>
+</figure>
+</div>
+
+<!-- ==================== 5.4 DATABASE DESIGN ==================== -->
+<div class="chapter">
+  <h2 style="margin-top:0;">5.4 Database Design</h2>
+
+  <p>
+    A database is an integrated collection of data and provides a centralised access to the data and
+    makes it possible to treat data as a separate resource. Usually centralised data-managing software
+    is called a Relational Database Management System (RDBMS). The most significant difference between
+    an RDBMS and other types of data management is the separation of data as seen by the program and
+    data as stored on the direct access storage device. This is the difference between logical and
+    physical data.
+  </p>
+
+  <p>
+    The present implementation keeps its records in the browser's LocalStorage, which is a key/value
+    store rather than a relational database; however, the records themselves follow a relational shape.
+    Each key holds an array of objects, every object has a fixed primary identifier (<i>ref</i> for a
+    booking, <i>ref</i> for a quotation, <i>id</i> for a vehicle, <i>email</i> for a user) and the
+    nested groups inside a booking (customer, pickup, delivery, goods, vehicle, payment, history)
+    correspond exactly to the tables into which the data would be normalised when the system is moved to
+    a server database. Table 5.1 lists the keys; Tables 5.2 to 5.6 describe the logical tables; Figure
+    5.5 shows the corresponding entity relationship diagram.
+  </p>
+
+  <table>
+    <caption>Table 5.1 — LocalStorage Data Store Keys</caption>
+    <thead><tr><th style="width:26%;">Storage key</th><th style="width:26%;">Logical table</th><th>Contents</th></tr></thead>
+    <tr><td>rptc_bookings</td><td>Booking</td><td>Every booking request with its customer, route, goods, vehicle requirement, payment preference and status history.</td></tr>
+    <tr><td>rptc_quotes</td><td>Freight quotation</td><td>Every quotation request with route, material, weight, truck type, contact number and the illustrative estimate.</td></tr>
+    <tr><td>rptc_vehicles</td><td>Vehicle / fleet</td><td>The fleet register — registration number, type, capacity, driver, contact, availability, location and assigned booking.</td></tr>
+    <tr><td>rptc_users</td><td>Customer account</td><td>Registered customers — name, e-mail (unique), mobile number and password.</td></tr>
+    <tr><td>rptc_messages</td><td>Enquiry / message</td><td>Contact-form submissions — name, mobile, e-mail, subject and message.</td></tr>
+    <tr><td>rptc_session</td><td>Session</td><td>The signed-in customer's name, e-mail and login time, removed on logout.</td></tr>
+  </table>
+
+  <h3>5.4.1 Data Dictionary</h3>
+
+  <p>
+    The efficiency of an application developed using an RDBMS mainly depends upon the database tables,
+    the fields in each table and the way the tables are opened using the contents in them to retrieve
+    the necessary information. Hence a careful selection of tables and their fields is imperative. The
+    tables used in this system are created keeping the above points in mind. The tables used are given
+    below; <i>PK</i> marks the primary key and <i>FK</i> a foreign key.
+  </p>
+
+  <table>
+    <caption>Table 5.2 — Data Dictionary: Booking Record (<i>rptc_bookings</i>)</caption>
+    <thead><tr>
+      <th style="width:24%;">Field</th><th style="width:18%;">Data type</th>
+      <th style="width:12%;">Size / rule</th><th>Description</th>
+    </tr></thead>
+    <tr><td>ref</td><td>Text (PK)</td><td>15</td><td>Booking reference generated as RPTC-YYYY-NNNNN, e.g. RPTC-2026-10001. Unique for every request.</td></tr>
+    <tr><td>createdAt</td><td>Date / time</td><td>ISO 8601</td><td>Date and time at which the request was submitted; used for sorting and for the &ldquo;last updated&rdquo; display.</td></tr>
+    <tr><td>customer.name</td><td>Text</td><td>60</td><td>Full name of the person booking the truck. Mandatory.</td></tr>
+    <tr><td>customer.company</td><td>Text</td><td>80</td><td>Firm or company name, if the booking is on behalf of a business. Optional.</td></tr>
+    <tr><td>customer.mobile</td><td>Text</td><td>10</td><td>Indian mobile number, validated against <i>/^[6-9]\d{9}$/</i>. Mandatory.</td></tr>
+    <tr><td>customer.email</td><td>Text</td><td>80</td><td>E-mail address, validated for the presence of &ldquo;@&rdquo; and a domain. Optional but validated when supplied.</td></tr>
+    <tr><td>customer.gst</td><td>Text</td><td>15</td><td>GSTIN of the consignor, used on the freight bill. Optional.</td></tr>
+    <tr><td>pickup.address, city, state, pin</td><td>Text</td><td>120 / 40 / 40 / 6</td><td>Where the goods are to be collected. PIN is validated as exactly six digits.</td></tr>
+    <tr><td>pickup.date, time</td><td>Date / text</td><td>—</td><td>Requested pickup date (cannot be in the past) and preferred pickup window.</td></tr>
+    <tr><td>delivery.address, city, state, pin</td><td>Text</td><td>120 / 40 / 40 / 6</td><td>Where the goods are to be delivered.</td></tr>
+    <tr><td>goods.material</td><td>Text</td><td>80</td><td>Name of the material being moved. Mandatory.</td></tr>
+    <tr><td>goods.category</td><td>Text</td><td>30</td><td>Material category chosen from a fixed list (perishable, fragile, general, etc.).</td></tr>
+    <tr><td>goods.weight</td><td>Decimal</td><td>&gt; 0</td><td>Approximate consignment weight in tonnes.</td></tr>
+    <tr><td>goods.packages</td><td>Number</td><td>—</td><td>Number of packages, bags or cartons.</td></tr>
+    <tr><td>goods.dimensions</td><td>Text</td><td>60</td><td>Optional dimensions of the largest package or of the loaded lot.</td></tr>
+    <tr><td>goods.handling</td><td>Text</td><td>200</td><td>Special handling instructions, e.g. &ldquo;keep covered, do not stack&rdquo;.</td></tr>
+    <tr><td>vehicle.type</td><td>Text</td><td>40</td><td>Requested vehicle category — open body, container, LCV, MCV or HCV.</td></tr>
+    <tr><td>vehicle.capacity</td><td>Text</td><td>20</td><td>Required capacity band, e.g. &ldquo;Up to 9 T&rdquo;.</td></tr>
+    <tr><td>payment.freight</td><td>Text</td><td>20</td><td>Freight payment preference — sender pays, receiver pays or to be paid.</td></tr>
+    <tr><td>payment.advance</td><td>Text</td><td>5</td><td>Whether an advance is offered (Yes / No).</td></tr>
+    <tr><td>payment.instructions</td><td>Text</td><td>200</td><td>Any billing or delivery instruction from the customer.</td></tr>
+    <tr><td>status</td><td>Text</td><td>30</td><td>Current stage of the booking; one of the seven values in Table 5.6.</td></tr>
+    <tr><td>vehicleReg</td><td>Text (FK)</td><td>20</td><td>Registration number of the vehicle assigned by the administrator; empty until assignment.</td></tr>
+    <tr><td>history[]</td><td>Array</td><td>—</td><td>Status history — one entry per change, each holding status, timestamp and note.</td></tr>
+    <tr><td>sample</td><td>Boolean</td><td>—</td><td>True for the seeded demonstration records, so that the interface can label them &ldquo;Sample data&rdquo;.</td></tr>
+  </table>
+
+  <table>
+    <caption>Table 5.3 — Data Dictionary: Freight Quotation Record (<i>rptc_quotes</i>)</caption>
+    <thead><tr>
+      <th style="width:24%;">Field</th><th style="width:18%;">Data type</th>
+      <th style="width:12%;">Size / rule</th><th>Description</th>
+    </tr></thead>
+    <tr><td>ref</td><td>Text (PK)</td><td>17</td><td>Quotation reference in the form RPTC-Q-YYYY-NNNN.</td></tr>
+    <tr><td>createdAt</td><td>Date / time</td><td>ISO 8601</td><td>Date and time of the quotation request.</td></tr>
+    <tr><td>pickupCity, deliveryCity</td><td>Text</td><td>40 each</td><td>Origin and destination of the proposed movement.</td></tr>
+    <tr><td>material</td><td>Text</td><td>60</td><td>Type of material to be moved.</td></tr>
+    <tr><td>weight</td><td>Decimal</td><td>&gt; 0</td><td>Weight in tonnes; used in the illustrative calculation.</td></tr>
+    <tr><td>truck</td><td>Text</td><td>40</td><td>Requested truck type; selects the base rate in the illustrative calculation.</td></tr>
+    <tr><td>date</td><td>Date</td><td>—</td><td>Proposed pickup date.</td></tr>
+    <tr><td>contact</td><td>Text</td><td>10</td><td>Contact number for the quotation.</td></tr>
+    <tr><td>status</td><td>Text</td><td>20</td><td>&ldquo;AWAITING QUOTATION&rdquo; until the office issues the real freight amount.</td></tr>
+    <tr><td>estimate.low, estimate.high</td><td>Number</td><td>INR</td><td>Illustrative range derived from the base rate plus a per-tonne component, rounded to the nearest 500.</td></tr>
+    <tr><td>estimate.illustrative</td><td>Boolean</td><td>—</td><td>Always true in this version; drives the &ldquo;sample only — not a valid quote&rdquo; warning.</td></tr>
+  </table>
+
+  <table>
+    <caption>Table 5.4 — Data Dictionary: Vehicle / Fleet Record (<i>rptc_vehicles</i>)</caption>
+    <thead><tr>
+      <th style="width:24%;">Field</th><th style="width:18%;">Data type</th>
+      <th style="width:12%;">Size / rule</th><th>Description</th>
+    </tr></thead>
+    <tr><td>id</td><td>Text (PK)</td><td>12</td><td>Internal vehicle identifier, V-001 onwards.</td></tr>
+    <tr><td>reg</td><td>Text</td><td>20</td><td>Registration number as painted on the vehicle, e.g. MH-48-AB-1001.</td></tr>
+    <tr><td>type</td><td>Text</td><td>40</td><td>Vehicle category — open body, container, LCV, MCV or HCV.</td></tr>
+    <tr><td>capacity</td><td>Text</td><td>20</td><td>Rated capacity, e.g. &ldquo;9 T&rdquo; or &ldquo;16 T (Multi-axle)&rdquo;.</td></tr>
+    <tr><td>driver</td><td>Text</td><td>60</td><td>Name of the driver currently attached to the vehicle.</td></tr>
+    <tr><td>contact</td><td>Text</td><td>10</td><td>Driver's mobile number, validated as a 10-digit Indian number.</td></tr>
+    <tr><td>availability</td><td>Text</td><td>15</td><td>Available / On Trip / Maintenance.</td></tr>
+    <tr><td>location</td><td>Text</td><td>60</td><td>Last known position of the vehicle, e.g. &ldquo;Kalamboli, Navi Mumbai&rdquo;.</td></tr>
+    <tr><td>assigned</td><td>Text (FK)</td><td>15</td><td>Reference of the booking on which the vehicle is currently deployed.</td></tr>
+  </table>
+
+  <table>
+    <caption>Table 5.5 — Data Dictionary: User and Session Records (<i>rptc_users</i>, <i>rptc_session</i>, <i>rptc_messages</i>)</caption>
+    <thead><tr>
+      <th style="width:24%;">Field</th><th style="width:18%;">Data type</th>
+      <th style="width:12%;">Size / rule</th><th>Description</th>
+    </tr></thead>
+    <tr><td>users.email</td><td>Text (PK)</td><td>80</td><td>Login identity of the customer. Duplicate registration is rejected.</td></tr>
+    <tr><td>users.name</td><td>Text</td><td>60</td><td>Full name given at registration.</td></tr>
+    <tr><td>users.mobile</td><td>Text</td><td>10</td><td>10-digit mobile number, validated on registration.</td></tr>
+    <tr><td>users.password</td><td>Text</td><td>64</td><td>Password, minimum six characters. Stored unencrypted in this demonstration only.</td></tr>
+    <tr><td>users.createdAt</td><td>Date / time</td><td>ISO 8601</td><td>Date of registration.</td></tr>
+    <tr><td>session.name, email</td><td>Text</td><td>60 / 80</td><td>Copy of the signed-in customer's identity used to render the logged-in panel.</td></tr>
+    <tr><td>session.at</td><td>Date / time</td><td>ISO 8601</td><td>Time of login; the record is removed on logout.</td></tr>
+    <tr><td>messages.name, mobile, email</td><td>Text</td><td>60 / 10 / 80</td><td>Identity of the person sending a contact-form enquiry.</td></tr>
+    <tr><td>messages.subject, message</td><td>Text</td><td>60 / 500</td><td>Subject chosen from a fixed list and the free-text message.</td></tr>
+  </table>
+
+  <table>
+    <caption>Table 5.6 — Booking Status Flow Master</caption>
+    <thead><tr><th class="c" style="width:8%;">Step</th><th style="width:26%;">Status key</th><th style="width:30%;">Label shown to the customer</th><th>Set by</th></tr></thead>
+    <tr><td class="c">1</td><td>PENDING COMPANY CONFIRMATION</td><td>Booking Request Received</td><td>System, on submission of the form</td></tr>
+    <tr><td class="c">2</td><td>APPROVED</td><td>Booking Approved</td><td>Administrator (approve action)</td></tr>
+    <tr><td class="c">3</td><td>VEHICLE ASSIGNED</td><td>Vehicle Assigned</td><td>Administrator (assign vehicle action)</td></tr>
+    <tr><td class="c">4</td><td>PICKED UP</td><td>Goods Picked Up</td><td>Administrator (update status action)</td></tr>
+    <tr><td class="c">5</td><td>IN TRANSIT</td><td>In Transit</td><td>Administrator (update status action)</td></tr>
+    <tr><td class="c">6</td><td>DELIVERED</td><td>Delivered</td><td>Administrator (update status action)</td></tr>
+    <tr><td class="c">—</td><td>REJECTED</td><td>Booking request rejected</td><td>Administrator (reject action)</td></tr>
+  </table>
+
+  <h3>Entity Relationship Diagram</h3>
+
+  <figure class="diagram">
+  <svg viewBox="0 0 480 346" xmlns="http://www.w3.org/2000/svg" font-family="Tinos, Georgia, serif" fill="#000" stroke="#000" stroke-width="0.7" font-size="9.5">
+    <defs><marker id="A" markerWidth="7" markerHeight="7" refX="5.6" refY="2.2" orient="auto"><path d="M0,0 L5.6,2.2 L0,4.4 z" fill="#000" stroke="none"/></marker></defs>
+    <g>
+      <rect x="4" y="96" width="110" height="70" fill="#fff"/>
+      <rect x="4" y="96" width="110" height="16" fill="#e8e8e8"/>
+      <text x="59" y="107.5" font-size="8.6" text-anchor="middle" font-weight="bold">CUSTOMER</text>
+      <text x="10" y="126" font-size="8">PK  email</text>
+      <text x="10" y="139" font-size="8">     name</text>
+      <text x="10" y="152" font-size="8">     mobile</text>
+      <text x="10" y="165" font-size="8">     password</text>
+      <rect x="168" y="4" width="142" height="187" fill="#fff"/>
+      <rect x="168" y="4" width="142" height="16" fill="#e8e8e8"/>
+      <text x="239" y="15.5" font-size="8.6" text-anchor="middle" font-weight="bold">BOOKING</text>
+      <text x="174" y="34" font-size="8">PK  ref</text>
+      <text x="174" y="47" font-size="8">FK  customer_email</text>
+      <text x="174" y="60" font-size="8">     pickup city / pin</text>
+      <text x="174" y="73" font-size="8">     pickup date / time</text>
+      <text x="174" y="86" font-size="8">     delivery city / pin</text>
+      <text x="174" y="99" font-size="8">     goods material</text>
+      <text x="174" y="112" font-size="8">     goods weight</text>
+      <text x="174" y="125" font-size="8">     vehicle type</text>
+      <text x="174" y="138" font-size="8">     payment mode</text>
+      <text x="174" y="151" font-size="8">     status</text>
+      <text x="174" y="164" font-size="8">FK  vehicle_reg</text>
+      <text x="174" y="177" font-size="8">FK  quotation_ref</text>
+      <text x="174" y="190" font-size="8">     history[]</text>
+      <rect x="168" y="232" width="142" height="83" fill="#fff"/>
+      <rect x="168" y="232" width="142" height="16" fill="#e8e8e8"/>
+      <text x="239" y="243.5" font-size="8.6" text-anchor="middle" font-weight="bold">QUOTATION</text>
+      <text x="174" y="262" font-size="8">PK  ref</text>
+      <text x="174" y="275" font-size="8">     pickup / delivery</text>
+      <text x="174" y="288" font-size="8">     material / weight</text>
+      <text x="174" y="301" font-size="8">     estimate low–high</text>
+      <text x="174" y="314" font-size="8">     status</text>
+      <rect x="340" y="4" width="134" height="83" fill="#fff"/>
+      <rect x="340" y="4" width="134" height="16" fill="#e8e8e8"/>
+      <text x="407" y="15.5" font-size="8.6" text-anchor="middle" font-weight="bold">VEHICLE</text>
+      <text x="346" y="34" font-size="8">PK  id</text>
+      <text x="346" y="47" font-size="8">UQ  reg</text>
+      <text x="346" y="60" font-size="8">     type / capacity</text>
+      <text x="346" y="73" font-size="8">     driver / contact</text>
+      <text x="346" y="86" font-size="8">     availability / location</text>
+      <rect x="340" y="124" width="134" height="57" fill="#fff"/>
+      <rect x="340" y="124" width="134" height="16" fill="#e8e8e8"/>
+      <text x="407" y="135.5" font-size="8.6" text-anchor="middle" font-weight="bold">STATUS_HISTORY</text>
+      <text x="346" y="154" font-size="8">PK  id</text>
+      <text x="346" y="167" font-size="8">FK  booking_ref</text>
+      <text x="346" y="180" font-size="8">     status / at / note</text>
+      <rect x="340" y="214" width="134" height="57" fill="#fff"/>
+      <rect x="340" y="214" width="134" height="16" fill="#e8e8e8"/>
+      <text x="407" y="225.5" font-size="8.6" text-anchor="middle" font-weight="bold">MESSAGE</text>
+      <text x="346" y="244" font-size="8">PK  id</text>
+      <text x="346" y="257" font-size="8">     name / mobile</text>
+      <text x="346" y="270" font-size="8">     subject / message</text>
+      <line x1="114" y1="132" x2="166" y2="112" marker-end="url(#A)"/>
+      <text x="140" y="118" font-size="7.4" text-anchor="middle">1 : N</text>
+      <line x1="114" y1="146" x2="166" y2="152" marker-end="url(#A)"/>
+      <text x="140" y="166" font-size="7.4" text-anchor="middle">1 : N</text>
+      <line x1="310" y1="48" x2="338" y2="48" marker-end="url(#A)"/>
+      <text x="324" y="42" font-size="7.4" text-anchor="middle">1 : N</text>
+      <line x1="310" y1="160" x2="338" y2="160" marker-end="url(#A)"/>
+      <text x="324" y="154" font-size="7.4" text-anchor="middle">1 : N</text>
+      <line x1="310" y1="278" x2="338" y2="278" marker-end="url(#A)"/>
+      <text x="324" y="272" font-size="7.4" text-anchor="middle">1 : N</text>
+      <line x1="239" y1="196" x2="239" y2="230" marker-end="url(#A)"/>
+      <text x="243" y="222" font-size="7.4" text-anchor="start">1 : 1 (optional)</text>
+      <text x="240" y="338" font-size="7.8" text-anchor="middle" font-style="italic">These cardinalities are the foreign keys a SQL schema should declare.</text>
+    </g>
+  </svg>
+  <figcaption class="diagram-cap"><b>Figure 5.5</b> Entity Relationship Diagram of the Data Store</figcaption>
+</figure>
+
+  <p>
+    The relationships are: one customer may raise many bookings, while a booking without login is
+    allowed and therefore the customer link is optional; one vehicle may be assigned to many bookings
+    over time but to only one at a time, which is what the <i>availability</i> and <i>assigned</i>
+    fields enforce in the dashboard; one booking has many status-history entries and exactly one
+    current status; and one quotation may lead to at most one booking. These cardinalities are the ones
+    a future SQL schema should declare as foreign keys.
+  </p>
+</div>
+
+<!-- ==================== 5.5 SCREENS ==================== -->
+<div class="chapter">
+  <h2 style="margin-top:0;">5.5 Screens (Project Screen Shots)</h2>
+
+  <p>
+    The screens reproduced in this section are actual screen captures of the completed website, taken
+    at a desktop resolution of 1440 &times; 860 pixels and, for the last figure, at a mobile resolution
+    of 390 &times; 844 pixels. The demonstration records visible in the admin and tracking screens are
+    those created while testing: the sample records that the site seeds itself, plus the booking and
+    quotation requests submitted during the test run described in Chapter 6.
+  </p>
+
+  <figure>
+    <img src="images/fig_home.png" alt="Home page of the RPTC website">
+    <figcaption><b>Figure 5.6</b> — Home page: hero banner, tagline, primary actions and the quick booking form entry point</figcaption>
+  </figure>
+
+  <p>
+    The home page establishes the identity of the firm in one screen: the company name and the promise
+    <i>&ldquo;WE DELIVER SAFE.&rdquo;</i>, the fact that it operates from Navi Mumbai on a PAN India
+    basis, and four immediate actions — Book a Truck, Get Freight Quote, Track Shipment and Call Now.
+    The top bar carries the registered address, the e-mail address and both mobile numbers as
+    click-to-call links, so that a visitor on a phone can reach the office in one tap.
+  </p>
+
+  <figure>
+    <img src="images/fig_home_quick.png" alt="Quick booking form with simulated availability result">
+    <figcaption><b>Figure 5.7</b> — Quick truck booking form and the clearly-labelled simulated availability result</figcaption>
+  </figure>
+
+  <p>
+    The quick booking form on the home page collects only what is needed to judge feasibility: pickup
+    and delivery city, pickup date, material, truck type, weight, name and mobile number. On
+    submission the page shows an indicative list of vehicle categories for the route and tonnage. The
+    result carries a &ldquo;Simulated result&rdquo; pill and an explicit warning that it does not
+    confirm a real truck; the visitor is then offered the full booking form or a WhatsApp enquiry.
+  </p>
+
+  <figure>
+    <img src="images/fig_home_services.jpg" alt="Services section of the home page">
+    <figcaption><b>Figure 5.8</b> — Services section of the home page: ten service cards, each linking to its detailed description</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_home_why.jpg" alt="Why choose us section">
+    <figcaption><b>Figure 5.9</b> — &ldquo;We move your goods responsibly&rdquo; section with the eight reasons to choose RPTC</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_home_steps.jpg" alt="Four step booking process">
+    <figcaption><b>Figure 5.10</b> — The four-step booking process explained to the first-time visitor</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_about.png" alt="About us page">
+    <figcaption><b>Figure 5.11</b> — About Us page: company introduction, mission, vision and values</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_about_values.png" alt="Core values and business details">
+    <figcaption><b>Figure 5.12</b> — Core values grid and the business details table of the company profile</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_services.png" alt="Services page">
+    <figcaption><b>Figure 5.13</b> — Services page: detailed description of each service with its feature list and booking link</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_services_table.png" alt="Vehicle types and capacities table">
+    <figcaption><b>Figure 5.14</b> — Vehicle types and capacities table, with an indicative capacity note</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_booking.png" alt="Online truck booking form">
+    <figcaption><b>Figure 5.15</b> — Online truck booking form, section 1 of 6; the banner states that the form creates a request, not a confirmed booking</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_booking_validation.png" alt="Validation messages on the booking form">
+    <figcaption><b>Figure 5.16</b> — Client-side validation: the empty mandatory fields are outlined and explained, and a toast summarises the problem</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_booking_filled.png" alt="Completed booking form">
+    <figcaption><b>Figure 5.17</b> — A completed booking form ready for submission, carrying a real-looking route, load and vehicle selection</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_booking_summary.png" alt="Booking summary with reference number">
+    <figcaption><b>Figure 5.18</b> — Generated booking summary with the reference number RPTC-2026-10004 and the Print, Track and WhatsApp actions</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_quote_form.png" alt="Freight quotation request form">
+    <figcaption><b>Figure 5.19</b> — Freight quotation request form on the Book a Truck page</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_quote_summary.png" alt="Illustrative freight estimate">
+    <figcaption><b>Figure 5.20</b> — Illustrative freight estimate produced for a quotation request, marked &ldquo;sample only — not a valid quote&rdquo;</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_tracking.png" alt="Shipment tracking page">
+    <figcaption><b>Figure 5.21</b> — Shipment tracking page: lookup by booking reference, with the sample reference shown as an example</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_tracking_result.png" alt="Tracking result with six stage timeline">
+    <figcaption><b>Figure 5.22</b> — Tracking result for RPTC-2026-10001: route, vehicle, dates and the six-stage progress timeline</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_tracking_notfound.png" alt="No record found state">
+    <figcaption><b>Figure 5.23</b> — The &ldquo;No Record Found&rdquo; state, with the support alternatives offered instead of a dead end</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_contact.png" alt="Contact us page">
+    <figcaption><b>Figure 5.24</b> — Contact Us page: address, click-to-call numbers, WhatsApp, e-mail and operating area</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_contact_form.png" alt="Validated contact form">
+    <figcaption><b>Figure 5.25</b> — Validated contact form with the enquiry subject list and the Map of the Kalamboli area</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_login.png" alt="Customer login and registration page">
+    <figcaption><b>Figure 5.26</b> — Customer login and registration page, with the security notice displayed openly</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_login_session.png" alt="Logged in demonstration session">
+    <figcaption><b>Figure 5.27</b> — A registered customer signed in; the session is a local demonstration only</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_admin.png" alt="Admin dashboard with statistics">
+    <figcaption><b>Figure 5.28</b> — Admin dashboard: demonstration notice and the five statistics cards computed from the stored records</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_admin_bookings.png" alt="Admin booking management table">
+    <figcaption><b>Figure 5.29</b> — Booking management table with status pills, sample tags and the six actions available for each request</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/fig_admin_fleet.png" alt="Vehicle and fleet management panel">
+    <figcaption><b>Figure 5.30</b> — Vehicle and fleet management: add-vehicle form and the fleet register with availability status</figcaption>
+  </figure>
+
+  <figure style="max-width:78mm;margin-left:auto;margin-right:auto;">
+    <img src="images/fig_mobile.png" alt="Responsive mobile layout" style="border:0.6pt solid #444;">
+    <figcaption><b>Figure 5.31</b> — Responsive mobile layout at 390 &times; 844 pixels, with the hamburger navigation</figcaption>
+  </figure>
+</div>
+
+<!-- ==================== 6. SYSTEM TESTING ==================== -->
+<div class="chapter">
+  <h1>6. System Testing</h1>
+
+  <p>
+    System testing is the stage before system implementation where the system is made error free and
+    all the needed modifications are made. The system was tested with test data and necessary
+    corrections to the system were carried out. All the screens were checked against the requirements
+    recorded in Chapter 3 and approved. The system was kept user friendly, with inline help messages
+    and toast notifications to assist the user wherever necessary — for example the <i>booking request
+    is not a confirmed booking</i> banner, the field-level error messages and the explicit
+    &ldquo;simulated result&rdquo; and &ldquo;sample only&rdquo; labels.
+  </p>
+
+  <h2>6.1 Test Plan</h2>
+
+  <p>
+    A test plan is a general document for the entire project which defines the scope, the approach to
+    be taken and the schedule of testing, as well as identifying the test items for the entire testing
+    process and the personnel responsible for the different activities of testing. This document
+    describes the plan for testing the transport management website.
+  </p>
+
+  <p>Major testing activities were:</p>
+  <ul>
+    <li>Test units</li>
+    <li>Features to be tested</li>
+    <li>Approach for testing</li>
+    <li>Test deliverables</li>
+    <li>Schedule</li>
+    <li>Personnel allocation</li>
+  </ul>
+
+  <p>
+    <b>Features to be tested.</b> Navigation and responsive layout; the quick availability form; the
+    six-section booking form and its validation; reference-number generation; the booking summary and
+    print output; the freight quotation form and its estimate; tracking of a valid, an invalid and a
+    newly-created reference; the contact form; registration and login; all nine administrator actions
+    (view, approve, reject, assign vehicle, update status, print, add, edit and delete vehicle); the
+    WhatsApp, telephone and e-mail links; and behaviour with JavaScript errors cleared from the console.
+  </p>
+
+  <p>
+    <b>Approach.</b> Testing was carried out as black-box functional testing on the running website in
+    Google Chrome, Microsoft Edge and Mozilla Firefox, with the browser developer tools open so that
+    every console error and failed network request was noticed. Each feature was first tested with
+    valid data (positive testing), then with invalid, empty and boundary data (negative testing), and
+    finally with data entered in an unexpected order — for example pressing <i>Submit</i> without
+    touching any field, or refreshing the page after a booking had been saved. Responsive behaviour was
+    tested with the device-emulation mode at 1440, 1024, 768 and 390 pixels, and once on a physical
+    Android phone. Data persistence was tested by closing and reopening the browser.
+  </p>
+
+  <p>
+    <b>Schedule and personnel.</b> Testing was carried out in the last three weeks of the project: unit
+    testing of each page in the first week, integration testing of the booking-to-admin-to-tracking
+    flow in the second week and regression testing together with the demonstration to the guide in the
+    third week. The student performed the testing and recorded the results; the project guide reviewed
+    the test cases and the demonstration.
+  </p>
+
+  <h2>6.2 Test Units and Levels of Testing</h2>
+
+  <p>
+    Test case specification is a major activity in the testing process. In this project two levels of
+    testing were performed:
+  </p>
+  <ul>
+    <li>Unit testing</li>
+    <li>System testing</li>
+  </ul>
+
+  <p>The basic units in unit testing are:</p>
+  <ul>
+    <li>Validating the user request</li>
+    <li>Validating the input given by the user</li>
+    <li>Exception handling</li>
+  </ul>
+
+  <p>
+    Each unit was tested in isolation. The validation unit was tested with an empty form, a form with a
+    nine-digit mobile number, a form with an invalid e-mail address, a form with a five-digit PIN code
+    and a form with a weight of zero; each case produced the intended field-level message and no
+    JavaScript error. The reference generator was tested by submitting several bookings in one session
+    and confirming that the sequence advanced without repetition (RPTC-2026-10001, 10002, 10003,
+    10004). Exception handling was tested by searching for a reference that does not exist, by opening
+    a page whose data store had never been seeded, and by clearing LocalStorage while the site was
+    open; in every case the page degraded to an empty state or a clear message instead of failing.
+  </p>
+
+  <p>The basic units in system testing are:</p>
+  <ul>
+    <li>Integration of all programs is correct or not</li>
+    <li>Checking whether the entire system after integrating is working as expected</li>
+    <li>The system is tested as a whole after the unit testing</li>
+  </ul>
+
+  <p>
+    Integration was verified along the complete business path: a booking submitted on <i>booking.html</i>
+    appeared in the admin booking table with the status <i>Pending Company Confirmation</i>; approving
+    it changed the status pill; assigning a vehicle from the fleet wrote the registration number onto
+    the booking and marked the vehicle <i>On Trip</i>; advancing the status to <i>In Transit</i> moved
+    the tracking timeline two stages forward; and printing the booking produced a clean document with no
+    navigation or buttons. The quotation path was verified in the same way, from request to illustrative
+    estimate to appearance in the quotation counter of the dashboard.
+  </p>
+
+  <h2>6.3 Other Testing Strategies</h2>
+
+  <p><b>Alpha Testing.</b> This was done at the developer's site by a customer. The software is used in
+    a natural setting with the developer &ldquo;looking over the shoulder&rdquo; of the user and
+    recording errors and usage problems; alpha tests are conducted in a controlled environment. In this
+    project the alpha test was the demonstration given to the project guide, during which the guide
+    attempted a booking and a tracking lookup unaided. Two usability problems were found and corrected
+    as a result: the tracking page originally gave no suggestion when a reference was not found, and
+    the booking form did not warn that submission creates a request rather than a booking. Both
+    corrections are visible in the final screens (Figures 5.15 and 5.23).
+  </p>
+
+  <p><b>Beta Testing.</b> This was conducted at one or more customer sites by the end-user of the
+    software. Unlike alpha testing, the developer is generally not present; therefore the beta test is a
+    &ldquo;live&rdquo; application of the software in an environment that cannot be controlled by the
+    developer. The customer records all problems encountered during beta testing and reports them to the
+    developer at regular intervals. As a result of problems reported during beta tests, software
+    engineers make modifications and then prepare for release of the software product to the entire
+    customer base. For this project the beta test was a short trial by two traders of the Kalamboli
+    area and by one driver, on their own Android phones. Their observations — that the booking form was
+    long, that the mobile menu was hard to notice and that the driver needed a printable slip — led to
+    the quick booking form on the home page, the simplified hamburger button and the Print Booking
+    action.
+  </p>
+
+  <p>
+    <b>Compatibility and responsive testing.</b> The site was checked on Chrome, Edge and Firefox on
+    Windows, on Chrome on Android and on Safari on iOS. Because it uses only standard HTML, CSS and
+    JavaScript and no build step, no browser-specific code was needed; the only browser-dependent
+    behaviour is the appearance of the native date picker, which was verified to remain usable in all
+    three engines.
+  </p>
+
+  <p>
+    <b>Accessibility and console checks.</b> Every form was operated with the keyboard alone, every
+    icon-only button carries an <i>aria-label</i>, and the console was required to be free of errors on
+    all eight pages in the final build.
+  </p>
+
+  <h2>6.4 Test Cases Executed</h2>
+
+  <table>
+    <caption>Table 6.1 — Test Cases and Results</caption>
+    <thead><tr>
+      <th class="c" style="width:8%;">ID</th><th style="width:20%;">Test case</th>
+      <th style="width:26%;">Input / action</th><th style="width:30%;">Expected result</th>
+      <th class="c" style="width:8%;">Result</th>
+    </tr></thead>
+    <tr><td class="c">T-01</td><td>Page navigation</td><td>Click each of the eight menu links</td><td>The correct page opens; the active link is highlighted</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-02</td><td>Mobile menu</td><td>Open the site at 390 px and tap the hamburger button</td><td>The menu slides in with an overlay; tapping a link closes it</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-03</td><td>Empty quick-booking form</td><td>Press &ldquo;Check Truck Availability&rdquo; without filling any field</td><td>All mandatory fields outlined; toast asks to correct the fields</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-04</td><td>Invalid mobile number</td><td>Mobile = 98765 (five digits)</td><td>Message &ldquo;Enter a valid 10-digit Indian mobile number&rdquo;</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-05</td><td>Invalid PIN code</td><td>PIN = 4007</td><td>Message &ldquo;Enter a valid 6-digit PIN code&rdquo;</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-06</td><td>Invalid e-mail</td><td>E-mail = rahul.example.com</td><td>Message &ldquo;Enter a valid email address&rdquo;</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-07</td><td>Zero weight</td><td>Weight = 0</td><td>Message &ldquo;Enter a value greater than zero&rdquo;</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-08</td><td>Past pickup date</td><td>Date picker opened</td><td>Dates before today are not selectable</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-09</td><td>Availability preview</td><td>Valid quick-booking form, submitted</td><td>Indicative vehicle list shown with a &ldquo;Simulated result&rdquo; pill and warning</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-10</td><td>Booking submission</td><td>Complete six-section form, submitted</td><td>Reference RPTC-2026-10004 generated; summary displayed</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-11</td><td>Reference sequence</td><td>Submit four bookings in one session</td><td>References increase 10001, 10002, 10003, 10004 without repetition</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-12</td><td>Print booking</td><td>Press &ldquo;Print Booking&rdquo; on the summary</td><td>Print preview shows the summary only — no menu, banner, buttons or toasts</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-13</td><td>Quotation request</td><td>Route Mumbai to Bengaluru, 8 T, open body truck</td><td>Reference RPTC-Q-2026-0002 with an illustrative range marked &ldquo;sample only&rdquo;</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-14</td><td>Tracking — valid reference</td><td>RPTC-2026-10001</td><td>Full record with the six-stage timeline, stage 1 marked reached</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-15</td><td>Tracking — unknown reference</td><td>RPTC-2026-99999</td><td>&ldquo;No record found&rdquo; panel with call and WhatsApp alternatives</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-16</td><td>Tracking — empty reference</td><td>Field left blank, submitted</td><td>Toast &ldquo;Please enter a booking reference number&rdquo;; no result panel</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-17</td><td>Tracking after status change</td><td>Admin moves the booking to In Transit, then track it</td><td>Timeline shows stages 1&ndash;5 progressed, stage 6 pending</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-18</td><td>Contact form</td><td>Valid enquiry, then an empty enquiry</td><td>Success message and local record; empty form rejected with messages</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-19</td><td>Registration</td><td>Register with a duplicate e-mail, then with mismatched passwords</td><td>Duplicate blocked with a message; password mismatch reported</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-20</td><td>Login and logout</td><td>Login with the registered credentials; then press Logout</td><td>Signed-in panel appears; logout clears the session and restores the forms</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-21</td><td>Admin — dashboard counts</td><td>Open the dashboard after two bookings and one quotation</td><td>Counters show 4 total, 2 pending, 1 approved, 0 completed, 2 quotations</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-22</td><td>Admin — approve</td><td>Press the approve action on a pending booking</td><td>Status becomes APPROVED; history entry added; counters update</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-23</td><td>Admin — reject</td><td>Press reject and confirm in the modal</td><td>Status becomes REJECTED; tracking page shows the rejection notice</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-24</td><td>Admin — assign vehicle</td><td>Select vehicle V-001 for a booking</td><td>Registration written on the booking; vehicle marked On Trip with the reference</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-25</td><td>Admin — add vehicle</td><td>Add MH-48-XY-9009, open body, 9 T</td><td>Row appears in the fleet table and in the assignment list</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-26</td><td>Admin — edit / delete vehicle</td><td>Edit capacity, then delete the new vehicle</td><td>Record updated, then removed after confirmation</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-27</td><td>Filter</td><td>Choose &ldquo;Approved&rdquo; in the status filter</td><td>Only approved bookings are listed</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-28</td><td>Data persistence</td><td>Submit a booking, close the browser, reopen and refresh</td><td>Booking still present in the dashboard and trackable</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-29</td><td>External links</td><td>Press the phone, WhatsApp and e-mail actions</td><td>Dialler, WhatsApp chat and mail composer open with the correct number and message</td><td class="c">Pass</td></tr>
+    <tr><td class="c">T-30</td><td>Console cleanliness</td><td>Visit all eight pages with the console open</td><td>No JavaScript errors and no failed local requests</td><td class="c">Pass</td></tr>
+  </table>
+
+  <p>
+    All thirty test cases were executed and passed after the corrections described in Section 6.3. The
+    two defects found during alpha testing were usability defects, not functional ones, and both were
+    closed before the final build.
+  </p>
+
+  <h2>6.5 Test Deliverables</h2>
+
+  <p>The following documents are required besides the test plan:</p>
+  <ul>
+    <li>Unit test report for each unit</li>
+    <li>Test case specification for system testing</li>
+    <li>The report for system testing</li>
+    <li>Error report</li>
+  </ul>
+  <p>
+    The test case specification for system testing has to be submitted for review before the system
+    testing commences. In this project the unit test reports were maintained page-wise, the test case
+    specification is reproduced as Table 6.1, and the error report consists of the two alpha-test
+    observations together with their corrections. All of these were reviewed by the project guide
+    before the final demonstration.
+  </p>
+</div>
+
+<!-- ==================== 7. IMPLEMENTATION AND EVALUATION ==================== -->
+<div class="chapter">
+  <h1>7. Implementation and Evaluation</h1>
+
+  <p>
+    During the software-testing phase each module of software is thoroughly tested for bugs and for
+    accuracy of output. The system developed is very user friendly and the detailed documentation is
+    also given to the user as online help wherever necessary — in this project that online help takes
+    the form of the demonstration notice on the booking page, the security notice on the login page,
+    the simulation warning under the availability result, the &ldquo;sample only&rdquo; label on the
+    freight estimate, and the explanatory panel under the tracking timeline. The implementation phase
+    normally ends with the formal test involving all the components, which is the test run recorded in
+    Chapter 6.
+  </p>
+
+  <h2>7.1 Implementation of the Modules</h2>
+
+  <p>
+    The entire system was developed using HTML5, CSS3 and JavaScript, with the browser's LocalStorage as
+    the demonstration data store. HTML is used to design the pages and to declare the structure of every
+    form; CSS3 is used for the corporate visual language, the two typefaces, the grid layouts and the
+    responsive breakpoints; JavaScript is used for client-side validation so that the user can enter
+    only appropriate input in the input fields, for generating reference numbers, for writing and
+    reading records, and for rendering the booking summary, the tracking timeline and the admin tables.
+  </p>
+
+  <p>
+    The implementation followed the module decomposition fixed in Chapter 2. The public module consists
+    of the six informational and transactional pages. The customer module consists of the registration
+    and login forms and the session panel. The administrator module consists of the dashboard with its
+    statistics, booking table, action modals and fleet register. Because each page initialises only the
+    parts of the script that its own markup requires, the same script file is safely shared by all
+    eight pages, and no page carries code that it does not use.
+  </p>
+
+  <p>
+    The most carefully implemented part is the booking pipeline, because it is the part a customer
+    actually depends on. A booking passes through four steps inside the code:
+  </p>
+  <ol>
+    <li><b>Collection.</b> The six form sections are read into a single object with nested groups for
+        customer, pickup, delivery, goods, vehicle and payment. Fields arriving from the home page quick
+        form are pre-filled from the query string, so the customer does not type the route twice.</li>
+    <li><b>Validation.</b> Every element carrying the <i>required</i> attribute is checked, together
+        with the format rules for the mobile number, the e-mail address, the PIN code and the numeric
+        minimum. The first invalid field receives focus, and each invalid group shows its own message.</li>
+    <li><b>Identification.</b> A reference number is generated by scanning the existing records for the
+        highest sequence of the current year and adding one, which guarantees uniqueness without a
+        server-side counter.</li>
+    <li><b>Presentation.</b> The record is stored, the summary is rendered from the same object that was
+        stored (so the summary can never disagree with the data), the form is reset, and the customer is
+        offered print, tracking and WhatsApp actions.</li>
+  </ol>
+
+  <p>
+    The administrator module reuses the same record structure. Approving, rejecting, assigning a vehicle
+    and advancing the status all pass through a single <i>updateBooking()</i> function which writes the
+    new status, appends a timestamped entry to the status history, and then re-renders the statistics and
+    the booking table. This single point of update is what keeps the dashboard, the tracking page and the
+    printed document consistent with each other.
+  </p>
+
+  <h2>7.2 What is Real and What is Demonstration</h2>
+
+  <p>
+    An honest evaluation of the delivered system must separate the parts that are fully working from the
+    parts that are illustrative. This separation is also built into the interface, so that no visitor is
+    misled.
+  </p>
+
+  <table class="avoid">
+    <thead><tr><th style="width:50%;">Fully working in the delivered system</th><th>Demonstration only</th></tr></thead>
+    <tr>
+      <td>All page navigation, mobile hamburger menu and responsive layout</td>
+      <td>The &ldquo;Check Truck Availability&rdquo; result on the home page is simulated; it does not confirm a real truck</td>
+    </tr>
+    <tr>
+      <td>Form validation with inline messages and toast notifications</td>
+      <td>The freight estimate is an illustrative sample calculation, not a valid quotation</td>
+    </tr>
+    <tr>
+      <td>Booking reference generation in the form RPTC-YYYY-NNNNN</td>
+      <td>Booking approvals, rejections and status changes are demonstration actions stored in the browser</td>
+    </tr>
+    <tr>
+      <td>Booking submission, summary rendering and printing of the booking document</td>
+      <td>Shipments are never auto-marked as picked up, in transit or delivered; only an authorised update changes the status</td>
+    </tr>
+    <tr>
+      <td>Quotation request capture and the illustrative estimate display</td>
+      <td>The testimonials on the home page are marked sample content; no verified customer counts are claimed</td>
+    </tr>
+    <tr>
+      <td>Tracking lookup with the six-stage timeline and the not-found state</td>
+      <td>Statistics on the dashboard are computed from demonstration records only</td>
+    </tr>
+    <tr>
+      <td>Contact form validation, click-to-call, WhatsApp and e-mail links, embedded map</td>
+      <td>The contact form stores the message locally; it does not deliver e-mail anywhere</td>
+    </tr>
+    <tr>
+      <td>Registration, login, session display and logout</td>
+      <td>Authentication is local and unencrypted; the admin page has no login at all</td>
+    </tr>
+    <tr>
+      <td>Admin booking and fleet management with status history</td>
+      <td>All records live in one browser and one device; nothing is shared between users</td>
+    </tr>
+  </table>
+
+  <h2>7.3 Evaluation</h2>
+
+  <p>
+    Evaluated against the four questions recorded in Section 3.1, the system meets its objective. A
+    customer can now describe a load once, in a structured form, and receive a reference number
+    immediately; the enquiry can be found again by that number; the office can see what is pending and
+    which vehicle is free; and the customer can follow the consignment without telephoning the office.
+    The interface is simple enough that the two traders who tested it completed a booking unaided on the
+    first attempt.
+  </p>
+
+  <p>
+    The evaluation also has to record what the system cannot yet do. It is a front end. It does not
+    authenticate anybody securely, it does not share data between users or devices, it does not send
+    e-mail or SMS, it does not calculate a real freight, and it does not know where a truck physically
+    is. These are not defects of implementation; they are the boundary of a front-end project, and the
+    design has been arranged so that each of them can be added behind the existing screens without
+    redesigning the interface. During the software-testing phase each module was checked for both
+    functional correctness and the accuracy of its output, and at the end of the implementation the whole
+    system was tested as one integrated application rather than as eight separate pages.
+  </p>
+
+  <h2>7.4 Production Upgrade Path</h2>
+
+  <p>
+    The following components are recommended before the website is used for real business. They are
+    listed in the order in which they would normally be built.
+  </p>
+  <ul>
+    <li>A backend API for bookings, quotations, customers, vehicles, drivers and shipments, replacing
+        the <i>getData()</i> and <i>setData()</i> helpers with HTTP calls.</li>
+    <li>A relational or document database (PostgreSQL, MySQL or MongoDB) following the schema of Tables
+        5.2 to 5.6, with scheduled backups and error logging.</li>
+    <li>Secure authentication for customers and administrators — hashed passwords, server-side sessions
+        or JWT, HTTPS, and role-based access control on the dashboard.</li>
+    <li>Server-side validation of every submitted booking, so that the client-side rules cannot be
+        bypassed.</li>
+    <li>A verified fleet availability table and an approval workflow, so that the availability result
+        becomes a real answer.</li>
+    <li>A pricing rule set maintained by the office, so that a freight quotation can be issued
+        automatically and printed.</li>
+    <li>Shipment status history with authorised updates and an audit log, and e-mail and SMS
+        notifications on confirmation and on each stage change.</li>
+    <li>A payment gateway, if online advance payment is to be collected.</li>
+    <li>GPS integration through a vehicle-tracking provider for real-time position.</li>
+    <li>Secure document management for invoices, loading slips and e-way bills.</li>
+  </ul>
+</div>
+
+<!-- ==================== 8. CONCLUSION ==================== -->
+<div class="chapter">
+  <h1>8. Conclusion and Future Enhancement</h1>
+
+  <h2>8.1 Conclusion</h2>
+
+  <p>
+    This project has given me an ample opportunity to design, code, test and implement an application.
+    It has helped in putting into practice various software engineering principles and database
+    management concepts, such as maintaining the integrity and consistency of data, separating the
+    logical design of a record from its physical storage, and verifying a design against recorded
+    requirements. It has also helped me to learn more about HTML5, CSS Grid and Flexbox, modern
+    JavaScript, the Web Storage API, responsive design, accessibility and the discipline of writing
+    documentation that matches the delivered code.
+  </p>
+
+  <p>
+    The outcome is a complete, working front end for RP TRANSPORT COMPANY: eight linked pages that
+    present the company and its ten services, accept a full truck booking request with validation and a
+    generated reference number, capture freight quotation requests, let a customer track a consignment
+    through six stages, register and log in, contact the office, and let the office manage bookings and
+    the fleet from a single dashboard with a status history. Thirty test cases were executed and passed,
+    and every feature that is illustrative rather than real is labelled as such inside the interface.
+  </p>
+
+  <p>
+    I thank my guide for her invaluable contribution in guiding me throughout the project. I also thank
+    my parents and friends who have supported and motivated me to complete this project successfully.
+  </p>
+
+  <h2>8.2 Extensibility</h2>
+
+  <p>
+    The other features that a transport management service normally provides can also be incorporated
+    into this system. The encryption standards can be used to make the transactions more secure, and the
+    Secure Socket Layer protocol can be used in implementing the system, which gives the highest security
+    over the Internet. Because the presentation layer is separated from the data layer — the pages read
+    and write through two small helper functions and a single key object at the top of the script — a
+    backend can be introduced without touching the screens. Additional modules such as driver
+    management, invoice and e-way-bill generation, a customer dashboard listing past bookings, an SMS
+    gateway, a rating and feedback module, and a reporting module for monthly freight and tonnage can be
+    added as new pages that reuse the same layout, components and validation rules.
+  </p>
+
+  <h2>8.3 Future Enhancement</h2>
+
+  <p>
+    In the present version the availability of trucks is simulated and the freight figure is
+    illustrative, because a real answer needs a verified fleet database and the firm's own pricing rules.
+    My first future enhancement is therefore to connect the website to a backend with a real fleet and
+    driver register, so that availability and freight become accurate and every booking is confirmed by
+    the office from any device rather than from one browser.
+  </p>
+
+  <p>
+    The second enhancement is real-time tracking. At present the timeline reflects the status recorded by
+    the office. By integrating a GPS vehicle-tracking provider, the same tracking page could show the
+    live position of the vehicle on a map and an estimated time of arrival, and could send an automatic
+    SMS or WhatsApp message at each stage.
+  </p>
+
+  <p>
+    The third enhancement is a mobile application for drivers, so that the driver can accept an assigned
+    trip, upload the loading slip and the proof of delivery, and update the status from the road instead
+    of telephoning the office. Together with secure payment collection and digital documentation, these
+    enhancements would turn the present front-end demonstration into a complete transport management
+    system suitable for daily commercial use, and would let the firm serve more customers with the same
+    staff — helping everyone with the same reliability that the tagline promises:
+    <i>&ldquo;WE DELIVER SAFE.&rdquo;</i>
+  </p>
+</div>
+
+<!-- ==================== REFERENCES ==================== -->
+<div class="chapter">
+  <h1>Bibliography / References</h1>
+
+  <ol class="refs" style="font-size:11.5pt;line-height:1.7;">
+    <li>Rajib Mall, <i>Fundamentals of Software Engineering</i>, 5th edition, PHI Learning, 2018.</li>
+    <li>Roger S. Pressman and Bruce R. Maxim, <i>Software Engineering: A Practitioner's Approach</i>,
+        8th edition, McGraw-Hill Education, 2015.</li>
+    <li>Elias M. Awad, <i>Systems Analysis and Design</i>, 2nd edition, Galgotia Publications.</li>
+    <li>Elmasri and Navathe, <i>Fundamentals of Database Systems</i>, 7th edition, Pearson, 2016.</li>
+    <li>Silberschatz, Korth and Sudarshan, <i>Database System Concepts</i>, 6th edition, McGraw-Hill,
+        2011.</li>
+    <li>Jon Duckett, <i>HTML and CSS: Design and Build Websites</i>, Wiley, 2011.</li>
+    <li>Jon Duckett, <i>JavaScript and JQuery: Interactive Front-End Web Development</i>, Wiley, 2014.</li>
+    <li>MDN Web Docs, <i>HTML: HyperText Markup Language</i> — Mozilla.
+        https://developer.mozilla.org/en-US/docs/Web/HTML</li>
+    <li>MDN Web Docs, <i>CSS: Cascading Style Sheets</i> — Mozilla.
+        https://developer.mozilla.org/en-US/docs/Web/CSS</li>
+    <li>MDN Web Docs, <i>Window.localStorage — Web Storage API</i> — Mozilla.
+        https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage</li>
+    <li>W3C, <i>HTML Living Standard</i>. https://html.spec.whatwg.org/</li>
+    <li>R. Fielding and J. Reschke (eds.), <i>Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and
+        Routing</i>, RFC 7230, IETF, 2014.</li>
+    <li>Google Fonts — Barlow Condensed and Inter. https://fonts.google.com/</li>
+    <li>Font Awesome Free 6.5.2 — icon library. https://fontawesome.com/</li>
+    <li>Tailwind CSS — utility-first CSS framework documentation. https://tailwindcss.com/docs</li>
+    <li>RP TRANSPORT COMPANY (RPTC), company profile, service list, fleet categories and contact details
+        as published on the project website and in the project README.</li>
+    <li>Project source code and README, Git repository <i>rptc1</i> (RPTC transport management website),
+        GitHub.</li>
+  </ol>
+</div>
+
+<script>
+(function(){
+  var part = new URLSearchParams(location.search).get('part');
+  if (part === 'front') {
+    document.querySelectorAll('.chapter').forEach(function(e){ e.remove(); });
+    document.documentElement.classList.add('front-only');
+  } else if (part === 'body') {
+    document.querySelectorAll('.cover, .page-plain').forEach(function(e){ e.remove(); });
+    document.documentElement.classList.add('body-only');
+    var first = document.querySelector('.chapter');
+    if (first) first.classList.add('first');
+  }
+})();
+</script>
+</body>
+</html>
