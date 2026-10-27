@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Track Shipment | RP TRANSPORT COMPANY (RPTC)</title>
-  <meta name="description" content="Track your RP TRANSPORT COMPANY (RPTC) shipment using your booking reference number. PAN India truck booking and logistics.">
+  <title>Customer Login &amp; Registration | RP TRANSPORT COMPANY (RPTC)</title>
+  <meta name="description" content="Customer login and registration for RP TRANSPORT COMPANY (RPTC) online truck booking portal. Demo authentication — see security notice on the page.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23B30000'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3ERT%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,113 +41,109 @@
         <li><a href="index.html" data-page="index.html">Home</a></li>
         <li><a href="about.html" data-page="about.html">About Us</a></li>
         <li><a href="services.html" data-page="services.html">Services</a></li>
+        <li><a href="rate-card.html" data-page="rate-card.html">Rate Card</a></li>
         <li><a href="booking.html" data-page="booking.html">Book a Truck</a></li>
         <li><a href="tracking.html" data-page="tracking.html">Track Shipment</a></li>
+        <li><a href="my-bookings.html" data-page="my-bookings.html">My Bookings</a></li>
         <li><a href="contact.html" data-page="contact.html">Contact Us</a></li>
         <li><a href="login.html" data-page="login.html">Login</a></li>
-        <li><a href="booking.html#freight-quote" class="btn btn-red btn-sm nav-cta">Get a Freight Quote</a></li>
+        <li><a href="booking.html#freight-quote" class="btn btn-red btn-sm nav-cta">Get a Quote</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
   <div class="nav-overlay" id="navOverlay"></div>
 
-  <!-- ================= PAGE BANNER ================= -->
-  <header class="page-banner no-print">
+  <!-- ================= AUTH ================= -->
+  <section class="auth-section">
     <div class="container">
-      <h1>Track <span>Shipment</span></h1>
-      <div class="breadcrumb">
-        <a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i><span>Track Shipment</span>
-      </div>
-    </div>
-  </header>
-
-  <section class="section">
-    <div class="container">
-
-      <!-- ===== TRACKING SEARCH ===== -->
-      <div class="track-search-card reveal">
-        <div class="section-head center" style="margin-bottom:30px;">
-          <span class="kicker">Shipment Tracking</span>
-          <h2 class="section-title">Track Your <span class="accent">Consignment</span></h2>
-          <p class="section-sub">Enter the booking reference number you received when you submitted your booking request.</p>
+      <div class="auth-card reveal">
+        <div class="auth-tabs no-print">
+          <button class="auth-tab active" id="tabLogin" type="button"><i class="fa-solid fa-right-to-bracket"></i> Customer Login</button>
+          <button class="auth-tab" id="tabRegister" type="button"><i class="fa-solid fa-user-plus"></i> Register</button>
         </div>
-        <form id="trackingForm" novalidate>
-          <div class="track-input-row">
-            <div class="form-group">
-              <label>Booking Reference Number <em>*</em></label>
-              <input type="text" id="trackRef" placeholder="e.g. RPTC-2026-10001" style="text-transform:uppercase;" required>
-              <small class="error-msg"></small>
+        <div class="auth-body">
+          <div id="authForms">
+            <!-- ===== LOGIN ===== -->
+            <div id="loginPanel">
+              <h2>Welcome Back</h2>
+              <p>Log in to manage your bookings and track shipments.</p>
+              <form id="loginForm" novalidate>
+                <div class="form-group" style="margin-bottom:16px;">
+                  <label>Email Address <em>*</em></label>
+                  <input type="email" name="lEmail" placeholder="name@example.com" required>
+                  <small class="error-msg"></small>
+                </div>
+                <div class="form-group" style="margin-bottom:20px;">
+                  <label>Password <em>*</em></label>
+                  <input type="password" name="lPass" placeholder="Your password" required>
+                  <small class="error-msg"></small>
+                </div>
+                <button type="submit" class="btn btn-red btn-block"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+              </form>
+              <p style="font-size:13px;text-align:center;margin-top:18px;">
+                <a href="booking.html" style="color:var(--red);font-weight:600;">New here? Book a truck without an account →</a>
+              </p>
             </div>
-            <div class="form-group" style="max-width:220px;">
-              <label>&nbsp;</label>
-              <button type="submit" class="btn btn-red btn-block"><i class="fa-solid fa-magnifying-glass-location"></i> Track Shipment</button>
+
+            <!-- ===== REGISTER ===== -->
+            <div id="registerPanel" hidden>
+              <h2>Create Account</h2>
+              <p>Register to save your details for faster booking.</p>
+              <form id="registerForm" novalidate>
+                <div class="form-group" style="margin-bottom:16px;">
+                  <label>Full Name <em>*</em></label>
+                  <input type="text" name="rName" placeholder="Your full name" required>
+                  <small class="error-msg"></small>
+                </div>
+                <div class="form-group" style="margin-bottom:16px;">
+                  <label>Email Address <em>*</em></label>
+                  <input type="email" name="rEmail" placeholder="name@example.com" required>
+                  <small class="error-msg"></small>
+                </div>
+                <div class="form-group" style="margin-bottom:16px;">
+                  <label>Mobile Number <em>*</em></label>
+                  <input type="tel" name="rMobile" placeholder="10-digit mobile" maxlength="10" data-validate="mobile" required>
+                  <small class="error-msg"></small>
+                </div>
+                <div class="form-group" style="margin-bottom:16px;">
+                  <label>Password <em>*</em></label>
+                  <input type="password" name="rPass" placeholder="Minimum 6 characters" minlength="6" required>
+                  <small class="error-msg"></small>
+                </div>
+                <div class="form-group" style="margin-bottom:20px;">
+                  <label>Confirm Password <em>*</em></label>
+                  <input type="password" name="rPass2" placeholder="Re-enter password" required>
+                  <small class="error-msg"></small>
+                </div>
+                <button type="submit" class="btn btn-navy btn-block"><i class="fa-solid fa-user-plus"></i> Register</button>
+              </form>
             </div>
           </div>
-          <p class="track-example">Example reference: <code>RPTC-2026-10001</code> (sample record included in this demo).</p>
-        </form>
-      </div>
 
-      <!-- ===== TRACKING RESULT ===== -->
-      <div id="trackingResult" hidden style="margin-top:44px;">
-
-        <!-- Not found message -->
-        <div class="form-card" id="trackNotFound" hidden>
-          <div class="empty-state">
-            <i class="fa-solid fa-box-open"></i>
-            <h3 style="font-size:24px;margin-bottom:8px;">No Record Found</h3>
-            <p>No booking record was found for reference <b id="notFoundRef" style="color:var(--red);"></b>.</p>
-            <p style="font-size:14px;">No booking record was found. Please check your reference number or contact RP TRANSPORT COMPANY.</p>
+          <!-- ===== SESSION (logged in) ===== -->
+          <div class="auth-session" id="authSession" hidden>
+            <div class="big-check"><i class="fa-solid fa-check"></i></div>
+            <h2>You're Logged In</h2>
+            <p>Signed in as <b id="sessionName"></b> (demonstration session stored in this browser).</p>
             <div class="summary-actions" style="justify-content:center;">
-              <a href="tel:+918828383122" class="btn btn-navy"><i class="fa-solid fa-phone"></i> +91 88283 83122</a>
-              <a href="https://wa.me/918828383122?text=Hello%20RP%20TRANSPORT%20COMPANY%2C%20I%20could%20not%20find%20my%20booking%20on%20the%20tracking%20page.%20Please%20help." class="btn btn-wa wa-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp Support</a>
+              <a href="my-bookings.html" class="btn btn-red"><i class="fa-solid fa-clock-rotate-left"></i> My Booking History</a>
+              <a href="booking.html" class="btn btn-navy"><i class="fa-solid fa-truck-fast"></i> Book a Truck</a>
+              <a href="tracking.html" class="btn btn-outline"><i class="fa-solid fa-magnifying-glass-location"></i> Track Shipment</a>
+              <button class="btn btn-outline" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
             </div>
+            <p style="font-size:13px;margin-top:16px;"><a href="my-bookings.html" style="color:var(--red);font-weight:600;">View all bookings &amp; quotation rates →</a></p>
           </div>
         </div>
+      </div>
 
-        <!-- Found: details + timeline -->
-        <div id="trackFound" hidden>
-          <div class="panel reveal">
-            <div class="panel-head">
-              <h3><i class="fa-solid fa-truck-fast"></i><span id="tRef">RPTC-2026-10001</span></h3>
-              <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
-                <span class="demo-tag" id="tSample" hidden>Sample data</span>
-                <span class="pill pill-pending" id="tStatus"></span>
-              </div>
-            </div>
-            <div class="panel-body">
-              <div class="summary-grid track-details-grid">
-                <div class="summary-item"><small>Route</small><b id="tRoute"></b></div>
-                <div class="summary-item"><small>Pickup Location</small><b id="tPickup"></b></div>
-                <div class="summary-item"><small>Delivery Location</small><b id="tDelivery"></b></div>
-                <div class="summary-item"><small>Vehicle Details</small><b id="tVehicle"></b></div>
-                <div class="summary-item"><small>Pickup Date</small><b id="tDate"></b></div>
-                <div class="summary-item"><small>Last Updated</small><b id="tUpdated"></b></div>
-                <div class="summary-item"><small>Estimated Delivery Date</small><b id="tEta"></b></div>
-              </div>
-
-              <h4 style="font-size:15px;font-weight:700;color:var(--navy);margin:26px 0 6px;text-transform:uppercase;letter-spacing:1px;">Shipment Progress</h4>
-              <div class="timeline-wrap">
-                <div class="timeline" id="timeline"></div>
-              </div>
-              <div class="notice notice-red" id="timelineRejected" hidden style="margin-bottom:0;">
-                <i class="fa-solid fa-circle-xmark"></i>
-                <span><b>Booking request rejected.</b> This booking request was not approved. Please contact RP TRANSPORT COMPANY for details.</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="notice notice-amber">
-            <i class="fa-solid fa-satellite-dish"></i>
-            <span><b>About tracking:</b> This page shows the status recorded for your booking request. For a newly submitted request, only the received status is shown — shipments are never marked as picked up, in transit or delivered without an authorized update. <b>Real-time GPS tracking</b> requires a connected vehicle-tracking system or GPS API, which is not part of this frontend demonstration.</span>
-          </div>
-
-          <div class="summary-actions">
-            <a href="booking.html" class="btn btn-red"><i class="fa-solid fa-truck-fast"></i> Book Another Truck</a>
-            <a href="tel:+918828383122" class="btn btn-outline"><i class="fa-solid fa-phone"></i> Call Transport Team</a>
-            <a href="https://wa.me/918828383122?text=Hello%20RP%20TRANSPORT%20COMPANY%2C%20I%20would%20like%20an%20update%20on%20my%20shipment." class="btn btn-wa wa-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp Team</a>
-          </div>
-        </div>
+      <div class="notice notice-amber reveal" style="max-width:480px;margin:26px auto 0;">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span><b>Security notice — demo only.</b> This login uses the browser's LocalStorage and is <b>not secure</b>; passwords are stored in plain text locally and must never be used for real customer accounts. For a production website, authentication must be implemented with a secure backend, password hashing, session management and appropriate access controls.</span>
+      </div>
+      <div class="notice notice-blue reveal" style="max-width:480px;margin:16px auto 0;">
+        <i class="fa-solid fa-user-shield"></i>
+        <span><b>RPTC staff / transport office?</b> Use the separate administrator profile to accept booking requests and share freight rates. <a href="admin-login.html" style="color:#173F7A;font-weight:700;">Admin login →</a></span>
       </div>
     </div>
   </section>
@@ -177,6 +173,8 @@
             <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Services</a></li>
             <li><a href="booking.html"><i class="fa-solid fa-chevron-right"></i> Book a Truck</a></li>
             <li><a href="tracking.html"><i class="fa-solid fa-chevron-right"></i> Track Shipment</a></li>
+            <li><a href="my-bookings.html"><i class="fa-solid fa-chevron-right"></i> My Bookings</a></li>
+            <li><a href="rate-card.html"><i class="fa-solid fa-chevron-right"></i> Rate Card</a></li>
             <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact Us</a></li>
             <li><a href="login.html"><i class="fa-solid fa-chevron-right"></i> Customer Login</a></li>
           </ul>
@@ -205,7 +203,7 @@
       <div class="footer-bottom">
         <div class="footer-bottom-inner">
           <span>© <span class="year">2026</span> <b>RP TRANSPORT COMPANY (RPTC)</b>. All rights reserved.</span>
-          <span>Frontend demonstration — data is stored only in this browser (LocalStorage).</span>
+          <span>Frontend demonstration — data is stored only in this browser (LocalStorage). · <a href="admin-login.html" style="color:#fff;font-weight:600;">Admin Login</a></span>
         </div>
       </div>
     </div>

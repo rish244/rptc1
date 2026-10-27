@@ -1,0 +1,199 @@
+================================================================================
+  RP TRANSPORT COMPANY (RPTC) — WEBSITE KAISE CHALAYEN
+  (VS Code / Visual Studio / Seedha Browser)
+================================================================================
+
+Is folder mein website ka POORA code hai. Koi installation, koi internet
+package, koi database nahi chahiye — sirf 14 files hain (HTML + CSS + JS).
+
+  index.html      -> Home page
+  about.html      -> About Us
+  services.html   -> Services
+  rate-card.html  -> Rate Card + Freight Calculator
+  booking.html    -> Book a Truck + Freight Quote form
+  tracking.html   -> Track Shipment
+  my-bookings.html-> Booking History (bookings + quotations)
+  contact.html    -> Contact Us
+  login.html      -> Customer Login / Register
+  admin-login.html-> Admin Login (alag profile)
+  admin.html      -> Admin Dashboard (rate dena, approve, etc.)
+  style.css       -> Poori design / styling
+  script.js       -> Poora logic (booking, history, admin, tracking)
+  README.txt      -> Pura documentation
+
+
+--------------------------------------------------------------------------------
+  NOTE: INTERNET
+--------------------------------------------------------------------------------
+  Website 100% offline chal jayegi, LEKIN ye 3 cheezein internet se aati hain:
+     - Fonts (Google Fonts)      -> internet na ho to default font dikhega
+     - Icons (Font Awesome CDN)  -> icons ki jagah khali jagah
+     - Truck photos (Pexels)     -> images nahi dikhengi
+  Matlab: internet ke bina bhi sab functionality (booking, admin, history,
+  tracking) kaam karegi — sirf look thoda simple lagega. Best experience ke
+  liye internet on rakhein.
+
+  (Agar aapko 100% offline version chahiye — fonts/icons/photos download
+  karke local kar dena — to bata dijiye, woh bhi bana dunga.)
+
+
+--------------------------------------------------------------------------------
+TARIKA 1 — SABSE AASAN: SEEDHA BROWSER MEIN (0 setup, 10 second)
+--------------------------------------------------------------------------------
+  1. ZIP ko extract karein (Right click -> Extract All).
+  2. Folder kholein -> "index.html" par DOUBLE CLICK karein.
+  3. Website Chrome mein khul jayegi. Bas!
+
+  Note: Is tarike mein bhi sab kuch kaam karta hai (booking, admin, history)
+  kyunki website browser ke andar hi chalti hai.
+
+
+--------------------------------------------------------------------------------
+TARIKA 2 — VS CODE (recommended, sabse acha experience)
+--------------------------------------------------------------------------------
+  STEP 1: VS Code install karein (agar nahi hai):
+          https://code.visualstudio.com/
+
+  STEP 2: VS Code kholein -> File -> Open Folder...
+          -> "RPTC-Website" folder select karein -> Select Folder
+
+  STEP 3: Left side "Extensions" icon (ya Ctrl+Shift+X) -> search karein:
+          "Live Server"  (Ritwick Dey wala)  -> Install
+
+  STEP 4: Left panel mein "index.html" par right click ->
+          "Open with Live Server"
+          (ya neeche-right corner mein "Go Live" button dabayein)
+
+  STEP 5: Browser khud khul jayega: http://127.0.0.1:5500/index.html
+          Ab aap code mein change karein -> save (Ctrl+S) -> page khud refresh
+          ho jayega. Yahi "live preview" hai.
+
+  Band karne ke liye: neeche "Port: 5500" par click -> Stop.
+
+
+--------------------------------------------------------------------------------
+TARIKA 3 — PYTHON SE LOCAL SERVER (agar Python installed hai)
+--------------------------------------------------------------------------------
+  Windows:
+    1. Folder ke andar khali jagah par Shift + Right Click
+    2. "Open PowerShell window here" / "Open Terminal here" chunein
+    3. Ye command chalayein:
+
+         python -m http.server 8000
+
+    4. Browser mein kholein:  http://localhost:8000
+
+  Mac / Linux:
+    Terminal kholein -> folder mein jayein -> phir:
+
+         python3 -m http.server 8000
+
+  Rokne ke liye: terminal mein Ctrl + C
+
+  Is folder mein "start-website.bat" (Windows) aur "start-website.sh"
+  (Mac/Linux) bhi diye hain — un par double click karne se server khud
+  chal jayega.
+
+
+--------------------------------------------------------------------------------
+TARIKA 4 — VISUAL STUDIO (professional IDE)
+--------------------------------------------------------------------------------
+  Visual Studio (.NET wala) static HTML website ke liye bana nahi hai, lekin
+  isme bhi khol sakte hain:
+
+    1. Visual Studio kholein -> "Open a project or solution"
+    2. "RPTC-Website" folder ke andar jayein -> "index.html" select karein
+       (ya File -> Open -> File -> index.html)
+    3. File khulne ke baad "Design/Split/Source" view milega
+    4. Dekhne ke liye: Solution Explorer mein index.html par right click ->
+       "View in Browser" (ya Ctrl+Shift+W)
+       Tip: agar option na mile to Visual Studio mein "Open Folder" use karein.
+
+  Behtar option: Visual Studio Code (Tarika 2) — HTML/CSS/JS ke liye yahi
+  best hai aur free bhi.
+
+
+================================================================================
+  DEMO KE LIYE ZAROORI DETAILS
+================================================================================
+
+  ADMIN LOGIN:
+      Page      : admin-login.html
+      Email     : admin@rptc.in
+      Password  : Admin@123
+      (Login ke baad ~1 second mein admin.html khul jayega)
+
+  CUSTOMER LOGIN:
+      Page      : login.html
+      Naya account Register tab se bana sakte hain (koi OTP nahi — demo hai).
+
+  DEMO DATA:
+      Website khulte hi 3 sample bookings, 2 quotation requests aur 5 vehicles
+      pehle se hote hain. Inhe admin page -> "Reset demo data" se dobara
+      set kar sakte hain.
+
+  60-SECOND DEMO FLOW (sir ko dikhane ke liye):
+      1. booking.html -> form bharein -> "Booking request" submit karein
+         -> aapko RPTC-2026-XXXXX reference milega
+      2. admin-login.html -> login karein
+      3. Admin page -> "Booking Requests" tab -> apni booking dekhें
+         -> ₹ (rate) button se freight rate bhejein
+         -> ✓ (accept) button se request approve karein
+      4. my-bookings.html -> wahi booking ab APPROVED status, aapka bheja
+         hua rate aur poora timeline ke saath dikhegi
+      5. tracking.html -> reference daalein -> shipment status + timeline
+
+
+================================================================================
+  ZAROORI BAATEIN (sir ko batane se pehle)
+================================================================================
+
+  1. YE EK FRONT-END DEMO HAI.
+     Saara data (bookings, users, rates) browser ke "LocalStorage" mein
+     save hota hai. Matlab:
+        - Aapke laptop ki booking aapke phone par nahi dikhegi
+        - Do alag log ek doosre ki booking nahi dekh sakte
+        - Browser ka data clear karne par sab record chala jayega
+     Real multi-user system ke liye backend (server + database) chahiye.
+
+  2. ADMIN PASSWORD PLAIN TEXT MEIN HAI (demo ke liye).
+     Real use se pehle proper login system lagana zaroori hai.
+
+  3. LIVE WEBSITE BHI CHALU HAI (internet par, free hosting):
+        https://rish244.github.io/rptc1/
+     Isi code se bani hai — kisi ko bhi link bhej sakte hain, unke phone/
+     laptop par khul jayegi.
+
+  4. Poori technical documentation "README.txt" mein hai — features list,
+     file map, LocalStorage keys, production upgrade path, troubleshooting.
+
+
+================================================================================
+  KOI PROBLEM AAYE TO
+================================================================================
+
+  * Page bina design ka dikhe (sirf text)
+      -> style.css usi folder mein hona chahiye jahan index.html hai.
+         Folder ke andar ke saare files ek saath rakhein.
+
+  * Buttons kaam na karein / kuch na ho
+      -> script.js missing ho sakta hai. Check karein ki folder mein hai.
+      -> Browser mein F12 dabayein -> "Console" tab -> red error dekhें.
+
+  * "Live Server" nahi mil raha
+      -> Ctrl+Shift+X -> Extensions -> "Live Server" search -> Install
+      -> Phir VS Code restart karein.
+
+  * Purana data hata kar fresh shuru karna hai
+      -> Admin page -> Settings -> "Reset demo data"
+      -> Ya browser mein F12 -> Application -> Local Storage -> clear
+
+  * Chrome mein purana version dikh raha hai
+      -> Ctrl + Shift + R (hard refresh)
+
+================================================================================
+  RP TRANSPORT COMPANY (RPTC)
+  D 5103, Bima Complex, Near Steel Market, Kalamboli, Navi Mumbai – 410218
+  +91 88283 83122  /  +91 77387 33177
+  rptransportcompany28@gmail.com
+================================================================================
