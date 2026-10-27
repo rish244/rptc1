@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RP TRANSPORT COMPANY (RPTC) — Booking, History & Admin</title>
+<style>
+:root{--navy:#0F2A47;--ink:#12233B;--amber:#F5A623;--bg:#F4F6F9;--line:#E1E7EF;--muted:#64748B;--green:#15803D;--red:#B91C1C}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 14px rgba(0,0,0,.18)}
+.top{display:flex;align-items:center;gap:14px;padding:12px 18px;max-width:1120px;margin:auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.5px}
+.logo{width:36px;height:36px;border-radius:9px;background:var(--amber);color:#241703;display:grid;place-items:center;font-size:13px;font-weight:900}
+.brand small{display:block;font-weight:500;font-size:10px;letter-spacing:2px;color:#9FB4CA}
+nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+nav button{background:transparent;border:0;color:#CBD8E6;font:inherit;font-size:13.5px;padding:8px 11px;border-radius:8px;cursor:pointer}
+nav button:hover{background:rgba(255,255,255,.1);color:#fff}
+nav button.on{background:var(--amber);color:#241703;font-weight:700}
+.wrap{max-width:1120px;margin:auto;padding:22px 18px 54px}
+.view{display:none}.view.on{display:block}
+h1{font-size:clamp(22px,4vw,34px);line-height:1.25;margin-bottom:8px}
+h2{font-size:20px;margin-bottom:12px}
+h3{font-size:16px;margin-bottom:6px}
+p.lead{color:var(--muted);margin-bottom:18px;max-width:760px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(16,32,52,.05)}
+.hero{background:linear-gradient(135deg,#0F2A47,#1B4675);color:#fff;border:0;border-radius:16px;padding:34px 28px}
+.hero p{color:#C7D6E5;max-width:640px;margin:10px 0 18px}
+.tag{display:inline-block;background:rgba(245,166,35,.16);color:#FFD08A;border:1px solid rgba(245,166,35,.4);padding:4px 11px;border-radius:999px;font-size:11.5px;font-weight:700;letter-spacing:1.4px;margin-bottom:12px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.grid3{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+label{font-size:12.5px;font-weight:700;color:#334155}
+input,select,textarea{font:inherit;font-size:14px;padding:10px 11px;border:1px solid #CBD5E1;border-radius:9px;background:#fff;width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(245,166,35,.55);border-color:var(--amber)}
+.btn{display:inline-flex;align-items:center;gap:7px;background:var(--amber);color:#241703;border:0;border-radius:10px;padding:11px 18px;font:inherit;font-size:14px;font-weight:800;cursor:pointer;text-decoration:none}
+.btn:hover{filter:brightness(1.06)}
+.btn.dark{background:var(--navy);color:#fff}
+.btn.ghost{background:#fff;border:1px solid #CBD5E1;color:var(--ink);font-weight:700}
+.btn.sm{padding:6px 11px;font-size:12.5px;border-radius:8px}
+.btn.red{background:#FEE2E2;color:var(--red);border:1px solid #FCA5A5}
+.btn.green{background:#DCFCE7;color:var(--green);border:1px solid #86EFAC}
+.pill{display:inline-block;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.4px}
+.p-pend{background:#FEF3C7;color:#92400E}.p-appr{background:#DBEAFE;color:#1D4ED8}.p-trans{background:#E0E7FF;color:#4338CA}
+.p-del{background:#DCFCE7;color:#15803D}.p-rej{background:#FEE2E2;color:#B91C1C}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);padding:9px 10px;border-bottom:2px solid var(--line);background:#FAFBFD}
+td{padding:11px 10px;border-bottom:1px solid #EEF2F7;vertical-align:top}
+tr:hover td{background:#FCFDFF}
+.muted{color:var(--muted);font-size:12px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi b{display:block;font-size:22px;line-height:1.2}
+.kpi span{font-size:11px;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);font-weight:700}
+.tl{list-style:none;margin-top:10px;border-left:2px solid var(--line);padding-left:16px}
+.tl li{position:relative;padding:0 0 12px 4px;font-size:13px}
+.tl li:before{content:"";position:absolute;left:-23px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--amber);border:2px solid #fff}
+.tl b{display:block}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,120px);background:var(--navy);color:#fff;padding:12px 20px;border-radius:10px;font-size:13.5px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.3);transition:.35s;z-index:99;max-width:90vw}
+.toast.on{transform:translate(-50%,0)}
+.note{background:#FFF8E7;border:1px solid #F6DFAE;border-radius:10px;padding:11px 14px;font-size:12.5px;color:#7A5800;margin-bottom:14px}
+.empty{text-align:center;padding:28px;color:var(--muted);font-size:13.5px}
+footer{background:var(--navy);color:#A9BED3;font-size:12.5px;padding:26px 18px;text-align:center}
+footer b{color:#fff}
+.calc{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.total{font-size:26px;font-weight:900;color:var(--navy)}
+@media(max-width:640px){nav{width:100%;margin-left:0}.wrap{padding:16px 12px 40px}.card{padding:16px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <div class="brand"><span class="logo">RP</span><span>RPTC<small>TRANSPORT COMPANY</small></span></div>
+    <nav>
+      <button class="on" data-view="home">Home</button>
+      <button data-view="book">Book</button>
+      <button data-view="history">My Bookings</button>
+      <button data-view="rate">Rate Card</button>
+      <button data-view="track">Track</button>
+      <button data-view="admin">Admin</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <section id="v-home" class="view on">
+    <div class="hero">
+      <span class="tag">WE DELIVER SAFE.</span>
+      <h1>Truck Booking, Rate Card &amp; Booking History</h1>
+      <p>Kalamboli, Navi Mumbai based fleet owner &amp; transport contractor. Book a truck, track your shipment and see every past booking with the rate shared by our office.</p>
+      <button class="btn" data-view="book">Book a Truck →</button>
+      <button class="btn ghost" data-view="history">My Bookings</button>
+    </div>
+    <div class="card">
+      <h2>Why RPTC</h2>
+      <div class="grid3">
+        <div><h3>PAN India Transport</h3><p class="muted">Maharashtra and all major Indian routes.</p></div>
+        <div><h3>Full Truck Load</h3><p class="muted">Open body, container, LCV, MCV and HCV vehicles.</p></div>
+        <div><h3>Office-verified rates</h3><p class="muted">Every freight rate is confirmed by our dispatch team.</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Recent Requests</h2>
+      <div id="homeRecent"></div>
+    </div>
+  </section>
+
+  <!-- ============ BOOK ============ -->
+  <section id="v-book" class="view">
+    <h1>Book a Truck</h1>
+    <p class="lead">Submit a request — you get a reference number. Our office shares the freight rate and approves the booking.</p>
+    <div class="card">
+      <form id="bookForm">
+        <div class="grid">
+          <div class="field"><label>Pickup City *</label><input name="pickup" required placeholder="e.g. Navi Mumbai"></div>
+          <div class="field"><label>Delivery City *</label><input name="delivery" required placeholder="e.g. Delhi"></div>
+          <div class="field"><label>Pickup Date *</label><input name="date" type="date" required></div>
+          <div class="field"><label>Material *</label><input name="material" required placeholder="e.g. Steel Coils"></div>
+          <div class="field"><label>Truck Type *</label>
+            <select name="truck" required>
+              <option value="Light Commercial Vehicle">Light Commercial Vehicle (up to 3.5 T)</option>
+              <option value="Open Body Truck" selected>Open Body Truck (up to 9 T)</option>
+              <option value="Medium Commercial Vehicle">Medium Commercial Vehicle (up to 16 T)</option>
+              <option value="Container Truck">Container Truck (20–32 ft)</option>
+              <option value="Heavy Commercial Vehicle">Heavy Commercial Vehicle (16–25 T)</option>
+            </select></div>
+          <div class="field"><label>Weight (Tons) *</label><input name="weight" type="number" min="1" step="0.5" required placeholder="9"></div>
+          <div class="field"><label>Your Name *</label><input name="name" required placeholder="Full name"></div>
+          <div class="field"><label>Mobile Number *</label><input name="mobile" required pattern="[0-9]{10}" placeholder="10 digit mobile"></div>
+        </div>
+        <button class="btn" type="submit">Submit Booking Request</button>
+        <span class="muted" style="margin-left:10px">Demo — data is saved in this browser only.</span>
+      </form>
+      <div id="bookResult" style="display:none"></div>
+    </div>
+  </section>
+
+  <!-- ============ HISTORY ============ -->
+  <section id="v-history" class="view">
+    <h1>My Bookings — History</h1>
+    <p class="lead">Every truck booking with its status, the freight rate shared by the office, and the full timeline.</p>
+    <div class="kpis" id="histKpis"></div>
+    <div class="card">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+        <input id="histSearch" placeholder="Search reference / city / material" style="max-width:300px">
+        <select id="histFilter" style="max-width:200px">
+          <option value="">All statuses</option>
+          <option>PENDING CONFIRMATION</option><option>APPROVED</option>
+          <option>IN TRANSIT</option><option>DELIVERED</option>
+          <option>REJECTED</option><option>CANCELLED</option>
+        </select>
+      </div>
+      <div id="histList"></div>
+    </div>
+  </section>
+
+  <!-- ============ RATE CARD ============ -->
+  <section id="v-rate" class="view">
+    <h1>Rate Card &amp; Freight Calculator</h1>
+    <p class="lead">Indicative demo rates — the office confirms the final freight in writing.</p>
+    <div class="card">
+      <h2>Truck-wise Rates</h2>
+      <div style="overflow:auto"><table>
+        <thead><tr><th>Vehicle</th><th>Capacity</th><th>Base Fare</th><th>Per KM</th><th>Loading</th></tr></thead>
+        <tbody id="rateRows"></tbody>
+      </table></div>
+    </div>
+    <div class="card">
+      <h2>Freight Calculator</h2>
+      <div class="calc">
+        <div class="field"><label>Truck</label><select id="cTruck"></select></div>
+        <div class="field"><label>Distance (km)</label><input id="cKm" type="number" min="0" value="450"></div>
+        <div class="field"><label>Round Trip?</label><select id="cRound"><option value="1">No</option><option value="2">Yes (2x)</option></select></div>
+        <div class="field"><label>Loading / Unloading</label><select id="cLoad"><option value="1">Include</option><option value="0">Not included</option></select></div>
+        <div class="field"><label>Detention (days)</label><input id="cDet" type="number" min="0" value="0"></div>
+      </div>
+      <div style="margin-top:14px;display:flex;gap:22px;flex-wrap:wrap;align-items:end">
+        <div><div class="muted">Base + Distance</div><div id="cBase" style="font-weight:700">₹0</div></div>
+        <div><div class="muted">Loading</div><div id="cLoadOut" style="font-weight:700">₹0</div></div>
+        <div><div class="muted">Detention</div><div id="cDetOut" style="font-weight:700">₹0</div></div>
+        <div><div class="muted">GST 5%</div><div id="cGst" style="font-weight:700">₹0</div></div>
+        <div><div class="muted">Estimated Total</div><div class="total" id="cTotal">₹0</div></div>
+      </div>
+      <p class="note" style="margin-top:14px">Estimate only — toll, permits and actuals are confirmed by the office.</p>
+    </div>
+  </section>
+
+  <!-- ============ TRACK ============ -->
+  <section id="v-track" class="view">
+    <h1>Track Shipment</h1>
+    <p class="lead">Enter your booking reference (e.g. RPTC-2026-10001).</p>
+    <div class="card">
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <input id="trackRef" placeholder="RPTC-2026-10001" style="max-width:260px">
+        <button class="btn" id="trackBtn">Track</button>
+      </div>
+      <div id="trackOut" style="margin-top:18px"></div>
+    </div>
+  </section>
+
+  <!-- ============ ADMIN ============ -->
+  <section id="v-admin" class="view">
+    <div id="adminLogin">
+      <h1>Admin Login</h1>
+      <p class="lead">Separate profile — share rates, accept/reject requests and update shipments.</p>
+      <div class="card" style="max-width:420px">
+        <div class="field"><label>Email</label><input id="aEmail" value="admin@rptc.in"></div>
+        <div class="field"><label>Password</label><input id="aPass" type="password" value="Admin@123"></div>
+        <button class="btn" id="aLoginBtn">Login</button>
+        <p class="muted" style="margin-top:10px">Demo credentials: admin@rptc.in / Admin@123</p>
+      </div>
+    </div>
+    <div id="adminPanel" style="display:none">
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
+        <h1 style="margin:0">Admin Dashboard</h1>
+        <button class="btn ghost sm" id="aLogout" style="margin-left:auto">Logout</button>
+      </div>
+      <p class="lead">Signed in as <b>RPTC Admin</b> — all actions are saved in this browser (demo).</p>
+      <div class="kpis" id="adminKpis"></div>
+      <div class="card">
+        <h2>Booking Requests</h2>
+        <div style="overflow:auto"><table>
+          <thead><tr><th>Ref</th><th>Customer</th><th>Route</th><th>Pickup</th><th>Freight</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="adminRows"></tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <b>RP TRANSPORT COMPANY (RPTC)</b> · D 5103, Bima Complex, Kalamboli, Navi Mumbai – 410218<br>
+  +91 88283 83122 / +91 77387 33177 · rptransportcompany28@gmail.com<br>
+  <span style="font-size:11.5px">Front-end demo — bookings &amp; rates are stored in this browser only (LocalStorage).</span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= RPTC single-file demo app ================= */
+const KEY='rptc_bookings';
+const RATES=[
+  {t:'Light Commercial Vehicle',cap:'Up to 3.5 T',base:2500,km:22,load:500},
+  {t:'Open Body Truck',cap:'Up to 9 T',base:4500,km:34,load:1200},
+  {t:'Medium Commercial Vehicle',cap:'Up to 16 T',base:6000,km:42,load:1500},
+  {t:'Container Truck',cap:'20–32 ft',base:7500,km:48,load:1800},
+  {t:'Heavy Commercial Vehicle',cap:'16–25 T',base:9500,km:56,load:2500}
+];
+const $=s=>document.querySelector(s);
+const money=n=>'₹'+(Number(n)||0).toLocaleString('en-IN');
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const now=()=>new Date().toISOString();
+const fmt=d=>{if(!d)return '—';const x=new Date(d);return isNaN(x)?d:x.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});};
+
+function all(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return []}}
+function save(list){localStorage.setItem(KEY,JSON.stringify(list));}
+function update(ref,fn){const l=all();const b=l.find(x=>x.ref===ref);if(!b)return;fn(b);save(l);renderAll();}
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2600);}
+function nextRef(){const y=new Date().getFullYear();const n=all().length+1;return 'RPTC-'+y+'-'+(10000+n);}
+
+/* ---- seed demo data on first run ---- */
+function seed(){
+  if(localStorage.getItem(KEY))return;
+  const base=now();
+  const demo=[
+    {ref:'RPTC-2026-10001',name:'Demo Customer — Mumbai',mobile:'9820000001',pickup:'Navi Mumbai',delivery:'Delhi',date:'2026-12-11',material:'Onions (Agricultural Produce)',truck:'Open Body Truck',weight:'9',status:'PENDING CONFIRMATION',rate:0,note:'',vehicle:'',driver:'',createdAt:base,history:[{status:'PENDING CONFIRMATION',at:base,note:'Request submitted from website'}]},
+    {ref:'RPTC-2026-10002',name:'Demo Customer — Pune',mobile:'9820000002',pickup:'Pune',delivery:'Chennai',date:'2026-12-07',material:'Automobile Parts',truck:'Container Truck',weight:'7',status:'IN TRANSIT',rate:28500,note:'Toll and loading extra.',vehicle:'MH-48-CD-2002 (Sample)',driver:'Ramesh Patil (Sample) · 9000000002',createdAt:base,history:[{status:'PENDING CONFIRMATION',at:base,note:'Request submitted'},{status:'APPROVED',at:base,note:'Accepted by RPTC Admin · ₹28,500 shared'},{status:'IN TRANSIT',at:base,note:'Vehicle departed Pune'}]},
+    {ref:'RPTC-2026-10003',name:'Demo Customer — Nashik',mobile:'9820000003',pickup:'Nashik',delivery:'Nagpur',date:'2026-12-14',material:'Steel Coils',truck:'Heavy Commercial Vehicle',weight:'16',status:'APPROVED',rate:41200,note:'Crane loading extra.',vehicle:'',driver:'',createdAt:base,history:[{status:'PENDING CONFIRMATION',at:base,note:'Request submitted'},{status:'APPROVED',at:base,note:'Accepted by RPTC Admin'}]}
+  ];
+  save(demo);
+}
+seed();
+
+/* ---- view routing ---- */
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-view]');
+  if(!b)return;
+  const v=b.dataset.view;
+  document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
+  document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x.dataset.view===v));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(v==='admin')renderAdmin();
+});
+
+/* ---- booking form ---- */
+$('#bookForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=new FormData(e.target), o={};
+  f.forEach((v,k)=>o[k]=String(v).trim());
+  const ref=nextRef();
+  const b={...o,ref,status:'PENDING CONFIRMATION',rate:0,note:'',vehicle:'',driver:'',createdAt:now(),
+           history:[{status:'PENDING CONFIRMATION',at:now(),note:'Request submitted from website'}]};
+  const l=all();l.push(b);save(l);
+  e.target.reset();
+  $('#bookResult').style.display='block';
+  $('#bookResult').innerHTML='<div class="note" style="margin-top:16px;font-size:14px">'+
+    '<b>Booking request submitted ✅</b><br>Reference: <b>'+esc(ref)+'</b><br>'+
+    'Our office will share the freight rate and approve this request. '+
+    '<button class="btn sm" style="margin-left:8px" data-view="history">See in My Bookings</button></div>';
+  toast('Booking '+ref+' created');
+  renderAll();
+});
+
+/* ---- history ---- */
+$('#histSearch').addEventListener('input',renderHistory);
+$('#histFilter').addEventListener('change',renderHistory);
+
+function pill(s){
+  const m={'PENDING CONFIRMATION':'p-pend','APPROVED':'p-appr','IN TRANSIT':'p-trans',
+           'DELIVERED':'p-del','REJECTED':'p-rej','CANCELLED':'p-rej'};
+  return '<span class="pill '+(m[s]||'p-pend')+'">'+esc(s)+'</span>';
+}
+
+function renderHistory(){
+  const q=($('#histSearch').value||'').toLowerCase();
+  const f=$('#histFilter').value;
+  let list=all().slice().sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)));
+  list=list.filter(b=>!f||b.status===f);
+  if(q)list=list.filter(b=>[b.ref,b.pickup,b.delivery,b.material,b.name,b.truck].join(' ').toLowerCase().includes(q));
+
+  const total=all(), pending=total.filter(b=>b.status==='PENDING CONFIRMATION').length;
+  const active=total.filter(b=>['APPROVED','IN TRANSIT'].includes(b.status)).length;
+  const freight=total.reduce((s,b)=>s+(Number(b.rate)||0),0);
+  $('#histKpis').innerHTML=[
+    ['Bookings',total.length],['Pending',pending],['Active',active],['Freight Quoted',money(freight)]
+  ].map(([k,v])=>'<div class="kpi"><b>'+esc(v)+'</b><span>'+k+'</span></div>').join('');
+
+  if(!list.length){$('#histList').innerHTML='<div class="empty">No bookings match your search.</div>';return;}
+  $('#histList').innerHTML=list.map(b=>{
+    const canCancel=b.status==='PENDING CONFIRMATION'||b.status==='APPROVED';
+    return '<div class="card" style="margin:0 0 12px;box-shadow:none">'+
+      '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px">'+
+        '<b>'+esc(b.ref)+'</b>'+pill(b.status)+
+        '<span class="muted" style="margin-left:auto">Booked '+fmt(b.createdAt)+'</span></div>'+
+      '<div class="grid" style="gap:8px;font-size:13.5px">'+
+        '<div><span class="muted">Route</span><br><b>'+esc(b.pickup)+' → '+esc(b.delivery)+'</b></div>'+
+        '<div><span class="muted">Pickup Date</span><br><b>'+fmt(b.date)+'</b></div>'+
+        '<div><span class="muted">Goods</span><br><b>'+esc(b.material)+' · '+esc(b.weight)+' T</b></div>'+
+        '<div><span class="muted">Truck</span><br><b>'+esc(b.truck)+'</b></div>'+
+        '<div><span class="muted">Freight</span><br><b>'+(Number(b.rate)?money(b.rate):'Awaiting rate')+'</b></div>'+
+        '<div><span class="muted">Vehicle / Driver</span><br><b>'+(b.vehicle?esc(b.vehicle):'Not assigned')+'</b>'+
+          '<br><span class="muted">'+(b.driver?esc(b.driver):'')+'</span></div>'+
+      '</div>'+
+      (b.note?'<p class="note" style="margin:12px 0 0"><b>Note from RPTC:</b> '+esc(b.note)+'</p>':'')+
+      '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">'+
+        '<button class="btn ghost sm" onclick="window.__tl(\''+esc(b.ref)+'\')">View History</button>'+
+        '<button class="btn ghost sm" data-view="track" onclick="setTimeout(()=>{document.querySelector(\'#trackRef\').value=\''+esc(b.ref)+'\';document.querySelector(\'#trackBtn\').click()},120)">Track</button>'+
+        (canCancel?'<button class="btn red sm" onclick="window.__cancel(\''+esc(b.ref)+'\')">Cancel request</button>':'')+
+      '</div>'+
+      '<div id="tl-'+esc(b.ref)+'" style="display:none"><ul class="tl">'+
+        (b.history||[]).map(h=>'<li><b>'+esc(h.status)+'</b><span class="muted">'+fmt(h.at)+' — '+esc(h.note||'')+'</span></li>').join('')+
+      '</ul></div></div>';
+  }).join('');
+}
+window.__tl=ref=>{const el=document.getElementById('tl-'+ref);if(el)el.style.display=el.style.display==='none'?'block':'none';};
+window.__cancel=ref=>{
+  if(!confirm('Cancel booking '+ref+'?'))return;
+  update(ref,b=>{b.status='CANCELLED';b.history.push({status:'CANCELLED',at:now(),note:'Cancelled by customer (demo)'});});
+  toast('Booking '+ref+' cancelled');
+};
+
+/* ---- rate card ---- */
+$('#rateRows').innerHTML=RATES.map(r=>'<tr><td><b>'+r.t+'</b></td><td>'+r.cap+'</td><td><b>'+money(r.base)+'</b></td><td>'+money(r.km)+' / km</td><td>'+money(r.load)+'</td></tr>').join('');
+$('#cTruck').innerHTML=RATES.map((r,i)=>'<option value="'+i+'">'+r.t+'</option>').join('');
+
+function calc(){
+  const r=RATES[+$('#cTruck').value]||RATES[0];
+  const km=+$('#cKm').value||0, round=+$('#cRound').value, load=+$('#cLoad').value, det=+$('#cDet').value||0;
+  const base=r.base+(r.km*km*round);
+  const ld=load?r.load:0;
+  const dn=det*1500;
+  const sub=base+ld+dn;
+  const gst=Math.round(sub*0.05);
+  $('#cBase').textContent=money(Math.round(base));
+  $('#cLoadOut').textContent=money(ld);
+  $('#cDetOut').textContent=money(dn);
+  $('#cGst').textContent=money(gst);
+  $('#cTotal').textContent=money(Math.round(sub+gst));
+}
+['#cTruck','#cKm','#cRound','#cLoad','#cDet'].forEach(s=>{$(s).addEventListener('input',calc);$(s).addEventListener('change',calc);});
+calc();
+
+/* ---- tracking ---- */
+$('#trackBtn').addEventListener('click',()=>{
+  const ref=$('#trackRef').value.trim().toUpperCase();
+  const b=all().find(x=>String(x.ref).toUpperCase()===ref);
+  if(!b){$('#trackOut').innerHTML='<div class="note">No booking found for this reference. Check the number and try again.</div>';return;}
+  $('#trackOut').innerHTML='<h3>'+esc(b.ref)+' '+pill(b.status)+'</h3>'+
+    '<div class="grid" style="gap:8px;margin-top:10px;font-size:13.5px">'+
+      '<div><span class="muted">Route</span><br><b>'+esc(b.pickup)+' → '+esc(b.delivery)+'</b></div>'+
+      '<div><span class="muted">Pickup Date</span><br><b>'+fmt(b.date)+'</b></div>'+
+      '<div><span class="muted">Truck</span><br><b>'+esc(b.truck)+'</b></div>'+
+      '<div><span class="muted">Vehicle</span><br><b>'+(b.vehicle?esc(b.vehicle):'Not assigned')+'</b></div>'+
+      '<div><span class="muted">Driver</span><br><b>'+(b.driver?esc(b.driver):'Not assigned')+'</b></div>'+
+      '<div><span class="muted">Freight</span><br><b>'+(Number(b.rate)?money(b.rate):'Awaiting rate')+'</b></div>'+
+    '</div><ul class="tl">'+(b.history||[]).map(h=>'<li><b>'+esc(h.status)+'</b><span class="muted">'+fmt(h.at)+' — '+esc(h.note||'')+'</span></li>').join('')+'</ul>';
+});
+
+/* ---- admin ---- */
+let isAdmin=false;
+$('#aLoginBtn').addEventListener('click',()=>{
+  if($('#aEmail').value.trim().toLowerCase()==='admin@rptc.in'&&$('#aPass').value==='Admin@123'){
+    isAdmin=true;$('#adminLogin').style.display='none';$('#adminPanel').style.display='block';
+    toast('Admin logged in');renderAdmin();
+  }else{toast('Wrong email or password');}
+});
+$('#aLogout').addEventListener('click',()=>{isAdmin=false;$('#adminPanel').style.display='none';$('#adminLogin').style.display='block';});
+
+window.__rate=ref=>{
+  const v=prompt('Freight rate (₹) for '+ref);
+  if(v===null)return;const amt=Number(String(v).replace(/[^0-9.]/g,''));
+  if(!amt){alert('Enter a valid amount');return;}
+  const note=prompt('Note for customer (optional)','Rate shared by RPTC office — toll and loading extra.')||'';
+  update(ref,b=>{b.rate=amt;b.note=note;b.history.push({status:'RATE SHARED',at:now(),note:'₹'+amt.toLocaleString('en-IN')+' — '+note});});
+  toast('Rate shared: '+money(amt));
+};
+window.__approve=ref=>{
+  update(ref,b=>{b.status='APPROVED';b.history.push({status:'APPROVED',at:now(),note:'Booking accepted by RPTC Admin'+(b.rate?' · ₹'+Number(b.rate).toLocaleString('en-IN'):'')});});
+  toast('Booking '+ref+' approved');
+};
+window.__reject=ref=>{
+  const why=prompt('Reason for rejection','No vehicle available for this route/date');
+  if(why===null)return;
+  update(ref,b=>{b.status='REJECTED';b.history.push({status:'REJECTED',at:now(),note:'Rejected — '+(why||'No reason provided')});});
+  toast('Booking rejected');
+};
+window.__assign=ref=>{
+  const veh=prompt('Vehicle number (e.g. MH-46-AB-1234)');if(!veh)return;
+  const drv=prompt('Driver name & mobile','Ramesh Patil · 9000000002')||'';
+  update(ref,b=>{b.vehicle=veh;b.driver=drv;b.history.push({status:'VEHICLE ASSIGNED',at:now(),note:veh+(drv?' · '+drv:'')});});
+  toast('Vehicle assigned');
+};
+window.__status=ref=>{
+  const list=['PENDING CONFIRMATION','APPROVED','IN TRANSIT','DELIVERED'];
+  const cur=all().find(b=>b.ref===ref);
+  const nx=list[Math.min(list.indexOf(cur.status)+1,list.length-1)];
+  const s=prompt('New status (PENDING CONFIRMATION / APPROVED / IN TRANSIT / DELIVERED)',nx);
+  if(!s)return;
+  const up=String(s).toUpperCase();
+  update(ref,b=>{b.status=up;b.history.push({status:up,at:now(),note:'Updated by RPTC Admin'});});
+  toast('Status → '+up);
+};
+
+function renderAdmin(){
+  if(!isAdmin)return;
+  const l=all().slice().sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)));
+  $('#adminKpis').innerHTML=[
+    ['Total',l.length],
+    ['Pending',l.filter(b=>b.status==='PENDING CONFIRMATION').length],
+    ['Approved',l.filter(b=>b.status==='APPROVED').length],
+    ['Freight',money(l.reduce((s,b)=>s+(Number(b.rate)||0),0))]
+  ].map(([k,v])=>'<div class="kpi"><b>'+esc(v)+'</b><span>'+k+'</span></div>').join('');
+
+  if(!l.length){$('#adminRows').innerHTML='<tr><td colspan="7"><div class="empty">No booking requests yet.</div></td></tr>';return;}
+  $('#adminRows').innerHTML=l.map(b=>'<tr>'+
+    '<td><b>'+esc(b.ref)+'</b></td>'+
+    '<td>'+esc(b.name)+'<br><span class="muted">'+esc(b.mobile)+'</span></td>'+
+    '<td>'+esc(b.pickup)+' → '+esc(b.delivery)+'<br><span class="muted">'+esc(b.truck)+'</span></td>'+
+    '<td>'+fmt(b.date)+'</td>'+
+    '<td>'+(Number(b.rate)?'<b>'+money(b.rate)+'</b>':'<span class="muted">Not quoted</span>')+'</td>'+
+    '<td>'+pill(b.status)+'</td>'+
+    '<td><div style="display:flex;gap:5px;flex-wrap:wrap">'+
+      '<button class="btn sm ghost" onclick="window.__rate(\''+esc(b.ref)+'\')" title="Share rate">₹</button>'+
+      '<button class="btn sm green" onclick="window.__approve(\''+esc(b.ref)+'\')" title="Approve">✓</button>'+
+      '<button class="btn sm red" onclick="window.__reject(\''+esc(b.ref)+'\')" title="Reject">✕</button>'+
+      '<button class="btn sm ghost" onclick="window.__assign(\''+esc(b.ref)+'\')" title="Assign vehicle">🚚</button>'+
+      '<button class="btn sm ghost" onclick="window.__status(\''+esc(b.ref)+'\')" title="Update status">↻</button>'+
+    '</div></td></tr>').join('');
+}
+
+/* ---- home recent ---- */
+function renderHome(){
+  const l=all().slice().sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt))).slice(0,3);
+  $('#homeRecent').innerHTML=l.length?('<div style="overflow:auto"><table><thead><tr><th>Ref</th><th>Route</th><th>Pickup</th><th>Freight</th><th>Status</th></tr></thead><tbody>'+
+    l.map(b=>'<tr><td><b>'+esc(b.ref)+'</b></td><td>'+esc(b.pickup)+' → '+esc(b.delivery)+'</td><td>'+fmt(b.date)+'</td><td>'+(Number(b.rate)?money(b.rate):'—')+'</td><td>'+pill(b.status)+'</td></tr>').join('')+
+    '</tbody></table></div>'):'<div class="empty">No bookings yet.</div>';
+}
+
+function renderAll(){renderHome();renderHistory();renderAdmin();}
+renderAll();
+</script>
+</body>
+</html>
