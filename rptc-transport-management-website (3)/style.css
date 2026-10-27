@@ -757,3 +757,264 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-head);color:var(--navy);line-height:1.1
   .summary-card,.result-panel{box-shadow:none;border:1px solid #999;}
   a{color:#000;}
 }
+
+/* ==========================================================================
+   30. BOOKING HISTORY, ADMIN PROFILE, RATE CARD & FREIGHT CALCULATOR
+   (added for the booking-history + admin-profile upgrade)
+   ========================================================================== */
+[hidden]{display:none !important;}
+
+/* ---------- Pills / small helpers ---------- */
+.pill-cancelled{background:#ECEEF2;color:#5A6577;}
+.pill-rate{background:var(--blue-soft);color:#1D5FD6;}
+.field-hint{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.55;}
+.btn-xs{padding:6px 12px;font-size:11.5px;border-radius:7px;letter-spacing:.8px;}
+.inline-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.money{font-family:var(--font-head);font-weight:800;color:var(--navy);letter-spacing:.3px;}
+.text-muted{color:var(--muted);}
+.divider{height:1px;background:var(--border);margin:22px 0;border:0;}
+
+/* ---------- Segmented tabs (My Bookings) ---------- */
+.seg-tabs{display:inline-flex;gap:5px;background:var(--grey);border:1px solid var(--border);border-radius:11px;padding:5px;flex-wrap:wrap;}
+.seg-tab{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;color:var(--text);transition:all .22s ease;white-space:nowrap;}
+.seg-tab i{font-size:12.5px;}
+.seg-tab:hover{color:var(--navy);}
+.seg-tab.active{background:#fff;color:var(--red);box-shadow:var(--shadow-sm);}
+.seg-tab .count{background:var(--red);color:#fff;border-radius:100px;font-size:10.5px;padding:1px 7px;font-weight:800;}
+.seg-tab.active .count{background:var(--navy);}
+
+/* ---------- Account strip (My Bookings) ---------- */
+.account-strip{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:#fff;border:1px solid var(--border);border-left:4px solid var(--red);border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);padding:16px 20px;margin:24px 0;}
+.account-strip .who{display:flex;align-items:center;gap:14px;}
+.account-strip .who i{width:40px;height:40px;border-radius:50%;background:var(--red-soft);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.account-strip b{display:block;color:var(--navy);font-size:14.5px;}
+.account-strip span{font-size:12.5px;color:var(--muted);}
+.switch{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600;color:var(--text);cursor:pointer;}
+.switch input{width:16px;height:16px;accent-color:var(--red);}
+
+/* ---------- History toolbar ---------- */
+.history-toolbar{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin:0 0 22px;}
+.history-toolbar .filter-row{flex:1;min-width:260px;}
+.filter-row input[type="search"],.filter-row input[type="text"]{
+  padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  background:#fff;min-width:240px;outline:none;transition:border-color .2s ease,box-shadow .2s ease;
+}
+.filter-row input[type="search"]:focus,.filter-row input[type="text"]:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(179,0,0,.08);}
+.filter-row select{min-width:170px;}
+
+/* ---------- Booking history cards ---------- */
+.history-list{display:grid;gap:18px;}
+.history-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;transition:box-shadow .25s ease,transform .25s ease;}
+.history-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
+.hc-head{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:15px 22px;background:var(--grey);border-bottom:1px solid var(--border);}
+.hc-ref{font-family:var(--font-head);font-size:21px;font-weight:800;color:var(--navy);letter-spacing:.5px;}
+.hc-date{display:block;font-size:12px;color:var(--muted);margin-top:1px;}
+.hc-body{padding:20px 22px;}
+.hc-route{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px;}
+.hc-city{display:flex;flex-direction:column;min-width:110px;}
+.hc-city small{font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:700;}
+.hc-city b{font-family:var(--font-head);font-size:24px;color:var(--navy);letter-spacing:.4px;line-height:1.18;}
+.hc-city span{font-size:12.5px;color:var(--muted);}
+.hc-arrow{color:var(--red);font-size:15px;display:flex;align-items:center;gap:8px;}
+.hc-arrow::before,.hc-arrow::after{content:"";width:30px;height:2px;background:var(--border);display:block;}
+.hc-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 20px;padding:16px 0;border-top:1px dashed var(--border);border-bottom:1px dashed var(--border);}
+.hc-meta small{display:block;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-weight:700;}
+.hc-meta b{font-size:14px;color:var(--navy);font-weight:600;}
+.hc-note{margin-top:16px;display:flex;gap:13px;align-items:flex-start;background:var(--blue-soft);border:1px solid #C4D8F5;border-radius:var(--radius-sm);padding:13px 16px;}
+.hc-note i{color:var(--navy-2);margin-top:3px;}
+.hc-note b{display:block;font-size:14.5px;color:var(--navy);}
+.hc-note span{font-size:12.5px;color:#42597D;}
+.hc-note.amber{background:var(--amber-soft);border-color:#E4C36A;}
+.hc-note.amber i,.hc-note.amber b{color:#7A5800;}
+.hc-note.amber span{color:#7A5800;}
+.hc-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.hc-actions .btn{padding:9px 15px;font-size:11.5px;}
+.hc-actions .link-action{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);padding:9px 4px;transition:color .2s ease;}
+.hc-actions .link-action:hover{color:var(--red);}
+
+/* ---------- Vertical timeline (booking history modal) ---------- */
+.vt{position:relative;margin-top:10px;}
+.vt::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:var(--border);}
+.vt-item{position:relative;padding:0 0 20px 32px;}
+.vt-item:last-child{padding-bottom:0;}
+.vt-dot{position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--border);}
+.vt-item.done .vt-dot{border-color:var(--green);background:var(--green);}
+.vt-item.current .vt-dot{border-color:var(--red);background:var(--red);box-shadow:0 0 0 5px rgba(179,0,0,.14);}
+.vt-item b{display:block;font-size:13.5px;color:var(--navy);text-transform:uppercase;letter-spacing:.6px;}
+.vt-item small{font-size:12px;color:var(--muted);}
+.vt-item p{font-size:13px;color:var(--text);margin-top:3px;}
+
+/* ---------- Empty state ---------- */
+.empty-panel{text-align:center;background:#fff;border:1px dashed var(--border);border-radius:var(--radius);padding:50px 24px;color:var(--muted);}
+.empty-panel i{font-size:44px;color:var(--border);display:block;margin-bottom:14px;}
+.empty-panel h3{font-size:24px;margin-bottom:6px;text-transform:uppercase;}
+.empty-panel p{font-size:14px;max-width:440px;margin:0 auto 18px;}
+
+/* ---------- Admin: hero, tabs, gate ---------- */
+.admin-hero{
+  background:linear-gradient(110deg,var(--navy) 0%,var(--navy-2) 58%,#123a6b 100%);
+  border-radius:var(--radius);padding:26px 30px;color:#C9D6E8;
+  display:flex;justify-content:space-between;align-items:center;gap:22px;flex-wrap:wrap;
+  box-shadow:var(--shadow-md);margin-bottom:24px;position:relative;overflow:hidden;
+}
+.admin-hero::before{
+  content:"\f0d1";font-family:"Font Awesome 6 Free";font-weight:900;position:absolute;right:-16px;bottom:-52px;
+  font-size:180px;color:rgba(255,255,255,.05);transform:rotate(-10deg);pointer-events:none;
+}
+.admin-identity{display:flex;gap:18px;align-items:center;position:relative;z-index:1;}
+.admin-avatar{
+  width:66px;height:66px;border-radius:18px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--red),#7d0000);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-head);font-size:26px;font-weight:800;letter-spacing:1px;
+  box-shadow:0 10px 24px rgba(179,0,0,.35);
+}
+.admin-avatar.lg{width:88px;height:88px;border-radius:24px;font-size:34px;margin:0 auto 16px;}
+.admin-identity h2{color:#fff;font-size:26px;font-weight:800;text-transform:uppercase;line-height:1.15;}
+.admin-identity p{font-size:13px;color:#AFC1D9;}
+.admin-hero-meta{display:flex;gap:8px 20px;flex-wrap:wrap;font-size:12.5px;margin-top:7px;}
+.admin-hero-meta span{display:inline-flex;gap:7px;align-items:center;}
+.admin-hero-meta i{color:#FF6B6B;}
+.admin-hero-actions{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1;}
+
+.admin-tabs{
+  display:flex;gap:7px;overflow-x:auto;padding:6px;background:#fff;border:1px solid var(--border);
+  border-radius:14px;box-shadow:var(--shadow-sm);margin-bottom:26px;
+}
+.admin-tab{display:inline-flex;align-items:center;gap:9px;padding:11px 17px;border-radius:9px;font-size:13px;font-weight:700;color:var(--text);white-space:nowrap;transition:all .22s ease;}
+.admin-tab i{font-size:12.5px;}
+.admin-tab:hover{background:var(--grey);color:var(--navy);}
+.admin-tab.active{background:var(--navy);color:#fff;box-shadow:0 8px 18px rgba(10,35,66,.22);}
+.admin-tab .count{background:var(--red);color:#fff;border-radius:100px;font-size:10.5px;padding:1px 7px;font-weight:800;}
+.admin-tab.active .count{background:rgba(255,255,255,.2);}
+
+.admin-gate{max-width:520px;margin:0 auto;}
+.admin-gate-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-lg);border-top:5px solid var(--red);padding:34px;}
+.admin-gate-card h2{font-size:29px;text-transform:uppercase;margin-bottom:6px;}
+.admin-gate-card > p{font-size:14px;margin-bottom:20px;}
+.admin-gate-cred{background:var(--grey);border:1px dashed var(--border);border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;margin:18px 0;}
+.admin-gate-cred b{color:var(--navy);}
+.admin-gate-cred code{background:#fff;border:1px solid var(--border);border-radius:5px;padding:1px 7px;color:var(--red);font-weight:700;}
+
+/* ---------- Admin: stats 3 columns / activity feed ---------- */
+.admin-stat-grid.cols-3{grid-template-columns:repeat(3,1fr);}
+.activity-list{display:grid;}
+.activity-item{display:flex;gap:14px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--border);}
+.activity-item:last-child{border-bottom:none;padding-bottom:0;}
+.activity-icon{width:38px;height:38px;border-radius:10px;background:var(--grey);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.activity-item b{display:block;font-size:13.5px;color:var(--navy);font-weight:600;}
+.activity-item small{font-size:12px;color:var(--muted);}
+.quick-action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.quick-action{display:flex;gap:14px;align-items:center;background:var(--grey);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;text-align:left;transition:all .22s ease;}
+.quick-action:hover{background:#fff;border-color:var(--red);box-shadow:var(--shadow-sm);}
+.quick-action i{width:40px;height:40px;border-radius:10px;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;box-shadow:var(--shadow-sm);}
+.quick-action b{display:block;font-size:13.5px;color:var(--navy);}
+.quick-action span{font-size:12px;color:var(--muted);}
+
+/* ---------- Admin: profile ---------- */
+.profile-grid{display:grid;grid-template-columns:330px 1fr;gap:26px;align-items:start;}
+.profile-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:28px;text-align:center;}
+.profile-card h3{font-size:23px;text-transform:uppercase;margin-bottom:3px;}
+.profile-card .role{font-size:11.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--red);font-weight:700;}
+.profile-meta{display:grid;gap:11px;margin-top:20px;text-align:left;font-size:13px;}
+.profile-meta li{display:flex;gap:10px;align-items:flex-start;word-break:break-word;}
+.profile-meta i{color:var(--red);margin-top:4px;width:15px;text-align:center;flex-shrink:0;}
+
+/* ---------- Admin: rate editor ---------- */
+.rate-meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:22px;}
+.rate-edit-table input{width:100%;min-width:86px;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;background:#FBFCFE;outline:none;}
+.rate-edit-table input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(179,0,0,.08);background:#fff;}
+.data-table.rate-edit-table{min-width:720px;}
+.data-table.rate-table{min-width:620px;}
+.data-table.quotes-table{min-width:940px;}
+.data-table.bookings-table{min-width:960px;}
+.data-table .row-actions{gap:5px;}
+
+/* ---------- Rate card page + calculator ---------- */
+.rate-card-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:start;}
+.calc-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:26px;position:sticky;top:96px;border-top:4px solid var(--red);}
+.calc-card h3{font-size:22px;text-transform:uppercase;margin-bottom:4px;}
+.calc-card > p{font-size:13px;color:var(--muted);margin-bottom:18px;}
+.calc-card .form-group{margin-bottom:14px;}
+.calc-card .form-grid-2{gap:14px;}
+.check-row{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text);margin-bottom:10px;}
+.check-row input{width:16px;height:16px;accent-color:var(--red);margin-top:2px;flex-shrink:0;}
+.calc-result{margin-top:18px;background:var(--grey);border:1px dashed var(--border);border-radius:var(--radius-sm);padding:18px;}
+.calc-row{display:flex;justify-content:space-between;gap:14px;font-size:13.5px;padding:5px 0;color:var(--text);}
+.calc-row b{color:var(--navy);font-weight:600;}
+.calc-total{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:2px dashed var(--border);margin-top:12px;padding-top:14px;font-family:var(--font-head);font-size:24px;font-weight:800;color:var(--navy);}
+.calc-total span:last-child{color:var(--red);}
+.calc-note{font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.5;}
+.rate-table td small{display:block;color:var(--muted);font-size:11.5px;}
+.rate-updated{font-size:12.5px;color:var(--muted);}
+.policy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.policy-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);}
+.policy-card i{width:44px;height:44px;border-radius:11px;background:var(--red-soft);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;}
+.policy-card h4{font-family:var(--font-body);font-size:15.5px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.policy-card p{font-size:13.5px;}
+
+/* ---------- Home page tools section ---------- */
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.tool-card{display:flex;gap:18px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-sm);transition:all .28s ease;}
+.tool-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:transparent;}
+.tool-icon{width:54px;height:54px;border-radius:13px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;transition:all .28s ease;}
+.tool-card:hover .tool-icon{background:var(--red);transform:rotate(-6deg);}
+.tool-card h3{font-size:20px;text-transform:uppercase;margin-bottom:5px;}
+.tool-card p{font-size:13.5px;margin-bottom:9px;}
+.tool-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--red);}
+.tool-link i{transition:transform .25s ease;}
+.tool-card:hover .tool-link i{transform:translateX(4px);}
+
+/* ---------- Document / LR print helper (screen preview note) ---------- */
+.lr-badge{display:inline-flex;align-items:center;gap:8px;background:var(--amber-soft);color:#7A5800;border:1px dashed #E4C36A;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+
+/* ---------- 31. Responsive additions ---------- */
+@media (min-width:1181px){
+  .nav-links{gap:18px;}
+  .nav-links a:not(.btn){font-size:14px;}
+}
+@media (max-width:1180px) and (min-width:1025px){
+  .nav-links{gap:10px;}
+  .nav-links a:not(.btn){font-size:13.5px;}
+  .nav-cta{padding:8px 12px;font-size:11px;}
+  .brand-text b{font-size:19px;}
+  .brand-badge{width:42px;height:42px;font-size:17px;}
+}
+@media (max-width:1080px){
+  .rate-card-grid{grid-template-columns:1fr;}
+  .calc-card{position:static;}
+  .policy-grid{grid-template-columns:repeat(2,1fr);}
+  .profile-grid{grid-template-columns:1fr;}
+  .hc-meta{grid-template-columns:repeat(2,1fr);}
+  .admin-stat-grid.cols-3{grid-template-columns:repeat(2,1fr);}
+  .quick-action-grid{grid-template-columns:1fr;}
+}
+@media (max-width:900px){
+  .tools-grid{grid-template-columns:1fr 1fr;}
+  .admin-hero{padding:24px;align-items:flex-start;flex-direction:column;}
+  .rate-meta-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:600px){
+  .tools-grid,.policy-grid,.rate-meta-grid{grid-template-columns:1fr;}
+  .history-toolbar{align-items:stretch;}
+  .history-toolbar .filter-row{flex-direction:column;align-items:stretch;}
+  .filter-row input[type="search"],.filter-row input[type="text"],.filter-row select{width:100%;min-width:0;}
+  .hc-meta{grid-template-columns:1fr 1fr;}
+  .hc-actions .btn{flex:1 1 100%;}
+  .admin-tabs{gap:5px;}
+  .admin-tab{padding:10px 13px;font-size:12px;}
+  .seg-tabs{width:100%;}
+  .seg-tab{flex:1;justify-content:center;}
+  .admin-stat-grid.cols-3{grid-template-columns:1fr;}
+  .admin-gate-card,.calc-card{padding:24px 20px;}
+  .hc-route{gap:10px;}
+  .hc-arrow::before,.hc-arrow::after{width:16px;}
+  .hc-arrow{font-size:13px;}
+  .hc-city b{font-size:21px;}
+}
+
+/* ---------- 32. Print additions ---------- */
+@media print{
+  .admin-tabs,.admin-hero,.account-strip,.history-toolbar,.hc-actions,.seg-tabs{display:none !important;}
+  .history-card,.panel,.calc-card{box-shadow:none !important;border:1px solid #999 !important;}
+}

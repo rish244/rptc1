@@ -41,11 +41,13 @@
         <li><a href="index.html" data-page="index.html">Home</a></li>
         <li><a href="about.html" data-page="about.html">About Us</a></li>
         <li><a href="services.html" data-page="services.html">Services</a></li>
+        <li><a href="rate-card.html" data-page="rate-card.html">Rate Card</a></li>
         <li><a href="booking.html" data-page="booking.html">Book a Truck</a></li>
         <li><a href="tracking.html" data-page="tracking.html">Track Shipment</a></li>
+        <li><a href="my-bookings.html" data-page="my-bookings.html">My Bookings</a></li>
         <li><a href="contact.html" data-page="contact.html">Contact Us</a></li>
         <li><a href="login.html" data-page="login.html">Login</a></li>
-        <li><a href="booking.html#freight-quote" class="btn btn-red btn-sm nav-cta">Get a Freight Quote</a></li>
+        <li><a href="booking.html#freight-quote" class="btn btn-red btn-sm nav-cta">Get a Quote</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
@@ -365,6 +367,47 @@
     </div>
   </section>
 
+  <!-- ================= TRANSPORT TOOLS ================= -->
+  <section class="section section-grey no-print" id="transport-tools">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="kicker">Self-Service Tools</span>
+        <h2 class="section-title">Manage Your <span class="accent">Transport</span></h2>
+        <p class="section-sub">Three tools that stay with your booking from request to delivery — booking history, indicative rates and shipment status.</p>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-card reveal" data-delay="0">
+          <div class="tool-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          <div>
+            <h3>Booking History</h3>
+            <p>Every truck booking and quotation request in one place — with admin-shared rates, status timeline, lorry receipt and one-click re-booking.</p>
+            <a href="my-bookings.html" class="tool-link">Open My Bookings <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="tool-card reveal" data-delay="100">
+          <div class="tool-icon"><i class="fa-solid fa-calculator"></i></div>
+          <div>
+            <h3>Rate Card &amp; Calculator</h3>
+            <p>See truck-wise base fares and per-km rates, then build an indicative freight estimate with distance, loading, detention and GST.</p>
+            <a href="rate-card.html" class="tool-link">Open Rate Card <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="tool-card reveal" data-delay="200">
+          <div class="tool-icon"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+          <div>
+            <h3>Shipment Tracking</h3>
+            <p>Enter a booking reference to see the recorded status, vehicle and driver details, and the full six-step shipment timeline.</p>
+            <a href="tracking.html" class="tool-link">Track a Shipment <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="notice notice-amber reveal" style="max-width:900px;margin:36px auto 0;">
+        <i class="fa-solid fa-circle-info"></i>
+        <span><b>Demo note:</b> booking history, rates and statuses are stored only in this browser. The transport office can share rates and accept requests from the separate <a href="admin-login.html" style="color:#7A5800;font-weight:700;">admin profile</a> on the same browser (demo credentials are shown on the login page).</span>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= TESTIMONIALS (SAMPLE / DEMO) ================= -->
   <section class="section" id="testimonials">
     <div class="container">
@@ -450,6 +493,8 @@
             <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Services</a></li>
             <li><a href="booking.html"><i class="fa-solid fa-chevron-right"></i> Book a Truck</a></li>
             <li><a href="tracking.html"><i class="fa-solid fa-chevron-right"></i> Track Shipment</a></li>
+            <li><a href="my-bookings.html"><i class="fa-solid fa-chevron-right"></i> My Bookings</a></li>
+            <li><a href="rate-card.html"><i class="fa-solid fa-chevron-right"></i> Rate Card</a></li>
             <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact Us</a></li>
             <li><a href="login.html"><i class="fa-solid fa-chevron-right"></i> Customer Login</a></li>
           </ul>
@@ -480,7 +525,7 @@
       <div class="footer-bottom">
         <div class="footer-bottom-inner">
           <span>© <span class="year">2026</span> <b>RP TRANSPORT COMPANY (RPTC)</b>. All rights reserved.</span>
-          <span>Frontend demonstration — data is stored only in this browser (LocalStorage).</span>
+          <span>Frontend demonstration — data is stored only in this browser (LocalStorage). · <a href="admin-login.html" style="color:#fff;font-weight:600;">Admin Login</a></span>
         </div>
       </div>
     </div>
