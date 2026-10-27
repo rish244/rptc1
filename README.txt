@@ -14,6 +14,14 @@ COMPANY DETAILS
   Email     : rptransportcompany28@gmail.com
   Area      : PAN India
 
+LIVE WEBSITE (GITHUB PAGES)
+---------------------------
+  Public link : https://rish244.github.io/rptc1/
+  Hosting     : GitHub Pages (free, HTTPS, no server needed)
+  Source      : this repository's root folder (branch: main)
+  Note        : any change pushed to the branch set in
+                Settings > Pages is published automatically in 1-2 minutes.
+
 WHAT IS NEW IN THIS VERSION
 ---------------------------
   1. BOOKING HISTORY (my-bookings.html)
