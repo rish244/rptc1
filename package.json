@@ -1,0 +1,23 @@
+{
+  "name": "rptc-transport-management-system",
+  "version": "1.0.0",
+  "description": "RP TRANSPORT COMPANY (RPTC) — Full-Stack Transport Management System & Online Truck Booking Portal (Express + SQLite)",
+  "main": "server.js",
+  "scripts": {
+    "prestart": "node -e \"try{require.resolve('express')}catch{require('child_process').execSync('npm install --no-audit --no-fund',{stdio:'inherit'})}\"",
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node tests/api.test.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "sql.js": "^1.12.0"
+  }
+}

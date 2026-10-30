@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Track Shipment | RP TRANSPORT COMPANY (RPTC)</title>
-  <meta name="description" content="Track your RP TRANSPORT COMPANY (RPTC) shipment using your booking reference number. PAN India truck booking and logistics.">
+  <title>About Us | RP TRANSPORT COMPANY (RPTC) — WE DELIVER SAFE.</title>
+  <meta name="description" content="About RP TRANSPORT COMPANY (RPTC) — fleet owner & transport contractor based in Kalamboli, Navi Mumbai, serving PAN India with reliable truck booking and logistics services.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23B30000'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3ERT%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,100 +53,119 @@
   <div class="nav-overlay" id="navOverlay"></div>
 
   <!-- ================= PAGE BANNER ================= -->
-  <header class="page-banner no-print">
+  <header class="page-banner no-print" style="background-image:linear-gradient(100deg,rgba(7,20,40,.92),rgba(10,35,66,.78)),url('https://images.pexels.com/photos/40071705/pexels-photo-40071705.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=1600');">
     <div class="container">
-      <h1>Track <span>Shipment</span></h1>
+      <h1>About <span>RPTC</span></h1>
       <div class="breadcrumb">
-        <a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i><span>Track Shipment</span>
+        <a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i><span>About Us</span>
       </div>
     </div>
   </header>
 
+  <!-- ================= ABOUT INTRO ================= -->
   <section class="section">
     <div class="container">
-
-      <!-- ===== TRACKING SEARCH ===== -->
-      <div class="track-search-card reveal">
-        <div class="section-head center" style="margin-bottom:30px;">
-          <span class="kicker">Shipment Tracking</span>
-          <h2 class="section-title">Track Your <span class="accent">Consignment</span></h2>
-          <p class="section-sub">Enter the booking reference number you received when you submitted your booking request.</p>
-        </div>
-        <form id="trackingForm" novalidate>
-          <div class="track-input-row">
-            <div class="form-group">
-              <label>Booking Reference Number <em>*</em></label>
-              <input type="text" id="trackRef" placeholder="e.g. RPTC-2026-10001" style="text-transform:uppercase;" required>
-              <small class="error-msg"></small>
-            </div>
-            <div class="form-group" style="max-width:220px;">
-              <label>&nbsp;</label>
-              <button type="submit" class="btn btn-red btn-block"><i class="fa-solid fa-magnifying-glass-location"></i> Track Shipment</button>
-            </div>
+      <div class="about-grid">
+        <div class="about-media reveal">
+          <img src="https://images.pexels.com/photos/29057949/pexels-photo-29057949.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=700&w=1000" alt="RPTC truck on an Indian expressway">
+          <div class="exp-badge">
+            <b>PAN India</b>
+            <span>Operating Area</span>
           </div>
-          <p class="track-example">Example reference: <code>RPTC-2026-10001</code> (sample record included in this demo).</p>
-        </form>
+        </div>
+        <div class="reveal" data-delay="120">
+          <span class="kicker">Who We Are</span>
+          <h2 class="section-title">RP TRANSPORT COMPANY <span class="accent">(RPTC)</span></h2>
+          <p style="margin-top:16px;"><b>WE DELIVER SAFE.</b> — that is our promise.</p>
+          <p>RP TRANSPORT COMPANY (RPTC) is a <b>fleet owner and transport contractor</b> based at D 5103, Bima Complex, Near Steel Market, Kalamboli, Navi Mumbai – 410218, Maharashtra, India. We arrange reliable truck transportation for businesses, traders, manufacturers and distributors across India.</p>
+          <p>From our base in Navi Mumbai — one of India's key logistics hubs — we coordinate open body trucks, container trucks, light and medium commercial vehicles and heavy multi-axle vehicles for full truck load (FTL) and part truck load (PTL) requirements.</p>
+          <p>Every consignment is handled with a simple, transparent process: understand the load, match the right vehicle, confirm the booking, and keep the customer informed until delivery.</p>
+          <div class="summary-actions" style="margin-top:24px;">
+            <a href="booking.html" class="btn btn-red"><i class="fa-solid fa-truck-fast"></i> Book a Truck</a>
+            <a href="contact.html" class="btn btn-outline"><i class="fa-solid fa-phone"></i> Contact Us</a>
+          </div>
+        </div>
       </div>
 
-      <!-- ===== TRACKING RESULT ===== -->
-      <div id="trackingResult" hidden style="margin-top:44px;">
+      <!-- Mission / Vision / Values -->
+      <div class="mvv-grid">
+        <div class="mvv-card reveal" data-delay="0">
+          <div class="mvv-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>Our Mission</h3>
+          <p>To provide safe, timely and transparent truck transportation services that help Indian businesses move their goods with confidence — from a single consignment to a full transport contract.</p>
+        </div>
+        <div class="mvv-card reveal" data-delay="100">
+          <div class="mvv-icon"><i class="fa-solid fa-eye"></i></div>
+          <h3>Our Vision</h3>
+          <p>To become a trusted PAN India transport partner known for reliability, honest freight practices and long-term relationships with customers and fleet partners.</p>
+        </div>
+        <div class="mvv-card reveal" data-delay="200">
+          <div class="mvv-icon"><i class="fa-solid fa-heart"></i></div>
+          <h3>Our Values</h3>
+          <p>Safety first, honest communication, disciplined dispatch, respect for drivers and partners, and a customer-first approach in every booking we handle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Not found message -->
-        <div class="form-card" id="trackNotFound" hidden>
-          <div class="empty-state">
-            <i class="fa-solid fa-box-open"></i>
-            <h3 style="font-size:24px;margin-bottom:8px;">No Record Found</h3>
-            <p>No booking record was found for reference <b id="notFoundRef" style="color:var(--red);"></b>.</p>
-            <p style="font-size:14px;">No booking record was found. Please check your reference number or contact RP TRANSPORT COMPANY.</p>
-            <div class="summary-actions" style="justify-content:center;">
-              <a href="tel:+918828383122" class="btn btn-navy"><i class="fa-solid fa-phone"></i> +91 88283 83122</a>
-              <a href="https://wa.me/918828383122?text=Hello%20RP%20TRANSPORT%20COMPANY%2C%20I%20could%20not%20find%20my%20booking%20on%20the%20tracking%20page.%20Please%20help." class="btn btn-wa wa-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp Support</a>
-            </div>
+  <!-- ================= CORE VALUES ================= -->
+  <section class="section section-grey">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="kicker">What Drives Us</span>
+        <h2 class="section-title">Our Core <span class="accent">Values</span></h2>
+      </div>
+      <div class="values-list">
+        <div class="value-chip reveal" data-delay="0"><i class="fa-solid fa-shield-halved"></i> Safe Transportation</div>
+        <div class="value-chip reveal" data-delay="60"><i class="fa-solid fa-clock"></i> Timely Delivery</div>
+        <div class="value-chip reveal" data-delay="120"><i class="fa-solid fa-people-group"></i> Experienced Team</div>
+        <div class="value-chip reveal" data-delay="180"><i class="fa-solid fa-truck"></i> Reliable Truck Arrangements</div>
+        <div class="value-chip reveal" data-delay="240"><i class="fa-solid fa-map-location-dot"></i> PAN India Operations</div>
+        <div class="value-chip reveal" data-delay="300"><i class="fa-solid fa-face-smile"></i> Customer Satisfaction</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= OPERATING PROFILE ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="kicker">Company Profile</span>
+        <h2 class="section-title">Business <span class="accent">Details</span></h2>
+      </div>
+      <div class="panel reveal">
+        <div class="panel-body" style="padding:0;">
+          <div class="table-wrap">
+            <table class="data-table">
+              <tbody>
+                <tr><th style="width:32%;">Company Name</th><td><b>RP TRANSPORT COMPANY (RPTC)</b></td></tr>
+                <tr><th>Business Type</th><td>Fleet Owner &amp; Transport Contractor</td></tr>
+                <tr><th>Tagline</th><td><b style="color:var(--red);">WE DELIVER SAFE.</b></td></tr>
+                <tr><th>Address</th><td>D 5103, Bima Complex, Near Steel Market, Kalamboli, Navi Mumbai – 410218, Maharashtra, India</td></tr>
+                <tr><th>Mobile</th><td><a href="tel:+918828383122">+91 88283 83122</a> · <a href="tel:+917738733177">+91 77387 33177</a></td></tr>
+                <tr><th>Email</th><td><a href="mailto:rptransportcompany28@gmail.com">rptransportcompany28@gmail.com</a></td></tr>
+                <tr><th>Operating Area</th><td>PAN India</td></tr>
+                <tr><th>Services</th><td>FTL, PTL, Container, Open Body, Heavy Goods, Industrial &amp; Commercial Goods Transport, Fleet Management, Transport Contracting, Freight Quotation</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Found: details + timeline -->
-        <div id="trackFound" hidden>
-          <div class="panel reveal">
-            <div class="panel-head">
-              <h3><i class="fa-solid fa-truck-fast"></i><span id="tRef">RPTC-2026-10001</span></h3>
-              <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
-                <span class="demo-tag" id="tSample" hidden>Sample data</span>
-                <span class="pill pill-pending" id="tStatus"></span>
-              </div>
-            </div>
-            <div class="panel-body">
-              <div class="summary-grid track-details-grid">
-                <div class="summary-item"><small>Route</small><b id="tRoute"></b></div>
-                <div class="summary-item"><small>Pickup Location</small><b id="tPickup"></b></div>
-                <div class="summary-item"><small>Delivery Location</small><b id="tDelivery"></b></div>
-                <div class="summary-item"><small>Vehicle Details</small><b id="tVehicle"></b></div>
-                <div class="summary-item"><small>Pickup Date</small><b id="tDate"></b></div>
-                <div class="summary-item"><small>Last Updated</small><b id="tUpdated"></b></div>
-                <div class="summary-item"><small>Estimated Delivery Date</small><b id="tEta"></b></div>
-              </div>
-
-              <h4 style="font-size:15px;font-weight:700;color:var(--navy);margin:26px 0 6px;text-transform:uppercase;letter-spacing:1px;">Shipment Progress</h4>
-              <div class="timeline-wrap">
-                <div class="timeline" id="timeline"></div>
-              </div>
-              <div class="notice notice-red" id="timelineRejected" hidden style="margin-bottom:0;">
-                <i class="fa-solid fa-circle-xmark"></i>
-                <span><b>Booking request rejected.</b> This booking request was not approved. Please contact RP TRANSPORT COMPANY for details.</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="notice notice-amber">
-            <i class="fa-solid fa-satellite-dish"></i>
-            <span><b>About tracking:</b> This page shows the status recorded for your booking request. For a newly submitted request, only the received status is shown — shipments are never marked as picked up, in transit or delivered without an authorized update. <b>Real-time GPS tracking</b> requires a connected vehicle-tracking system or GPS API, which is not part of this frontend demonstration.</span>
-          </div>
-
-          <div class="summary-actions">
-            <a href="booking.html" class="btn btn-red"><i class="fa-solid fa-truck-fast"></i> Book Another Truck</a>
-            <a href="tel:+918828383122" class="btn btn-outline"><i class="fa-solid fa-phone"></i> Call Transport Team</a>
-            <a href="https://wa.me/918828383122?text=Hello%20RP%20TRANSPORT%20COMPANY%2C%20I%20would%20like%20an%20update%20on%20my%20shipment." class="btn btn-wa wa-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp Team</a>
-          </div>
+  <!-- ================= CTA ================= -->
+  <section class="section section-grey no-print" style="padding-top:0;">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <div>
+          <h2>Move Your Goods with RPTC</h2>
+          <p>Book online, request a freight quote or talk to our transport team directly.</p>
+        </div>
+        <div class="cta-btns">
+          <a href="booking.html" class="btn btn-white"><i class="fa-solid fa-truck-fast"></i> Book a Truck</a>
+          <a href="tel:+918828383122" class="btn btn-ghost"><i class="fa-solid fa-phone"></i> Call Now</a>
+          <a href="https://wa.me/918828383122?text=Hello%20RP%20TRANSPORT%20COMPANY%2C%20I%20would%20like%20to%20enquire%20about%20truck%20booking%20and%20freight%20charges." class="btn btn-wa wa-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
         </div>
       </div>
     </div>
@@ -179,6 +198,7 @@
             <li><a href="tracking.html"><i class="fa-solid fa-chevron-right"></i> Track Shipment</a></li>
             <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact Us</a></li>
             <li><a href="login.html"><i class="fa-solid fa-chevron-right"></i> Customer Login</a></li>
+            <li><a href="admin.html"><i class="fa-solid fa-chevron-right"></i> Admin Portal</a></li>
           </ul>
         </div>
         <div>
@@ -205,7 +225,7 @@
       <div class="footer-bottom">
         <div class="footer-bottom-inner">
           <span>© <span class="year">2026</span> <b>RP TRANSPORT COMPANY (RPTC)</b>. All rights reserved.</span>
-          <span>Frontend demonstration — data is stored only in this browser (LocalStorage).</span>
+          <span>Kalamboli, Navi Mumbai · PAN India Transport &amp; Logistics</span>
         </div>
       </div>
     </div>
